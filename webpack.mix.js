@@ -13,6 +13,7 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/joint_trip/src/main.js', 'public/js')
     .vue()
-    .postCss('resources/css/app.css', 'public/css', [
+    .postCss('resources/js/joint_trip/public/css/style.css', 'public/css', [
         //
-    ]);
+    ])
+    .copyDirectory('resources/js/joint_trip/public/images', 'public/images');

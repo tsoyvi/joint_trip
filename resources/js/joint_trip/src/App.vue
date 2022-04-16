@@ -1,32 +1,37 @@
 <template>
-  <nav>
+  <!--<nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
     <router-link to="/RegisterUser">Register</router-link> |
     <router-link to="/LoginUser">LoginUser</router-link>
-  </nav>
+  </nav> -->
+
+  <!-- Подгружаем header-->
+  <header-pages/>
+  <!-- Подгружаем тело наших страниц-->
   <router-view/>
+  <footer-pages/>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import HeaderPages from './components/HeaderPages.vue';
+import FooterPages from './components/FooterPages.vue';
 
-nav {
-  padding: 30px;
-}
+export default {
+  name: 'indexApp',
+  components: {
+    HeaderPages,
+    FooterPages,
+  },
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+  // Обработка просроченных токенов
+  created() {
+    // this.checkLogin();
+  },
+  computed: {
+  },
 
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+  methods: {
+  },
+};
+</script>

@@ -1,5 +1,13 @@
 {
     "/js/main.js": "/js/main.js",
     "/js/about.js": "/js/about.js",
-    "/css/app.css": "/css/app.css"
+    "/css/style.css": "/css/style.css",
+    "/images/back-banner.svg": "/images/back-banner.svg",
+    "/images/click-ico.png": "/images/click-ico.png",
+    "/images/driver-passenger.jpg": "/images/driver-passenger.jpg",
+    "/images/importo-ico.png": "/images/importo-ico.png",
+    "/images/logo.png": "/images/logo.png",
+    "/images/made-in-russia.png": "/images/made-in-russia.png",
+    "/images/made.png": "/images/made.png",
+    "/images/rub-ico.png": "/images/rub-ico.png"
 }

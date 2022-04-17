@@ -7,19 +7,36 @@ const routes = [
     name: 'home',
     component: HomeView,
   },
+
+  // Ссылки в футоре
+  {
+    path: '/how_it_works',
+    name: 'HowItWorks',
+    component: () => import('../views/HowItWorks.vue'),
+  },
+  {
+    path: '/terms_use',
+    name: 'TermsUse',
+    component: () => import('../views/TermsUse.vue'),
+  },
   {
     path: '/about',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+    component: () => import('../views/AboutView.vue'),
   },
   {
-    path: '/LoginUser',
+    path: '/write_to_us',
+    name: 'write_to_us',
+    component: () => import('../views/WriteToUs.vue'),
+  },
+
+  // Ссылки на авторизацию / регистрацию
+  {
+    path: '/login_user',
     name: 'LoginUser',
     component: () => import('../views/auth/LoginUser.vue'),
   },
+
   {
     path: '/RegisterUser',
     name: 'RegisterUser',

@@ -1,55 +1,34 @@
 <template>
-  <div>
-    <section class="">
-
-      <div class="login-fullscreen-bg">
-            <div class="login-overlay">
-
-             <h2 class="login-title">Аутентификация / Авторизация</h2>
-
-                <div class="login-overlay-block">
-
-                  <div class="login-login">
-                    <h1>Аутентификация</h1>
-                    <form method="post" action="index.html">
-                      <p>
-                        <label for="login">
-                        <input type="text" name="login" placeholder="Логин" id="login"
-                          v-model="user.login">
-                          </label>
-                      </p>
-                      <p>
-                        <label for="password">
-                        <input type="password" name="password"  placeholder="Пароль"
-                          id="password" v-model="user.password">
-                        </label>
-                      </p>
-                      <p class="remember_me">
-                        <label for="remember">
-                          <input type="checkbox" name="remember" id="remember_me"
-                          v-model="user.remember">
-                          Запомнить меня
-                        </label>
-                      </p>
-                      <p class="login-submit">
-                        <button  class="btn btn-primary"
-                            @click="handleSubmit"
-                            >Войти
+    <main class="main-content">
+        <div class="container">
+            <form class="login-form" method="post">
+                <div class="login-form-row">
+                    <h1 class="login-form-header">Вход в персональный раздел</h1>
+                    <div class="login-form-input">
+                        <input type="email" placeholder="Эл. почта" name="login" value="">
+                    </div>
+                    <div class="login-form-input">
+                        <input type="password" placeholder="Пароль" name="password" value="">
+                    </div>
+                    <label for="rememberMe" class="login-form-remember">
+                        <div>Запомнить меня</div>
+                        <input id="rememberMe" type="checkbox" name="rememberMe" checked="">
+                    </label>
+                    <div class="login-form-btn-wrapper" >
+                        <button class="login-form-btn" type="submit">
+                            <div class="button-label">Войти</div>
                         </button>
-                      </p>
-                    </form>
-                  </div>
-
-                  <!--<div class="login-help">
-                    <a href="index.html">Забыли пароль?</a> Восстановите его!
-                  </div> -->
+                    </div>
+                    <div class="login-form-forgot">
+                      <a href="#">Я не помню пароль</a>
+                      </div>
+                    <div class="login-form-register">
+                      <router-link to="/RegisterUser">Регистрация</router-link>
+                      </div>
                 </div>
-            </div>
-
+            </form>
         </div>
-    </section>
-
-  </div>
+    </main>
 </template>
 
 <script>

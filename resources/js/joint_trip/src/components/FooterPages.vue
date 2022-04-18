@@ -20,7 +20,7 @@
               <div class="col-4-item">
                   <ul>
                     <li>
-                       <router-link to="/about">О нас</router-link>
+                       <router-link to="/about">О нашем проекте</router-link>
                     </li>
                   </ul>
               </div>

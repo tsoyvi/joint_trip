@@ -19,6 +19,9 @@
 <body>
   @if (Auth::check())
   <script>
+    // Пока не знаю нужна эта переменая или нет
+    // ведь она также загружаеться в auth.js
+    // пока оставлю может пригодиться...
     window.isLoggedin = true;
   </script>
   @endif

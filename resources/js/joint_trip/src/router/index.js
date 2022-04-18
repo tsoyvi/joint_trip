@@ -38,9 +38,21 @@ const routes = [
   },
 
   {
-    path: '/RegisterUser',
+    path: '/register_user',
     name: 'RegisterUser',
     component: () => import('../views/auth/RegisterUser.vue'),
+  },
+
+  // Ссылки личного кабинета
+  {
+    path: '/account_user',
+    name: 'AccountUser',
+    component: () => import('../views/auth/AccountUser.vue'),
+  },
+  {
+    path: '/car_user',
+    name: 'CarUser',
+    component: () => import('../views/auth/CarUser.vue'),
   },
 
 ];

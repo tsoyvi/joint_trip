@@ -69,10 +69,12 @@ export default ({
             commit('AUTH_REGISTER', data.user);
             return true;
           }
+          // eslint-disable-next-line no-alert
           alert(data.message);
         }
         return false;
       } catch (error) {
+        // eslint-disable-next-line no-alert
         alert(Object.entries(error.response.data.errors).map(([k, v]) => `${k}: ${v}`).join(', '));
         return false;
       }

@@ -54,6 +54,16 @@ const routes = [
     name: 'CarUser',
     component: () => import('../views/auth/CarUser.vue'),
   },
+  {
+    path: '/city',
+    name: 'City',
+    component: () => import('../views/city/AllCity.vue'),
+  },
+  {
+    path: '/newTrip',
+    name: 'Trip',
+    component: () => import('../views/Trip/SingleTrip.vue'),
+  },
 
 ];
 

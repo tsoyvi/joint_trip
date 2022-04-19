@@ -32,7 +32,7 @@
                   <router-link to="/account_user">{{user.name}}</router-link>
                   <button  @click="logoutFunction()">Выход</button>
                 </span>
-
+                  <router-link to="/city">Все Города</router-link>
                 </span>
             </div>
         </div>

@@ -25,7 +25,7 @@ class CreateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'login' => ['required', 'string', 'min:2', 'max:255'],
+            // 'login' => ['required', 'string', 'min:2', 'max:255'],
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string', 'min: 5'],
             // 'access_level' => ['required'],
@@ -43,7 +43,7 @@ class CreateRequest extends FormRequest
     {
         return [
             'name' => 'ФИО пользователя',
-            'login' => 'Логин',
+            // 'login' => 'Логин',
             'password' => 'Пароль',
 
         ];

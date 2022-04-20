@@ -59,7 +59,7 @@ class UserController extends Controller
         try {
             $user->name = $input['name'];
             $user->access_level = $input['access_level'];
-            $user->login = $input['login'];
+            // $user->login = $input['login'];
             $user->email = $input['email'];
 
             if (isset($input['password'])) {
@@ -125,7 +125,7 @@ class UserController extends Controller
 
             $user = new User();
             $user->name = $data['name'];
-            $user->login = $data['login'];
+            // $user->login = $data['login'];
             $user->email = $data['email'];
 
             $user->password = Hash::make($data['password']);
@@ -154,8 +154,8 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $credentials = [
-            // 'email' => $request->email,
-            'login' => $request->login,
+            'email' => $request->email,
+            // 'login' => $request->login,
             'password' => $request->password,
         ];
 

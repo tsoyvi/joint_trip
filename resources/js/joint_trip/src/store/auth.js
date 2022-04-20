@@ -81,7 +81,7 @@ export default ({
     async login({ commit }, user) {
       axios.get('/sanctum/csrf-cookie').then(() => {
         axios.post('api/login', {
-          login: user.login,
+          email: user.email,
           password: user.password,
           remember: user.remember,
         })

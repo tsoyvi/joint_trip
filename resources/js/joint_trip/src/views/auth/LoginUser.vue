@@ -1,21 +1,24 @@
 <template>
     <main class="main-content">
         <div class="container">
-            <form class="login-form" method="post">
+            <div class="login-form" >
                 <div class="login-form-row">
                     <h1 class="login-form-header">Вход в персональный раздел</h1>
                     <div class="login-form-input">
-                        <input type="email" placeholder="Эл. почта" name="login" value="">
+                        <input type="email" placeholder="Эл. почта" name="email"
+                          v-model="user.email">
                     </div>
                     <div class="login-form-input">
-                        <input type="password" placeholder="Пароль" name="password" value="">
+                        <input type="password" placeholder="Пароль" name="password"
+                          v-model="user.password">
                     </div>
                     <label for="rememberMe" class="login-form-remember">
                         <div>Запомнить меня</div>
-                        <input id="rememberMe" type="checkbox" name="rememberMe" checked="">
+                        <input id="rememberMe" type="checkbox" name="rememberMe"
+                          v-model="user.remember">
                     </label>
                     <div class="login-form-btn-wrapper" >
-                        <button class="login-form-btn" type="submit">
+                        <button class="login-form-btn" type="submit" @click="handleSubmit">
                             <div class="button-label">Войти</div>
                         </button>
                     </div>
@@ -23,10 +26,10 @@
                       <a href="#">Я не помню пароль</a>
                       </div>
                     <div class="login-form-register">
-                      <router-link to="/RegisterUser">Регистрация</router-link>
+                      <router-link to="/register_user">Регистрация</router-link>
                       </div>
                 </div>
-            </form>
+            </div>
         </div>
     </main>
 </template>
@@ -63,7 +66,7 @@ export default {
     handleSubmit(e) {
       e.preventDefault();
       // Простая валидация на заполненность полей
-      if (this.user.password.length > 0 && this.user.login.length > 0) {
+      if (this.user.password.length > 0 && this.user.email.length > 0) {
         this.login(this.user);
       }
     },

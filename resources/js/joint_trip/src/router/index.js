@@ -60,7 +60,7 @@ const routes = [
     component: () => import('../views/city/AllCity.vue'),
   },
   {
-    path: '/newTrip',
+    path: '/new_trip',
     name: 'Trip',
     component: () => import('../views/Trip/SingleTrip.vue'),
   },

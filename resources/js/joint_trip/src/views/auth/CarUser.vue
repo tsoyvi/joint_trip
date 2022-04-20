@@ -25,7 +25,8 @@
                             class="btm-go-main">Мой автомобиль</router-link>
                         </li>
                         <li class="personal-main-menu-link">
-                            <a href="/newTrip" class="btm-go-main">Мои поездки</a>
+                            <router-link to="/new_trip"
+                            class="btm-go-main">Новая поездка</router-link>
                         </li>
                         <li class="personal-main-menu-link">
                             <a href="#" class="btm-go-main">Уведомления</a>

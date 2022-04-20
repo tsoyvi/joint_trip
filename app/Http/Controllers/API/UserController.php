@@ -140,6 +140,7 @@ class UserController extends Controller
 
         // response
         $response = [
+            'ddd' => $data,
             'success' => $success,
             'message' => $message,
         ];
@@ -208,7 +209,7 @@ class UserController extends Controller
     }
 
     /**Проверка что пользователь авторизован
-     * 
+     *
      */
     public function checkLogin()
     {
@@ -227,7 +228,7 @@ class UserController extends Controller
             'message' => $message,
             'user' => Auth::user(), // Проверить!
         ];
-        
+
         // Задержка подгруздки для демонстрации работы
         sleep(2);
         return response()->json($response);

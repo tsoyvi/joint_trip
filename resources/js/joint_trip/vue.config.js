@@ -13,6 +13,6 @@ module.exports = defineConfig({
 
 module.exports = {
   devServer: {
-    proxy: 'http://TeemWork.com',
+    proxy: 'http://127.0.0.1:8001',
   },
 };

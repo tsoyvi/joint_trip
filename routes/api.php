@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\api\tripcontroller;
+use App\Http\Controllers\api\TripController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,5 +27,6 @@ Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
 Route::get('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 Route::get('check_login', [UserController::class, 'checkLogin']);
-Route::post('new_trip', [tripcontroller::class, 'create']);
+
+Route::post('new_trip', [TripController::class, 'create']);
 

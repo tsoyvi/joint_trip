@@ -1,19 +1,16 @@
 import axios from 'axios';
-import router from '../router';
+// import router from '../router';
 
 export default ({
   state: {
     status: false,
-    user: {},
+    trip: {},
   },
 
   getters: {
-    authStatus(state) {
-      return state.status;
-    },
 
-    user(state) {
-      return state.user;
+    trip(state) {
+      return state.trip;
     },
   },
 
@@ -44,20 +41,7 @@ export default ({
   },
 
   actions: {
-    // Здесь мы делаем запрос на сервер для проверки авторизации пользователя
-    //
-    async checkLogin({ commit }) {
-      commit('AUTH_REQUEST');
-      const { data } = await axios.get('api/check_login');
-
-      console.log(data);
-      if (data.success) {
-        commit('AUTH_SUCCESS', data.user);
-      } else {
-        commit('AUTH_ERROR');
-      }
-    },
-
+    /*
     async register({ commit }, user) {
       try {
         const sanctum = await axios.get('/sanctum/csrf-cookie');
@@ -79,25 +63,31 @@ export default ({
         return false;
       }
     },
-
+*/
     async newTrip({ commit }, trip) {
       console.log(trip);
-      axios.get('/sanctum/csrf-cookie').then(() => {
-        axios.post('api/new_trip', {
-          startingCity: trip.startingCity,
-          destination: trip.destination,
-          date: trip.date,
-        })
-          .then((response) => {
-            if (response.data.success) {
-              console.log(response.data.message);
-            } else {
-              commit(response.data.message);
-            }
-          });
-      });
-    },
 
+      try {
+        const sanctum = await axios.get('/sanctum/csrf-cookie');
+        console.log(sanctum.headers);
+        if (sanctum) {
+          const { data } = await axios.post('api/new_trip', trip);
+          if (data.success) {
+            console.log(data);
+            commit('AUTH_REGISTER', data.user);
+            return true;
+          }
+          // eslint-disable-next-line no-alert
+          alert(data.message);
+        }
+        return false;
+      } catch (error) {
+        // eslint-disable-next-line no-alert
+        alert(Object.entries(error.response.data.errors).map(([k, v]) => `${k}: ${v}`).join(', '));
+        return false;
+      }
+    },
+    /*
     async logout({ commit }) {
       const { data } = await axios.get('api/logout');
       if (data.success) {
@@ -105,7 +95,7 @@ export default ({
         router.push('/');
       }
     },
-
+*/
   },
 
   modules: {

@@ -7,7 +7,7 @@ use App\Http\Requests\Users\CreateRequest;
 use App\Models\newtrip;
 use Illuminate\Http\Request;
 
-class tripcontroller extends Controller
+class TripController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,7 +32,9 @@ class tripcontroller extends Controller
         $trip->startingCity = '$data[startingCity]';
         $trip->destination = 'ttt';
         $trip->date = '222';
-        $trip->save();
+        // отключил сохранение потому что у меня в БД нет записей
+        // без этого ключ ID зависимости не сохраниться 
+        // $trip->save();
         $success = true;
         $message = 'Запись о пользователе обновлена';
 

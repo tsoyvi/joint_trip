@@ -44,12 +44,13 @@ export default ({
   },
 
   actions: {
-
+    // Здесь мы делаем запрос на сервер для проверки авторизации пользователя
+    //
     async checkLogin({ commit }) {
       commit('AUTH_REQUEST');
       const { data } = await axios.get('api/check_login');
 
-      // console.log(data);
+      console.log(data);
       if (data.success) {
         commit('AUTH_SUCCESS', data.user);
       } else {
@@ -99,7 +100,7 @@ export default ({
       const { data } = await axios.get('api/logout');
       if (data.success) {
         commit('LOGOUT');
-        router.push('login');
+        router.push('/');
       }
     },
 

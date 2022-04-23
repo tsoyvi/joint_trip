@@ -52,7 +52,17 @@ const routes = [
   {
     path: '/car_user',
     name: 'CarUser',
-    component: () => import('../views/auth/CarUser.vue'),
+    component: () => import('../views/auth/AccountUser.vue'),
+  },
+  {
+    path: '/trips_user',
+    name: 'TripsUser',
+    component: () => import('../views/auth/AccountUser.vue'),
+  },
+  {
+    path: '/notice_user',
+    name: 'NoticeUser',
+    component: () => import('../views/auth/AccountUser.vue'),
   },
 
 ];

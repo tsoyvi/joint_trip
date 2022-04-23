@@ -660,10 +660,9 @@ footer {
 .personal-main-info-header {
   display: block;
   margin: 0 auto;
-  padding-left: 40px;
   font-size: 40px;
   margin-top: 10px;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 .personal-img {
@@ -944,5 +943,48 @@ input[type="file"] {
       -ms-flex-direction: column;
           flex-direction: column;
   margin-bottom: 8px;
+}
+
+/* Мои поездки */
+.personal-drive-empty {
+  margin: 0 auto;
+}
+
+.personal-drive-empty-text {
+  color: darkgrey;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+}
+
+.personal-drive-archive {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.personal-drive-archive table {
+  width: 100%;
+  margin-bottom: 40px;
+  border-collapse: collapse;
+  border: 1px solid #00aff5;
+}
+
+.personal-drive-archive-header {
+  font-size: 20px;
+  background-color: #dddddd;
+  border-bottom: 3px solid #00aff5;
+}
+
+.personal-drive-archive-header th, .personal-drive-archive-text td {
+  text-align: center;
+  padding: 10px 15px;
+  border: 1px solid #00aff5;
+}
+
+.isset-drive {
+  display: none;
+}
+
+.personal-drive-archive-driver {
+  color: black;
 }
 /*# sourceMappingURL=style.css.map */

@@ -72,10 +72,9 @@
 .personal-main-info-header {
     display: block;
     margin: 0 auto;
-    padding-left: 40px;
     font-size: 40px;
     margin-top: 10px;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 
 }
 
@@ -106,7 +105,7 @@
 }
 
 .personal-add-img {
-   display: flex;
+    display: flex;
     justify-content: center;
 }
 .personal-add-img-btn {
@@ -124,7 +123,7 @@
     margin-top: 10px;
 }
 .personal-add-img-form-block {
-   display: flex;
+    display: flex;
     justify-content: center;
     flex-direction: column;
     margin-bottom: 8px;
@@ -286,4 +285,45 @@ input[type="file"]{
     display: flex;
     flex-direction: column;
     margin-bottom: 8px;
+}
+
+/* Мои поездки */
+
+
+.personal-drive-empty {
+    margin: 0 auto;
+}
+
+.personal-drive-empty-text {
+    color: darkgrey;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+.personal-drive-archive {
+    width: 90%;
+    margin: 0 auto;
+}
+.personal-drive-archive table {
+    width: 100%;
+    margin-bottom: 40px;
+    border-collapse: collapse;
+    border: 1px solid rgb(0, 175, 245);
+}
+
+.personal-drive-archive-header {
+    font-size: 20px;
+    background-color: rgb(221, 221, 221);
+    border-bottom: 3px solid rgb(0, 175, 245);
+}
+.personal-drive-archive-header th, .personal-drive-archive-text td {
+    text-align: center;
+    padding: 10px 15px;
+    border: 1px solid rgb(0, 175, 245);
+}
+
+.isset-drive {
+    display: none;
+}
+.personal-drive-archive-driver {
+    color: black;
 }

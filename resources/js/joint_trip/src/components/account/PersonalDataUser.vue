@@ -21,38 +21,81 @@
             </div>
         </div>
         <div class="personal-main-info-individ">
-            <p class="personal-main-info-individ-head">Фамилия:</p>
-            <p class="personal-main-info-individ-name">{{user.name}}</p>
-            <p class="personal-main-info-individ-head">Имя:</p>
-            <p class="personal-main-info-individ-name">Иван</p>
-            <p class="personal-main-info-individ-head">Отчество:</p>
-            <p class="personal-main-info-individ-name">Иванович</p>
-            <p class="personal-main-info-individ-head">Возраст:</p>
-            <p class="personal-main-info-individ-name">30</p>
+            <label class="personal-main-info-individ-head" for="surname">Фамилия:
+                <p class="personal-main-info-individ-name">
+                <input type="text" id="surname" class="personal-main-info-individ-name"
+                    v-model="user.surname">
+                </p>
+            </label>
+            <label class="personal-main-info-individ-head" for="name">Имя:
+                 <p class="personal-main-info-individ-name">
+                <input type="text" id="name" class="personal-main-info-individ-name"
+                    v-model="user.name">
+                </p>
+            </label>
+
+            <label class="personal-main-info-individ-head" for="patronymic">Отчество:
+               <p class="personal-main-info-individ-name">
+                <input type="text" id="patronymic" class="personal-main-info-individ-name"
+                    v-model="user.patronymic">
+                </p>
+            </label>
+
+            <label class="personal-main-info-individ-head" for="birth_day">Возраст:
+              <p class="personal-main-info-individ-name">
+                <input type="text" id="patronymic" class="personal-main-info-individ-name"
+                    v-model="user.birth_day">
+              </p>
+            </label>
         </div>
         <div class="personal-main-info-contact">
-            <p class="personal-main-info-individ-head">Город</p>
-            <p class="personal-main-info-individ-name">Москва</p>
-            <p class="personal-main-info-individ-head">Телефон</p>
-            <p class="personal-main-info-individ-name">+7999999999</p>
-            <p class="personal-main-info-individ-head">E-mail</p>
-            <p class="personal-main-info-individ-name">{{user.email}}</p>
-            <p class="personal-main-info-individ-head">Мессенджеры</p>
-            <p class="personal-main-info-individ-name">WhatsApp</p>
+            <label class="personal-main-info-individ-head" for="city">Город
+             <p class="personal-main-info-individ-name">
+               <input type="text" id="patronymic" class="personal-main-info-individ-name"
+                    v-model="user.city">
+            </p>
+            </label>
+
+            <label class="personal-main-info-individ-head" for="phone_number">Телефон
+                <p class="personal-main-info-individ-name">
+                <input type="text" id="patronymic" class="personal-main-info-individ-name"
+                    v-model="user.phone_number">
+                </p>
+                </label>
+
+            <label class="personal-main-info-individ-head" for="email">E-mail
+                <p class="personal-main-info-individ-name">
+                <input type="text" id="patronymic" class="personal-main-info-individ-name"
+                    v-model="user.email">
+                </p>
+            </label>
+            <label class="personal-main-info-individ-head" for="messengers">Мессенджеры
+                <p class="personal-main-info-individ-name">
+                    <input type="text" id="patronymic" class="personal-main-info-individ-name"
+                    v-model="user.messengers">
+                </p>
+            </label>
         </div>
     </div>
     <div class="personal-main-info-about">
-        <p class="personal-main-info-about-head">О себе:</p>
-        <p class="personal-main-info-about-name">Рассказ о себе</p>
+        <label class="personal-main-info-about-head" for="about">О себе:
+            <p>
+                <textarea class="personal-main-info-about-name" id="about" v-model="user.about"
+                placeholder="Расскажи о себе">
+                </textarea>
+            </p>
+        </label>
+
     </div>
-    <a href="#" class="personal-main-info-change">
-        <div class="personal-main-info-change-btn">Редактировать профиль</div>
-    </a>
+    <button href="#" class="personal-main-info-change personal-main-info-change-btn"
+        @click="updateUserData(user)">
+        Редактировать профиль
+    </button>
 
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'PersonalDataUser',
@@ -64,6 +107,17 @@ export default {
 
   computed: {
     ...mapGetters(['user']),
+  },
+  methods: {
+    ...mapActions(['updateUserDataRequest']),
+
+    async updateUserData(user) {
+      const result = await this.updateUserDataRequest(user);
+      if (result) {
+        alert('Профиль обновлен');
+      }
+    },
+
   },
 
 };

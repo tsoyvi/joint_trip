@@ -41,6 +41,10 @@ export default ({
       state.user = {};
       window.isLoggedin = false;
     },
+
+    UPDATE_USER_DATA() {
+    },
+
   },
 
   actions: {
@@ -101,6 +105,24 @@ export default ({
       if (data.success) {
         commit('LOGOUT');
         router.push('/');
+      }
+    },
+
+    async updateUserDataRequest({ commit }, user) {
+      try {
+        console.log(user);
+
+        const { data } = await axios.put(`api/update_user_data/${user.id}`, user);
+        if (data.success === true) {
+          commit('UPDATE_USER_DATA');
+          alert(data.message);
+          return true;
+        }
+        alert(data.message);
+        return false;
+      } catch (error) {
+        alert(Object.entries(error.response.data.errors).map(([k, v]) => `${k}: ${v}`).join(', '));
+        return false;
       }
     },
 

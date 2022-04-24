@@ -26,3 +26,8 @@ Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
 Route::get('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 Route::get('check_login', [UserController::class, 'checkLogin']);
+
+//Route::put('update_user_data/{id}', [UserController::class, 'update']);// Обновление пользователя
+
+
+ Route::apiResource('update_user_data', UserController::class); 

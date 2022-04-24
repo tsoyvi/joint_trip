@@ -15,9 +15,9 @@ class CreateRussianCitiesTable extends Migration
     {
         Schema::create('russian_cities', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50)->comment('Название города');
-            $table->string('subject', 50)->comment('Субъект федерации');
-            $table->string('district', 50)->comment('Район');
+            $table->string('name', 50);
+            $table->string('subject', 50)->nullable()->comment('Субъект федерации');
+            $table->string('district', 50)->nullable()->comment('Район');
             $table->string('coords_lat', 20)->nullable()->comment('широта');
             $table->string('coords_lon', 20)->nullable()->comment('долгота');
             $table->integer('population')->nullable()->comment('Численность населения');

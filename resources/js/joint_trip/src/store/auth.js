@@ -5,6 +5,7 @@ export default ({
   state: {
     status: false,
     user: {},
+    userCar: {},
   },
 
   getters: {
@@ -15,6 +16,11 @@ export default ({
     user(state) {
       return state.user;
     },
+
+    userCar(state) {
+      return state.userCar;
+    },
+
   },
 
   mutations: {
@@ -23,8 +29,18 @@ export default ({
     },
 
     AUTH_SUCCESS(state, user) {
+      // Костыль по раскодировке JSON из БД
+      const arr = user;
+      arr.messengers = JSON.parse(arr.messengers);
+      //
+      state.user = arr;
       state.status = true;
-      state.user = user;
+      window.isLoggedin = true;
+    },
+
+    USER_CAR(state, car) {
+      state.userCar = car;
+      state.status = true;
       window.isLoggedin = true;
     },
 
@@ -57,6 +73,7 @@ export default ({
       console.log(data);
       if (data.success) {
         commit('AUTH_SUCCESS', data.user);
+        commit('USER_CAR', data.car);
       } else {
         commit('AUTH_ERROR');
       }
@@ -92,6 +109,7 @@ export default ({
           .then((response) => {
             if (response.data.success) {
               commit('AUTH_SUCCESS', response.data.user);
+              commit('USER_CAR', response.data.car);
               router.push(window.laravelPath || '/');
             } else {
               commit('AUTH_ERROR', response.data.message);
@@ -113,6 +131,24 @@ export default ({
         console.log(user);
 
         const { data } = await axios.put(`api/update_user_data/${user.id}`, user);
+        if (data.success === true) {
+          commit('UPDATE_USER_DATA');
+          alert(data.message);
+          return true;
+        }
+        alert(data.message);
+        return false;
+      } catch (error) {
+        alert(Object.entries(error.response.data.errors).map(([k, v]) => `${k}: ${v}`).join(', '));
+        return false;
+      }
+    },
+
+    async updateUserCarRequest({ commit }, userCar) {
+      try {
+        console.log(userCar);
+
+        const { data } = await axios.put(`api/update_user_car/${userCar.id}`, userCar);
         if (data.success === true) {
           commit('UPDATE_USER_DATA');
           alert(data.message);

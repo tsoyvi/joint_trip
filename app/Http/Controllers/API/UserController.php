@@ -8,6 +8,7 @@ use App\Http\Requests\Users\CreateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\Users\UpdateRequest;
+use App\Models\UserCar;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -158,6 +159,9 @@ class UserController extends Controller
         ];
 
         if (Auth::attempt($credentials, $request->remember)) {
+            
+            $car = UserCar::where('user_id', Auth::user()->id)->first();
+
             $success = true;
             $message = 'User login successfully';
         } else {
@@ -170,7 +174,7 @@ class UserController extends Controller
             'success' => $success,
             'message' => $message,
             'user' => Auth::user(), // Проверить!
-            // 'test' => Auth::viaRemember(),
+            'car' => $car, // Проверить!
         ];
         return response()->json($response);
     }
@@ -214,6 +218,7 @@ class UserController extends Controller
         if (Auth::check()) {
             $success = true;
             $message = 'User login successfully';
+            $car = UserCar::where('user_id', Auth::user()->id)->first();
         } else {
             $success = false;
             $message = 'Unauthorised';
@@ -224,6 +229,7 @@ class UserController extends Controller
             'success' => $success,
             'message' => $message,
             'user' => Auth::user(), // Проверить!
+            'car' => $car, // Проверить!
         ];
 
         // Задержка подгруздки для демонстрации работы

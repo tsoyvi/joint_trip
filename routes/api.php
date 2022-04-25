@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\СitiesListController;
+use App\Http\Controllers\API\UserCarController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,3 +33,6 @@ Route::get('check_login', [UserController::class, 'checkLogin']);
 
 
  Route::apiResource('update_user_data', UserController::class); 
+ Route::put('update_user_car/{id}', [UserCarController::class, '__invoke']);
+
+ Route::get('cities_list', СitiesListController::class); 

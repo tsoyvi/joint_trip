@@ -70,8 +70,8 @@
                 </p>
             </label>
             <label class="personal-main-info-individ-head" for="messengers">Мессенджеры
-                <p class="personal-main-info-individ-name">
-                    <input type="text" id="patronymic" class="personal-main-info-individ-name"
+               <p class="personal-main-info-individ-name">
+                <input type="text" id="patronymic" class="personal-main-info-individ-name"
                     v-model="user.messengers">
                 </p>
             </label>
@@ -103,6 +103,20 @@ export default {
   // Компоненты которые подключаем к нашему данному файлу
   components: {
 
+  },
+
+  data() {
+    return {
+      optionSelected: null,
+      optionsSelected: null,
+      inputVal: '',
+      messengers: [
+        'viber',
+        'WhatsApp',
+        'Telegram',
+      ],
+
+    };
   },
 
   computed: {

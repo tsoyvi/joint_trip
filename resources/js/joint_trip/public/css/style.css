@@ -790,7 +790,7 @@ footer {
 }
 
 .personal-main-info-individ-head {
-  color: #dddddd;
+  color: #979797;
 }
 
 .personal-main-info-individ-name {
@@ -805,26 +805,98 @@ footer {
   padding-right: 30px;
 }
 
+.personal-main-info-individ-name-form {
+  display: block;
+  height: calc(2rem + 2px);
+  width: 95%;
+  color: #0c0c0c;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+  padding-left: 10px;
+  border: 1px solid #979797;
+}
+
 .personal-main-info-about {
-  width: 90%;
+  width: 100%;
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.personal-main-info-about-head {
+  margin: 0 auto;
+  color: #979797;
+  width: 100%;
+}
+
+.personal-main-info-about-head-name {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  padding-left: 50px;
-  padding-right: 50px;
-  margin-top: 20px;
 }
 
-.personal-main-info-about-head {
-  color: #dddddd;
-  margin: 0 auto;
+.personal-main-info-about-head-text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.personal-main-info-about-name-form {
+  font-size: 1rem;
+  overflow: auto;
+  resize: none;
+  width: 80%;
+  min-height: 100px;
+  border: 1px solid #979797;
+}
+
+.personal-main-info-about-name-form::-webkit-input-placeholder {
+  color: #979797;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0.5rem;
+}
+
+.personal-main-info-about-name-form:-ms-input-placeholder {
+  color: #979797;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0.5rem;
+}
+
+.personal-main-info-about-name-form::-ms-input-placeholder {
+  color: #979797;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0.5rem;
+}
+
+.personal-main-info-about-name-form::placeholder {
+  color: #979797;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0.5rem;
 }
 
 .personal-main-info-about-name {

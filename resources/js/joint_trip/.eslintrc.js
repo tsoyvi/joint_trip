@@ -15,4 +15,12 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     "linebreak-style": 0, // <-- Раскомментировать эту строку если возникнут проблемы с CRLF и LF
   },
+  overrides: [
+    {
+      files: ["*.vue"],
+      rules: {
+        'max-len': 'off' // disables line length check
+      }
+    }
+  ]
 };

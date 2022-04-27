@@ -29,6 +29,11 @@ const routes = [
     name: 'write_to_us',
     component: () => import('../views/WriteToUs.vue'),
   },
+  {
+    path: '/results',
+    name: 'results',
+    component: () => import('../views/Results.vue'),
+  },
 
   // Ссылки на авторизацию / регистрацию
   {

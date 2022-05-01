@@ -24,6 +24,8 @@ class CreateUserCarsTable extends Migration
             $table->string('engine_capacity', 20)->nullable()->comment('Объем двигателя'); // Правда не знаю для чего, так для красоты ))
             $table->string('capacity', 20)->nullable()->comment('Вместимость');
             $table->string('state_number')->comment('Гос. номер авто');
+            $table->text('image_link')->nullable();
+
             $table->timestamps();
         });
     }

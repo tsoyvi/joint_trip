@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\СitiesListController;
 use App\Http\Controllers\API\UserCarController;
+use App\Http\Controllers\API\UserUploadImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,3 +37,6 @@ Route::get('check_login', [UserController::class, 'checkLogin']);
  Route::put('update_user_car/{id}', [UserCarController::class, '__invoke']);
 
  Route::get('cities_list', СitiesListController::class); 
+
+ Route::post('upload_user_image', [UserUploadImageController::class, 'userImage']);
+ Route::post('upload_user_car_image', [UserUploadImageController::class, 'userCarImage']);

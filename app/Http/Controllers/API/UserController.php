@@ -222,6 +222,7 @@ class UserController extends Controller
         } else {
             $success = false;
             $message = 'Unauthorised';
+            $car = ''; // Проверить!
         }
 
         // response

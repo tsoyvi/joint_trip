@@ -74,9 +74,10 @@ export default ({
       if (data.success) {
         commit('AUTH_SUCCESS', data.user);
         commit('USER_CAR', data.car);
-      } else {
-        commit('AUTH_ERROR');
+        return true;
       }
+      commit('AUTH_ERROR');
+      return false;
     },
 
     async register({ commit }, user) {

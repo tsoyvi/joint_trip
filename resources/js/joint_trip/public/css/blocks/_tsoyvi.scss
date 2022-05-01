@@ -1,0 +1,55 @@
+// Background Blur using backdrop-filter
+.blur {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(8px); 
+    top: 20px;
+    height: 100%;
+    width: 100%;
+    border-radius: 2em;
+    text-align:center;
+    z-index: 2;
+
+}
+
+.blur-loaded {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    color: darkblue;
+}
+
+.pouring {
+    position: relative;
+    background: white;
+    overflow: hidden;
+    z-index: 3;
+}
+
+.pouring:before {
+    content: '';
+    position: absolute;
+    filter: blur(5px);
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: screen;
+    background-image: repeating-linear-gradient(-45deg, transparent, transparent 1em, #BFE2FF 1em, #337AB7 50%), 
+     repeating-linear-gradient(45deg, #337AB7, #337AB7 1em, #FFF 1em, #BFE2FF 50%);
+    background-size: 3em 3em, 2em 2em;
+    animation-name: ani;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+@keyframes ani {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 100% 0;
+    }
+}
+@media (max-width:690px) {    
+    .pouring {font-size: 10px;}    
+}

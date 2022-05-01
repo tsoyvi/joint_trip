@@ -15,6 +15,7 @@ class AddLoginToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             
+            $table->text('image_link')->nullable()->after('name');
             $table->enum('role', ['user', 'admin'])->default('user')->after('remember_token');
             $table->json('messengers')->nullable()->after('name');
             $table->string('phone_number', 20)->nullable()->after('name');
@@ -22,11 +23,11 @@ class AddLoginToUsersTable extends Migration
             $table->date('birth_day')->nullable()->after('name');
             $table->string('patronymic', 20)->nullable()->after('name');
             $table->string('surname', 20)->nullable()->after('name');
-            $table->string('login')->nullable()->after('id');
+            $table->string('login', 20)->nullable()->after('id');
             
             // Это поле не требуется каждый пользователь может быть как пассажиром так и водителем
             // $table->enum('user_status', ['Водитель', 'Пассажир'])->default('Пассажир');
-            
+
         });
     }
 
@@ -38,7 +39,15 @@ class AddLoginToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('image_link');
             $table->dropColumn('login');
+            $table->dropColumn('surname');
+            $table->dropColumn('patronymic');
+            $table->dropColumn('birth_day');
+            $table->dropColumn('city');
+            $table->dropColumn('phone_number');
+            $table->dropColumn('messengers');
+            $table->dropColumn('role');
         });
     }
 }

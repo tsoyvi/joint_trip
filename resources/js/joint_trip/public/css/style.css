@@ -83,6 +83,9 @@ header {
 
 /* Главная форма */
 
+.form-submit-box a:visited {
+color: #ffffff;
+}
 .main-form {
   width: 100%;
   min-height: 300px;

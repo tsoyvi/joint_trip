@@ -116,7 +116,7 @@
             </div>
             <div class="form-submit-box">
               <button type="submit">
-                <span class="">Поиск</span>
+                <router-link to="/results"><span class="">Поиск</span></router-link>
               </button>
             </div>
           </form>

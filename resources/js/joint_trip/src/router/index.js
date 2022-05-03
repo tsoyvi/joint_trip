@@ -34,6 +34,11 @@ const routes = [
     name: 'results',
     component: () => import('../views/Results.vue'),
   },
+  {
+    path: '/add',
+    name: 'add',
+    component: () => import('../views/AddTrip.vue'),
+  },
 
   // Ссылки на авторизацию / регистрацию
   {

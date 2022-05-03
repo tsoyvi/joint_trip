@@ -17,71 +17,7 @@
             <hr class="search-form-delimeter" />
             <div class="search-button-date-box">
               <div class="search-button-date-wrapper" for="calendar">
-                <div>
-                  <svg
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    aria-hidden="true"
-                  >
-                    <g fill="none" fill-rule="evenodd">
-                      <rect
-                        x="3.5"
-                        y="3.5"
-                        width="17"
-                        height="17"
-                        rx="3.5"
-                        stroke="#708C91"
-                      ></rect>
-                      <path
-                        d="M3.5 7C3.5 5.067 5.067 3.5 7 3.5H17C18.933 3.5 20.5 5.067 20.5 7V8.5H3.5V7Z"
-                        stroke="#708C91"
-                      ></path>
-                      <rect
-                        x="6"
-                        y="11"
-                        width="2"
-                        height="2"
-                        rx="1"
-                        fill="#708C91"
-                      ></rect>
-                      <rect
-                        x="6"
-                        y="15"
-                        width="2"
-                        height="2"
-                        rx="1"
-                        fill="#708C91"
-                      ></rect>
-                      <rect
-                        x="11"
-                        y="11"
-                        width="2"
-                        height="2"
-                        rx="1"
-                        fill="#708C91"
-                      ></rect>
-                      <rect
-                        x="11"
-                        y="15"
-                        width="2"
-                        height="2"
-                        rx="1"
-                        fill="#708C91"
-                      ></rect>
-                      <rect
-                        x="16"
-                        y="11"
-                        width="2"
-                        height="2"
-                        rx="1"
-                        fill="#708C91"
-                      ></rect>
-                    </g>
-                  </svg>
-                </div>
-                  <input id="calendar" type="text" name="datetimes" value="" class="search-button-date" placeholder="22/05/2022">
+                <Datepicker v-model="date" format="dd/MM/yy" :enableTimePicker="false" :minDate="new Date()" autoApply name="datetimes"></Datepicker>
               </div>
             </div>
             <hr class="search-form-delimeter" />
@@ -183,10 +119,23 @@
 // @ is an alias to /src
 // import HelloWorld from '../components/HelloWorld.vue';
 
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
+import { ref } from 'vue';
+
 export default {
   name: 'HomeView',
-  components: {
-    // HelloWorld,
+  components: { Datepicker },
+  data() {
+    return {
+      // date: null,
+    };
+  },
+  setup() {
+    const date = ref(new Date());
+    return {
+      date,
+    };
   },
 };
 </script>

@@ -14,8 +14,8 @@
             </div>
             <div class="center-head"></div>
             <div class="right-head">
-                <a href="#">Найти поезду</a>
-                <a href="#">Опубликовать поездку</a>
+                <router-link to="/results">Найти поезду</router-link>
+                <router-link to="/add">Опубликовать поездку</router-link>
 
                 <!-- По хорошему надо вынести этот блок в отдельный темплет
                  Но это будет нашей проблемой в будущем ))) -->

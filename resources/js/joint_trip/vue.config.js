@@ -13,6 +13,7 @@ module.exports = defineConfig({
 
 module.exports = {
   devServer: {
-    proxy: 'http://bla-bal.dv:80',
+    // proxy: 'http://bla-bal.dv:80',
+    proxy: 'http://localhost:9999',
   },
 };

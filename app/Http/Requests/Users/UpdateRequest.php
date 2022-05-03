@@ -33,6 +33,7 @@ class UpdateRequest extends FormRequest
             'city' => [''],
             'phone_number' => [''],
             'messengers' => [''],
+            'about_me' => [''],
             // 'password' => ['string'],
         ];
 

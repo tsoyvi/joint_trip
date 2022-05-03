@@ -1,5 +1,6 @@
 import axios from 'axios';
 import router from '../router';
+import requests from './blocks/requests';
 
 export default ({
   state: {
@@ -68,15 +69,15 @@ export default ({
     //
     async checkLogin({ commit }) {
       commit('AUTH_REQUEST');
-      const { data } = await axios.get('api/check_login');
+      const result = await requests.getJson('api/check_login');
 
-      console.log(data);
-      if (data.success) {
-        commit('AUTH_SUCCESS', data.user);
-        commit('USER_CAR', data.car);
+      if (result.success === true) {
+        commit('AUTH_SUCCESS', result.data.user);
+        commit('USER_CAR', result.data.car);
         return true;
       }
       commit('AUTH_ERROR');
+      this.dispatch('addError', result.error);
       return false;
     },
 
@@ -134,7 +135,8 @@ export default ({
         const { data } = await axios.put(`api/update_user_data/${user.id}`, user);
         if (data.success === true) {
           commit('UPDATE_USER_DATA');
-          alert(data.message);
+          // alert(data.message);
+          this.dispatch('checkLogin');
           return true;
         }
         alert(data.message);

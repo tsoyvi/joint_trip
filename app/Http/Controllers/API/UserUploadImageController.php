@@ -13,80 +13,82 @@ use Illuminate\Support\Facades\Storage;
 class UserUploadImageController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Загрузка изображения пользователя.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\UploadImage\CreateRequest  $request
      * @return \Illuminate\Http\Response
-     * CreateRequest
+     * 
      */
-    public function userImage(Request $request)
+    public function userImage(CreateRequest $request)
     {
-        // $validated = $request->validated();
-        $user =  User::find($request['id']);
+        $success = null;
+        $message = null;
 
-        if ($request->hasFile('image')) {
-            $validated['image'] = app(UploadService::class)
-                ->saveFile(
-                    $request->file('image'),
-                    'images/' . $user->id
-                );
-            // Удаляем старую картинку с сервера
-            if ($user->image_link) {
-                Storage::disk('public')->delete($user->image_link);
+        try {
+            $validated = $request->validated();
+
+            $userId =  $validated['id'];
+            $uploadService = app(UploadService::class);
+
+            $status = $uploadService->uploadUserAvatarImage($validated['image'],  $userId);
+
+            if ($status == true) {
+                $success = true;
+                $message = 'Загружено изображение пользователя';
+            } else {
+                $success = false;
+                $message = 'Ошибка загрузки файла на сервер';
             }
-            // Добавляем ссылку на картинку в БД
-            $user->update(['image_link' => $validated['image']]);
-            $success = true;
-        } else {
+        } catch (\Illuminate\Database\QueryException $ex) {
             $success = false;
+            $message = $ex->getMessage();
         }
-
 
         $response = [
             'success' => $success,
-            // 'request' => $request['userId'], //$request['image'],
-
+            'message' => $message,
         ];
         sleep(2);
         return response()->json($response);
     }
 
     /**
-     * Handle the incoming request.
+     * Загрузка изображения автомобиля пользователя.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param App\Http\Requests\UploadImage\ CreateRequest  $request
      * @return \Illuminate\Http\Response
      * CreateRequest
      */
-    public function userCarImage(Request $request)
+    public function userCarImage(CreateRequest $request)
     {
-        // $validated = $request->validated();
-        $userCar =  UserCar::find($request['id']);
+        $success = null;
+        $message = null;
+        try {
+            $validated = $request->validated();
 
-        if ($request->hasFile('image')) {
-            $validated['image'] = app(UploadService::class)
-                ->saveFile(
-                    $request->file('image'),
-                    'images/' . $userCar->user_id
-                );
+            $uploadService = app(UploadService::class);
 
-            // Удаляем старую картинку с сервера
-            if ($userCar->image_link) {
-                Storage::disk('public')->delete($userCar->image_link);
+            $userCarId =  $validated['id'];
+            $status = $uploadService->uploadUserCarImage($validated['image'],  $userCarId);
+
+            if ($status == true) {
+                $success = true;
+                $message = 'Загружено изображение автомобиля пользователя';
+            } else {
+                $success = false;
+                $message = 'Ошибка загрузки файла на сервер';
             }
-            // Добавляем ссылку на картинку в БД
-            $userCar->update(['image_link' => $validated['image']]);
-            $success = true;
-        } else {
+        } catch (\Illuminate\Database\QueryException $ex) {
             $success = false;
+            $message = $ex->getMessage();
         }
 
 
         $response = [
             'success' => $success,
-            'request' => $userCar->image_link //$request['image'],
-
+            'message' =>  $message,
         ];
+
         sleep(2);
         return response()->json($response);
     }

@@ -24,7 +24,8 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => ['nullable', 'file', 'image', 'mimes:jpg,png'],
+            'image' => ['nullable', 'file', 'max:1999', 'image', 'mimes:jpg,png'],
+            'id' => ['required', 'numeric'],
         ];
     }
 

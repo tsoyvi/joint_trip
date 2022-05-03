@@ -16,6 +16,7 @@ class AddLoginToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             
             $table->text('image_link')->nullable()->after('name');
+            $table->text('about_me')->nullable()->after('name');
             $table->enum('role', ['user', 'admin'])->default('user')->after('remember_token');
             $table->json('messengers')->nullable()->after('name');
             $table->string('phone_number', 20)->nullable()->after('name');
@@ -40,6 +41,7 @@ class AddLoginToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('image_link');
+            $table->dropColumn('about_me');
             $table->dropColumn('login');
             $table->dropColumn('surname');
             $table->dropColumn('patronymic');

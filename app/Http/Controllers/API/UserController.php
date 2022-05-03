@@ -63,7 +63,7 @@ class UserController extends Controller
                 'birth_day' => $input['birth_day'],
                 'phone_number' => $input['phone_number'],
                 'messengers' => $input['messengers'],
-
+                'about_me' => $input['about_me'],
             ]);
 
             $success = true;

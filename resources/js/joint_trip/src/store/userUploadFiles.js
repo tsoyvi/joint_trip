@@ -1,4 +1,4 @@
-import axios from 'axios';
+import requests from './blocks/requests';
 
 export default ({
   state: {
@@ -21,24 +21,18 @@ export default ({
   },
 
   actions: {
-    async submitUserFile({ commit }, data) {
+    async submitUserFile({ commit }, userData) {
       commit('UPLOAD_FILE');
-      axios.post(
-        data.url,
-        data.formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        },
-      ).then((response) => {
-        console.log(response.data);
-        this.dispatch('checkLogin');
+
+      const result = await requests.uploadFile(userData.url, userData.formData);
+      if (result.success === true) {
         commit('UPLOADED_FILE');
-      })
-        .catch(() => {
-          console.log('FAILURE!!');
-        });
+        this.dispatch('checkLogin');
+        return true;
+      }
+      commit('UPLOADED_FILE');
+      this.dispatch('addError', result.error);
+      return false;
     },
   },
 

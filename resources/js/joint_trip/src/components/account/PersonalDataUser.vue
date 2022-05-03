@@ -98,7 +98,8 @@
         <label class="personal-main-info-about-head" for="about">
             <p class="personal-main-info-about-head-name">О себе:</p>
             <p class="personal-main-info-about-head-text">
-                <textarea class="personal-main-info-about-name-form" id="about" v-model="user.about"
+                <textarea class="personal-main-info-about-name-form" id="about"
+                    v-model="user.about_me"
                 placeholder="Расскажи о себе">
                 </textarea>
             </p>

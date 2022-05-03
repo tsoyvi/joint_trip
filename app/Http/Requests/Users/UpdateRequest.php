@@ -24,12 +24,20 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
+            'id' => [''],
             'name' => ['required', 'string', 'max:255'],
-            'login' => ['required', 'string', 'min:2', 'max:255'],
+            'surname' => [''],
+            'patronymic' => [''],
             'email' => ['required', 'string', 'email'],
+            'birth_day' => [''],
+            'city' => [''],
+            'phone_number' => [''],
+            'messengers' => [''],
+            'about_me' => [''],
             // 'password' => ['string'],
-            'access_level' => ['required'],
         ];
+
+
     }
 
     public function messages()

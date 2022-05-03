@@ -599,6 +599,7 @@ footer {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  position: relative;
 }
 
 .personal-main-info-header {
@@ -734,7 +735,7 @@ footer {
 }
 
 .personal-main-info-individ-head {
-  color: #dddddd;
+  color: #979797;
 }
 
 .personal-main-info-individ-name {
@@ -749,26 +750,98 @@ footer {
   padding-right: 30px;
 }
 
+.personal-main-info-individ-name-form {
+  display: block;
+  height: calc(2rem + 2px);
+  width: 95%;
+  color: #0c0c0c;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+  padding-left: 10px;
+  border: 1px solid #979797;
+}
+
 .personal-main-info-about {
-  width: 90%;
+  width: 100%;
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.personal-main-info-about-head {
+  margin: 0 auto;
+  color: #979797;
+  width: 100%;
+}
+
+.personal-main-info-about-head-name {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  padding-left: 50px;
-  padding-right: 50px;
-  margin-top: 20px;
 }
 
-.personal-main-info-about-head {
-  color: #dddddd;
-  margin: 0 auto;
+.personal-main-info-about-head-text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.personal-main-info-about-name-form {
+  font-size: 1rem;
+  overflow: auto;
+  resize: none;
+  width: 80%;
+  min-height: 100px;
+  border: 1px solid #979797;
+}
+
+.personal-main-info-about-name-form::-webkit-input-placeholder {
+  color: #979797;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0.5rem;
+}
+
+.personal-main-info-about-name-form:-ms-input-placeholder {
+  color: #979797;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0.5rem;
+}
+
+.personal-main-info-about-name-form::-ms-input-placeholder {
+  color: #979797;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0.5rem;
+}
+
+.personal-main-info-about-name-form::placeholder {
+  color: #979797;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0.5rem;
 }
 
 .personal-main-info-about-name {
@@ -930,5 +1003,78 @@ input[type="file"] {
 
 .personal-drive-archive-driver {
   color: black;
+}
+
+.blur {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+  top: 20px;
+  height: 100%;
+  width: 100%;
+  border-radius: 2em;
+  text-align: center;
+  z-index: 2;
+}
+
+.blur-loaded {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  color: darkblue;
+}
+
+.pouring {
+  position: relative;
+  background: white;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.pouring:before {
+  content: '';
+  position: absolute;
+  -webkit-filter: blur(5px);
+          filter: blur(5px);
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: screen;
+  background-image: repeating-linear-gradient(-45deg, transparent, transparent 1em, #BFE2FF 1em, #337AB7 50%), repeating-linear-gradient(45deg, #337AB7, #337AB7 1em, #FFF 1em, #BFE2FF 50%);
+  background-size: 3em 3em, 2em 2em;
+  -webkit-animation-name: ani;
+          animation-name: ani;
+  -webkit-animation-duration: 5s;
+          animation-duration: 5s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+}
+
+@-webkit-keyframes ani {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 0;
+  }
+}
+
+@keyframes ani {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 0;
+  }
+}
+
+@media (max-width: 690px) {
+  .pouring {
+    font-size: 10px;
+  }
 }
 /*# sourceMappingURL=style.css.map */

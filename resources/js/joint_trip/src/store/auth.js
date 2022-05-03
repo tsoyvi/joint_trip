@@ -1,10 +1,12 @@
 import axios from 'axios';
 import router from '../router';
+import requests from './blocks/requests';
 
 export default ({
   state: {
     status: false,
     user: {},
+    userCar: {},
   },
 
   getters: {
@@ -15,6 +17,11 @@ export default ({
     user(state) {
       return state.user;
     },
+
+    userCar(state) {
+      return state.userCar;
+    },
+
   },
 
   mutations: {
@@ -23,8 +30,18 @@ export default ({
     },
 
     AUTH_SUCCESS(state, user) {
+      // Костыль по раскодировке JSON из БД
+      const arr = user;
+      arr.messengers = JSON.parse(arr.messengers);
+      //
+      state.user = arr;
       state.status = true;
-      state.user = user;
+      window.isLoggedin = true;
+    },
+
+    USER_CAR(state, car) {
+      state.userCar = car;
+      state.status = true;
       window.isLoggedin = true;
     },
 
@@ -41,6 +58,10 @@ export default ({
       state.user = {};
       window.isLoggedin = false;
     },
+
+    UPDATE_USER_DATA() {
+    },
+
   },
 
   actions: {
@@ -48,14 +69,16 @@ export default ({
     //
     async checkLogin({ commit }) {
       commit('AUTH_REQUEST');
-      const { data } = await axios.get('api/check_login');
+      const result = await requests.getJson('api/check_login');
 
-      console.log(data);
-      if (data.success) {
-        commit('AUTH_SUCCESS', data.user);
-      } else {
-        commit('AUTH_ERROR');
+      if (result.success === true) {
+        commit('AUTH_SUCCESS', result.data.user);
+        commit('USER_CAR', result.data.car);
+        return true;
       }
+      commit('AUTH_ERROR');
+      this.dispatch('addError', result.error);
+      return false;
     },
 
     async register({ commit }, user) {
@@ -88,6 +111,7 @@ export default ({
           .then((response) => {
             if (response.data.success) {
               commit('AUTH_SUCCESS', response.data.user);
+              commit('USER_CAR', response.data.car);
               router.push(window.laravelPath || '/');
             } else {
               commit('AUTH_ERROR', response.data.message);
@@ -101,6 +125,43 @@ export default ({
       if (data.success) {
         commit('LOGOUT');
         router.push('/');
+      }
+    },
+
+    async updateUserDataRequest({ commit }, user) {
+      try {
+        console.log(user);
+
+        const { data } = await axios.put(`api/update_user_data/${user.id}`, user);
+        if (data.success === true) {
+          commit('UPDATE_USER_DATA');
+          // alert(data.message);
+          this.dispatch('checkLogin');
+          return true;
+        }
+        alert(data.message);
+        return false;
+      } catch (error) {
+        alert(Object.entries(error.response.data.errors).map(([k, v]) => `${k}: ${v}`).join(', '));
+        return false;
+      }
+    },
+
+    async updateUserCarRequest({ commit }, userCar) {
+      try {
+        console.log(userCar);
+
+        const { data } = await axios.put(`api/update_user_car/${userCar.id}`, userCar);
+        if (data.success === true) {
+          commit('UPDATE_USER_DATA');
+          alert(data.message);
+          return true;
+        }
+        alert(data.message);
+        return false;
+      } catch (error) {
+        alert(Object.entries(error.response.data.errors).map(([k, v]) => `${k}: ${v}`).join(', '));
+        return false;
       }
     },
 

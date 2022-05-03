@@ -8,7 +8,9 @@ use App\Http\Requests\Users\CreateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\Users\UpdateRequest;
+use App\Models\UserCar;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -45,34 +47,31 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(UpdateRequest $request, User $user)
     {
         $input = $request->validated();
 
         try {
-            $user->name = $input['name'];
-            $user->access_level = $input['access_level'];
-            // $user->login = $input['login'];
-            $user->email = $input['email'];
 
-            if (isset($input['password'])) {
-                $user->password = Hash::make($input['password']);
-            }
+            $update = DB::table('users')->where('id', $request['id'])->update([
+                'name' => $input['name'],
+                'surname' => $input['surname'],
+                'patronymic' => $input['patronymic'],
+                'email' => $input['email'],
+                'city' => $input['city'],
+                'birth_day' => $input['birth_day'],
+                'phone_number' => $input['phone_number'],
+                'messengers' => $input['messengers'],
+                'about_me' => $input['about_me'],
+            ]);
 
-            $user->save();
             $success = true;
             $message = 'Запись о пользователе обновлена';
         } catch (\Illuminate\Database\QueryException $ex) {
             $success = false;
             $message = $ex->getMessage();
-            $user = '';
+            // $user = '';
         }
 
         return response()->json([
@@ -147,7 +146,7 @@ class UserController extends Controller
     }
 
 
-     /**
+    /**
      * Login
      * Авторизация / аутентификация
      */
@@ -160,6 +159,9 @@ class UserController extends Controller
         ];
 
         if (Auth::attempt($credentials, $request->remember)) {
+            
+            $car = UserCar::where('user_id', Auth::user()->id)->first();
+
             $success = true;
             $message = 'User login successfully';
         } else {
@@ -172,7 +174,7 @@ class UserController extends Controller
             'success' => $success,
             'message' => $message,
             'user' => Auth::user(), // Проверить!
-            // 'test' => Auth::viaRemember(),
+            'car' => $car, // Проверить!
         ];
         return response()->json($response);
     }
@@ -216,9 +218,11 @@ class UserController extends Controller
         if (Auth::check()) {
             $success = true;
             $message = 'User login successfully';
+            $car = UserCar::where('user_id', Auth::user()->id)->first();
         } else {
             $success = false;
             $message = 'Unauthorised';
+            $car = ''; // Проверить!
         }
 
         // response
@@ -226,8 +230,9 @@ class UserController extends Controller
             'success' => $success,
             'message' => $message,
             'user' => Auth::user(), // Проверить!
+            'car' => $car, // Проверить!
         ];
-        
+
         // Задержка подгруздки для демонстрации работы
         sleep(2);
         return response()->json($response);

@@ -181,7 +181,7 @@ var _hoisted_8 = {
   "class": "col-4-item"
 };
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("О нас");
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("О нашем проекте");
 
 var _hoisted_10 = {
   "class": "col-4-item"
@@ -368,9 +368,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })])) : _ctx.authStatus === 'loading' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_14, _hoisted_17)) : _ctx.authStatus === true ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.user.name), 1
-  /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  })])) : _ctx.authStatus === 'loading' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_14, _hoisted_17)) : _ctx.authStatus === true ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: "/account_user"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.user.name), 1
+      /* TEXT */
+      )];
+    }),
+    _: 1
+    /* STABLE */
+
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.logoutFunction();
     })
@@ -618,6 +627,31 @@ var routes = [{
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_joint_trip_src_views_auth_RegisterUser_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/auth/RegisterUser.vue */ "./resources/js/joint_trip/src/views/auth/RegisterUser.vue"));
   }
+}, // Ссылки личного кабинета
+{
+  path: '/account_user',
+  name: 'AccountUser',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_joint_trip_src_views_auth_AccountUser_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/auth/AccountUser.vue */ "./resources/js/joint_trip/src/views/auth/AccountUser.vue"));
+  }
+}, {
+  path: '/car_user',
+  name: 'CarUser',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_joint_trip_src_views_auth_AccountUser_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/auth/AccountUser.vue */ "./resources/js/joint_trip/src/views/auth/AccountUser.vue"));
+  }
+}, {
+  path: '/trips_user',
+  name: 'TripsUser',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_joint_trip_src_views_auth_AccountUser_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/auth/AccountUser.vue */ "./resources/js/joint_trip/src/views/auth/AccountUser.vue"));
+  }
+}, {
+  path: '/notice_user',
+  name: 'NoticeUser',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_joint_trip_src_views_auth_AccountUser_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/auth/AccountUser.vue */ "./resources/js/joint_trip/src/views/auth/AccountUser.vue"));
+  }
 }];
 var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_1__.createRouter)({
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_1__.createWebHistory)(process.env.BASE_URL),
@@ -666,7 +700,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   state: {
     status: false,
-    user: {}
+    user: {},
+    userCar: {}
   },
   getters: {
     authStatus: function authStatus(state) {
@@ -674,6 +709,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     user: function user(state) {
       return state.user;
+    },
+    userCar: function userCar(state) {
+      return state.userCar;
     }
   },
   mutations: {
@@ -681,8 +719,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       state.status = 'loading';
     },
     AUTH_SUCCESS: function AUTH_SUCCESS(state, user) {
+      // Костыль по раскодировке JSON из БД
+      var arr = user;
+      arr.messengers = JSON.parse(arr.messengers); //
+
+      state.user = arr;
       state.status = true;
-      state.user = user;
+      window.isLoggedin = true;
+    },
+    USER_CAR: function USER_CAR(state, car) {
+      state.userCar = car;
+      state.status = true;
       window.isLoggedin = true;
     },
     AUTH_REGISTER: function AUTH_REGISTER() {},
@@ -694,7 +741,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       state.status = false;
       state.user = {};
       window.isLoggedin = false;
-    }
+    },
+    UPDATE_USER_DATA: function UPDATE_USER_DATA() {}
   },
   actions: {
     // Здесь мы делаем запрос на сервер для проверки авторизации пользователя
@@ -717,13 +765,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 data = _yield$axios$get.data;
                 console.log(data);
 
-                if (data.success) {
-                  commit('AUTH_SUCCESS', data.user);
-                } else {
-                  commit('AUTH_ERROR');
+                if (!data.success) {
+                  _context.next = 11;
+                  break;
                 }
 
-              case 8:
+                commit('AUTH_SUCCESS', data.user);
+                commit('USER_CAR', data.car);
+                return _context.abrupt("return", true);
+
+              case 11:
+                commit('AUTH_ERROR');
+                return _context.abrupt("return", false);
+
+              case 13:
               case "end":
                 return _context.stop();
             }
@@ -805,12 +860,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 commit = _ref5.commit;
                 axios__WEBPACK_IMPORTED_MODULE_1___default().get('/sanctum/csrf-cookie').then(function () {
                   axios__WEBPACK_IMPORTED_MODULE_1___default().post('api/login', {
-                    login: user.login,
+                    email: user.email,
                     password: user.password,
                     remember: user.remember
                   }).then(function (response) {
                     if (response.data.success) {
                       commit('AUTH_SUCCESS', response.data.user);
+                      commit('USER_CAR', response.data.car);
                       _router__WEBPACK_IMPORTED_MODULE_2__["default"].push(window.laravelPath || '/');
                     } else {
                       commit('AUTH_ERROR', response.data.message);
@@ -854,6 +910,108 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee4);
       }))();
+    },
+    updateUserDataRequest: function updateUserDataRequest(_ref7, user) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        var commit, _yield$axios$put, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                commit = _ref7.commit;
+                _context5.prev = 1;
+                console.log(user);
+                _context5.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().put("api/update_user_data/".concat(user.id), user);
+
+              case 5:
+                _yield$axios$put = _context5.sent;
+                data = _yield$axios$put.data;
+
+                if (!(data.success === true)) {
+                  _context5.next = 11;
+                  break;
+                }
+
+                commit('UPDATE_USER_DATA');
+                alert(data.message);
+                return _context5.abrupt("return", true);
+
+              case 11:
+                alert(data.message);
+                return _context5.abrupt("return", false);
+
+              case 15:
+                _context5.prev = 15;
+                _context5.t0 = _context5["catch"](1);
+                alert(Object.entries(_context5.t0.response.data.errors).map(function (_ref8) {
+                  var _ref9 = _slicedToArray(_ref8, 2),
+                      k = _ref9[0],
+                      v = _ref9[1];
+
+                  return "".concat(k, ": ").concat(v);
+                }).join(', '));
+                return _context5.abrupt("return", false);
+
+              case 19:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, null, [[1, 15]]);
+      }))();
+    },
+    updateUserCarRequest: function updateUserCarRequest(_ref10, userCar) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+        var commit, _yield$axios$put2, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                commit = _ref10.commit;
+                _context6.prev = 1;
+                console.log(userCar);
+                _context6.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().put("api/update_user_car/".concat(userCar.id), userCar);
+
+              case 5:
+                _yield$axios$put2 = _context6.sent;
+                data = _yield$axios$put2.data;
+
+                if (!(data.success === true)) {
+                  _context6.next = 11;
+                  break;
+                }
+
+                commit('UPDATE_USER_DATA');
+                alert(data.message);
+                return _context6.abrupt("return", true);
+
+              case 11:
+                alert(data.message);
+                return _context6.abrupt("return", false);
+
+              case 15:
+                _context6.prev = 15;
+                _context6.t0 = _context6["catch"](1);
+                alert(Object.entries(_context6.t0.response.data.errors).map(function (_ref11) {
+                  var _ref12 = _slicedToArray(_ref11, 2),
+                      k = _ref12[0],
+                      v = _ref12[1];
+
+                  return "".concat(k, ": ").concat(v);
+                }).join(', '));
+                return _context6.abrupt("return", false);
+
+              case 19:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, null, [[1, 15]]);
+      }))();
     }
   },
   modules: {}
@@ -872,15 +1030,97 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./resources/js/joint_trip/node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./resources/js/joint_trip/node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./auth */ "./resources/js/joint_trip/src/store/auth.js");
+/* harmony import */ var _userUploadFiles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./userUploadFiles */ "./resources/js/joint_trip/src/store/userUploadFiles.js");
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vuex__WEBPACK_IMPORTED_MODULE_1__.createStore)({
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vuex__WEBPACK_IMPORTED_MODULE_2__.createStore)({
   modules: {
-    auth: _auth__WEBPACK_IMPORTED_MODULE_0__["default"]
+    auth: _auth__WEBPACK_IMPORTED_MODULE_0__["default"],
+    userUploadFiles: _userUploadFiles__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 }));
+
+/***/ }),
+
+/***/ "./resources/js/joint_trip/src/store/userUploadFiles.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/joint_trip/src/store/userUploadFiles.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./resources/js/joint_trip/node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./resources/js/joint_trip/node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  state: {
+    uploadFileSatatus: false
+  },
+  getters: {
+    uploadFileSatatus: function uploadFileSatatus(state) {
+      return state.uploadFileSatatus;
+    }
+  },
+  mutations: {
+    UPLOAD_FILE: function UPLOAD_FILE(state) {
+      state.uploadFileSatatus = 'loading';
+    },
+    UPLOADED_FILE: function UPLOADED_FILE(state) {
+      state.uploadFileSatatus = false;
+    }
+  },
+  actions: {
+    submitUserFile: function submitUserFile(_ref, data) {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var commit;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                commit = _ref.commit;
+                commit('UPLOAD_FILE');
+                axios__WEBPACK_IMPORTED_MODULE_1___default().post(data.url, data.formData, {
+                  headers: {
+                    'Content-Type': 'multipart/form-data'
+                  }
+                }).then(function (response) {
+                  console.log(response.data);
+
+                  _this.dispatch('checkLogin');
+
+                  commit('UPLOADED_FILE');
+                })["catch"](function () {
+                  console.log('FAILURE!!');
+                });
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
+  },
+  modules: {}
+});
 
 /***/ }),
 
@@ -27629,7 +27869,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_joint_trip_src_views_HowItWorks_vue":1,"resources_js_joint_trip_src_views_TermsUse_vue":1,"resources_js_joint_trip_src_views_AboutView_vue":1,"resources_js_joint_trip_src_views_WriteToUs_vue":1,"resources_js_joint_trip_src_views_auth_LoginUser_vue":1,"resources_js_joint_trip_src_views_auth_RegisterUser_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_joint_trip_src_views_HowItWorks_vue":1,"resources_js_joint_trip_src_views_TermsUse_vue":1,"resources_js_joint_trip_src_views_AboutView_vue":1,"resources_js_joint_trip_src_views_WriteToUs_vue":1,"resources_js_joint_trip_src_views_auth_LoginUser_vue":1,"resources_js_joint_trip_src_views_auth_RegisterUser_vue":1,"resources_js_joint_trip_src_views_auth_AccountUser_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

@@ -56,6 +56,7 @@
               </button>
             </div>
           </form>
+          <SearchBar/>
         </div>
       </div>
     </section>
@@ -117,7 +118,7 @@
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from '../components/HelloWorld.vue';
+import SearchBar from '../components/search/SearchBar.vue';
 
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
@@ -136,6 +137,8 @@ export default {
     return {
       date,
     };
+  components: {
+    SearchBar,
   },
 };
 </script>

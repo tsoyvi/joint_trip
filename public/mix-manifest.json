@@ -3,6 +3,7 @@
     "/css/style.css": "/css/style.css",
     "/images/avatar-ico.png": "/images/avatar-ico.png",
     "/images/back-banner.svg": "/images/back-banner.svg",
+    "/images/cal_image.svg": "/images/cal_image.svg",
     "/images/car-ico.png": "/images/car-ico.png",
     "/images/click-ico.png": "/images/click-ico.png",
     "/images/driver-passenger.jpg": "/images/driver-passenger.jpg",
@@ -10,5 +11,7 @@
     "/images/logo.png": "/images/logo.png",
     "/images/made-in-russia.png": "/images/made-in-russia.png",
     "/images/made.png": "/images/made.png",
-    "/images/rub-ico.png": "/images/rub-ico.png"
+    "/images/man_image.svg": "/images/man_image.svg",
+    "/images/rub-ico.png": "/images/rub-ico.png",
+    "/images/vodila.jpg": "/images/vodila.jpg"
 }

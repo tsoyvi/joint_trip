@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@vuepic/vue-datepicker": "^3.2.0",
+    "@vueform/multiselect": "^2.3.3",
     "axios": "^0.26.1",
     "core-js": "^3.8.3",
     "vue": "^3.2.13",

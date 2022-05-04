@@ -13,14 +13,15 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    "linebreak-style": 0, // <-- Раскомментировать эту строку если возникнут проблемы с CRLF и LF
+    'linebreak-style': 0, // <-- Раскомментировать эту строку если возникнут проблемы с CRLF и LF
   },
+
   overrides: [
     {
-      files: ["*.vue"],
+      files: ['*.vue'],
       rules: {
-        'max-len': 'off' // disables line length check
-      }
-    }
-  ]
+        'max-len': 'off', // disables line length check
+      },
+    },
+  ],
 };

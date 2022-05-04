@@ -118,15 +118,18 @@
 
 <script>
 // @ is an alias to /src
-import SearchBar from '../components/search/SearchBar.vue';
-
+import { ref } from 'vue';
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
-import { ref } from 'vue';
+
+import SearchBar from '../components/search/SearchBar.vue';
 
 export default {
   name: 'HomeView',
-  components: { Datepicker },
+  components: {
+    Datepicker,
+    SearchBar,
+  },
   data() {
     return {
       // date: null,
@@ -137,8 +140,6 @@ export default {
     return {
       date,
     };
-  components: {
-    SearchBar,
   },
 };
 </script>

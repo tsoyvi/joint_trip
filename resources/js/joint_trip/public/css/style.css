@@ -115,10 +115,10 @@ header {
 }
 
 /* Главная форма */
-
 .form-submit-box a:visited {
-color: #ffffff;
+  color: #ffffff;
 }
+
 .main-form {
   width: 100%;
   min-height: 300px;
@@ -235,14 +235,18 @@ color: #ffffff;
           align-items: center;
   width: 100%;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
+
 .dp__input_icons {
-  padding: 5px!important;
+  padding: 5px !important;
 }
+
 .dp__input {
   text-align: center;
 }
+
 .form-people-box {
   width: 10%;
   display: -webkit-box;
@@ -639,8 +643,9 @@ footer {
 }
 
 /* Страница логина и регистрации */
-
 .login-form, .add-trip-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 100%;
   -webkit-box-orient: vertical;
@@ -656,12 +661,15 @@ footer {
   min-width: 400px;
 }
 
-.login-form-header {
+.login-form-header, .form-header {
   text-align: center;
   font-size: 2.5em;
   color: #054752;
 }
+
 .login-form-input, .form-input {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -669,8 +677,11 @@ footer {
           box-shadow: none;
   padding: 8px 24px;
 }
+
 .login-form-input input, .form-input input {
-  appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   border: 0px;
   border-radius: 16px;
   background-color: #ededed;
@@ -685,22 +696,32 @@ footer {
   padding: 16px;
   outline: 0;
 }
+
 .login-form-remember, .agreement {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding: 8px 24px;
 }
+
 .login-form-btn-wrapper, .form-btn-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   padding: 8px 24px;
 }
+
 .login-form-btn, .form-btn {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
   display: inline-flex;
   padding: 0px 24px;
   border: 1px solid transparent;
@@ -722,8 +743,9 @@ footer {
   -webkit-transition: max-width 500ms ease-in 0s, background-color 200ms ease-in 0s;
   transition: max-width 500ms ease-in 0s, background-color 200ms ease-in 0s;
 }
-.login-form-btn:hover, .form-btn:hover  {
-  background-color: rgb(0, 143, 193);
+
+.login-form-btn:hover, .form-btn:hover {
+  background-color: #008fc1;
 }
 
 .login-form-forgot {
@@ -737,13 +759,14 @@ footer {
 }
 
 /* Добавление поездки */
-
 .form-row {
   min-width: 600px;
 }
+
 .add-trip-form .dp__main {
   width: 100%;
 }
+
 .form-input input {
   text-align: center;
 }
@@ -1302,5 +1325,24 @@ input[type="file"] {
   .pouring {
     font-size: 10px;
   }
+}
+
+.form-input-select {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 0px;
+  border-radius: 16px;
+  background-color: #ededed;
+  color: #054752;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 0%;
+          flex: 1 1 0%;
+  font-size: 16px;
+  line-height: 20px;
+  width: 100%;
+  caret-color: #00aff5;
+  padding: 16px;
+  outline: 0;
 }
 /*# sourceMappingURL=style.css.map */

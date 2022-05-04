@@ -3,6 +3,7 @@ body {
   margin: 0;
   padding: 0;
   min-width: 800px;
+  color: #054752;
 }
 
 a {
@@ -54,7 +55,6 @@ header {
   display: flex;
   width: 100%;
   height: 80px;
-  box-sizing: border-box;
   position: fixed;
   background-color: white;
   top: 0px;
@@ -132,7 +132,7 @@ header {
   width: 100%;
   box-sizing: border-box;
   background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.123) 0px 1pt 4pt, rgba(0, 0, 0, 0.075) 0px 2pt 8pt;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1pt 4pt, rgba(0, 0, 0, 0.08) 0px 2pt 8pt;
   padding: 8px 0px 8px 8px;
   border-radius: 16px;
   height: 56px;
@@ -148,13 +148,19 @@ header {
 
 .main-form-box form input {
   font-size: 18px;
+  color: #708c91;
   line-height: 20px;
   background: transparent;
   border: 0px !important;
   border-radius: 0px;
-  transform: translateY(1px);
   outline: 0;
   padding: 10px 15px;
+}
+
+.main-form-box form .search-button-date {
+  padding: 10px 5px;
+  font-size: 16px;
+  text-align: center;
 }
 
 .form-input-box {
@@ -174,28 +180,33 @@ header {
   display: flex;
   align-items: center;
   position: relative;
+  box-sizing: border-box;
 }
 
-.form-date-box {
+.search-button-date-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.form-people-box {
   width: 10%;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  box-sizing: border-box;
 }
 
-.form-date-box button {
+.form-people-box select {
   display: flex;
   cursor: pointer;
   border: none;
+  padding-left: 5px;
+  outline: 0;
   font-size: inherit;
-  font-family: inherit;
   color: #708c91;
-  background: none;
-  height: 56px;
-  box-sizing: border-box;
-  line-height: 24px;
-  width: 100%;
-  min-width: 0px;
-  text-align: left;
-  white-space: nowrap;
-  overflow: hidden;
   align-items: center;
   justify-content: center;
 }
@@ -203,21 +214,17 @@ header {
 .search-button-date {
   display: flex;
   cursor: pointer;
-  border: none;
-  font-size: inherit;
-  font-family: inherit;
   color: #708c91;
-  background: none;
-  height: 56px;
   box-sizing: border-box;
-  line-height: 24px;
-  width: 100%;
-  min-width: 0px;
-  text-align: left;
   white-space: nowrap;
   overflow: hidden;
   align-items: center;
   justify-content: center;
+}
+
+.search-button-date-wrapper div, .form-people-box div {
+  display: flex;
+  align-items: center;
 }
 
 .form-submit-box {
@@ -235,7 +242,6 @@ header {
   cursor: pointer;
   border: none;
   font-size: inherit;
-  font-family: inherit;
   height: 56px;
   box-sizing: border-box;
   line-height: 24px;
@@ -252,6 +258,11 @@ header {
   background-color: #008fc1;
 }
 
+.daterangepicker {
+  margin-top: -5px !important;
+}
+
+/* Контент */
 .about {
   margin-top: 50px;
 }
@@ -349,6 +360,111 @@ header {
   color: #ffffff !important;
 }
 
+/* Результаты */
+.main-form.results {
+  width: 100%;
+  background-image: none;
+  min-height: auto;
+  background-color: #ededed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-form-box.results {
+  min-height: auto;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-top: 0;
+}
+
+.results-section {
+  margin-top: 50px;
+}
+
+.result-list {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+}
+
+.result-card {
+  position: relative;
+  border-radius: 16px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1pt 4pt, rgba(0, 0, 0, 0.08) 0px 2pt 8pt;
+  list-style-type: none;
+  transition: box-shadow 200ms ease-in 0s;
+  background-color: white;
+  flex: 1 1 0%;
+  padding: 20px;
+}
+
+.result-card:hover {
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 2pt 8pt, rgba(0, 0, 0, 0.08) 0px 2pt 16pt;
+}
+
+.result-card a, .result-card a:visited, .result-card a:hover {
+  color: #054752;
+}
+
+.result-card-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.result-card-route {
+  display: flex;
+  flex-direction: column;
+}
+
+.result-card-halt {
+  display: flex;
+}
+
+.result-card-halt div {
+  margin-right: 15px;
+  width: 50px;
+}
+
+.result-card-halt-delimeter {
+  padding-left: 5px;
+}
+
+.result-card-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.result-card-bottom div {
+  display: flex;
+}
+
+.result-card-driver div {
+  margin-right: 15px;
+}
+
+.driver-img {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.driver-name {
+  align-items: center;
+  font-size: 22px;
+}
+
+.driver-tickets {
+  align-items: end;
+}
+
 /* Футер */
 footer {
   min-width: 800px;
@@ -376,7 +492,7 @@ footer {
 }
 
 .login-form-row {
-  min-width: 500px;
+  min-width: 400px;
 }
 
 .login-form-header {
@@ -454,6 +570,12 @@ footer {
 .login-form-register {
   text-align: center;
   padding: 2px 24px 8px 24px;
+}
+
+@media screen and (max-width: 960px) {
+  .search-button-date-wrapper svg, .form-people-box svg {
+    display: none;
+  }
 }
 
 /*Личный кабинет*/
@@ -899,4 +1021,12 @@ input[type="file"] {
   .pouring {
     font-size: 10px;
   }
+}
+
+.div-select-city {
+  position: absolute;
+  background-color: #FFF;
+  color: burlywood;
+  font-size: larger;
+  width: auto;
 }

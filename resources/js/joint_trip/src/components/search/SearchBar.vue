@@ -1,14 +1,33 @@
 <template>
   <form action="" method="post">
-            <label class="form-input-box" for="search-from">
+           <!-- <label class="form-input-box" for="search-from">
                 <input id="search-from" type="search" placeholder="Откуда" name="from" autocomplete="off"
                 v-model="search.from" style=""
                 @input ="selectCity({id: 'search-from' })"/>
-            </label>
+            </label> -->
+
+            <div  class="form-input-box">
+              <multiselect v-model="search.from"
+                  :close-on-select="true"
+                  :searchable="true"
+                  :create-option="true"
+                  :options="citiesList"
+                  @search-change="test"
+              ></multiselect>
+            </div>
 
             <hr class="search-form-delimeter" />
             <div class="form-input-box" for="search-to">
-                <input id="search-to" type="search" placeholder="Куда" name="to" value=""/>
+                <!-- <input id="search-to" type="search" placeholder="Куда" name="to" value=""/> -->
+
+              <multiselect v-model="search.to"
+                  :close-on-select="true"
+                  :searchable="true"
+                  :create-option="true"
+                  :options="citiesList"
+                  @search-change="test"
+              ></multiselect>
+
             </div>
             <hr class="search-form-delimeter" />
             <div class="search-button-date-box">
@@ -16,7 +35,9 @@
                 <div>
                   <img src="images/cal_image.svg" alt="cal_image.svg">
                 </div>
+                <label for="calendar">
                   <input id="calendar" type="date" name="datetimes" v-model="search.date" class="search-button-date">
+                </label>
               </div>
             </div>
             <hr class="search-form-delimeter" />
@@ -39,24 +60,20 @@
               </button>
             </div>
           </form>
-
-<div id="div-select-city" class="div-select-city">
-    <ul>
-        <li>Microsoft</li>
-        <li>Google</li>
-        <li>Apple</li>
-        <li>IBM</li>
-    </ul>
-</div>
-
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import Multiselect from '@vueform/multiselect';
 import DateMixin from '../mixins/date';
 
 export default {
   name: 'searchBar',
   mixins: [DateMixin],
+  components: {
+    // https://github.com/vueform/multiselect
+    Multiselect,
+  },
   data() {
     return {
       countPass: 10,
@@ -69,49 +86,19 @@ export default {
       },
     };
   },
+
+  computed: {
+    ...mapGetters(['citiesList']),
+  },
+
   methods: {
-    selectCity(data) {
-      console.log(data);
-      const position = this.getPositionElement(data.id);
-      this.setPositionElement('div-select-city', position);
-      console.log(document.getElementById(data.id).style.width);
+    test(query) {
+      console.log(query);
     },
-
-    getPositionElement(idObjTarget) {
-    // На данный момент не знаю как лучше сделать. Приходиться привязываться к id объекта
-      const coordinates = document.getElementById(idObjTarget).getBoundingClientRect();
-
-      const scrollTop = (window.pageYOffset || document.documentElement.scrollTop
-              || document.body.scrollTop || 0) + coordinates.top;
-      const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft
-              || document.body.scrollLeft || 0 + coordinates.left;
-
-      return { scrollTop, scrollLeft, coordinates };
-    },
-
-    // *
-    // * @param {*} idObjTarget - id элемента который будем двигать
-    // * @param {*} position - объект включающий scrollTop, scrollLeft, coordinates
-    // */
-    setPositionElement(idObjTarget, position) {
-      const objTarget = document.getElementById(idObjTarget);
-
-      objTarget.style.top = `${position.scrollTop + position.coordinates.height + 2}px`;
-      objTarget.style.left = `${position.scrollLeft}px`;
-    },
-
-    /*
-    setWidthElement(idObjTarget, id) {
-      const objTarget = document.getElementById(idObjTarget);
-
-    },
-    */
 
   },
 
 };
 </script>
 
-<style>
-
-</style>
+<style src="@vueform/multiselect/themes/default.css"></style>

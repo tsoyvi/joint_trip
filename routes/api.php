@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\TripController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\СitiesListController;
 use App\Http\Controllers\API\UserCarController;
@@ -40,3 +41,5 @@ Route::get('check_login', [UserController::class, 'checkLogin']);
 
  Route::post('upload_user_image', [UserUploadImageController::class, 'userImage']);
  Route::post('upload_user_car_image', [UserUploadImageController::class, 'userCarImage']);
+
+ Route::apiResource('trip', TripController::class); 

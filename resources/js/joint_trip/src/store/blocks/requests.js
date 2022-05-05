@@ -44,4 +44,18 @@ export default {
     }
   },
 
+  async postJson(url, pData) {
+    try {
+      const { data } = await axios.post(url, pData);
+
+      if (data.success === true) {
+        return { success: true, data };
+      }
+      return { success: false, error: data.message };
+    } catch (error) {
+      console.log(error);
+      return { success: false, error };
+    }
+  },
+
 };

@@ -95,6 +95,10 @@ header {
 }
 
 /* Главная форма */
+.form-submit-box a:visited {
+  color: #ffffff;
+}
+
 .main-form {
   width: 100%;
   min-height: 300px;
@@ -187,8 +191,16 @@ header {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 10px;
+  padding: 0;
   box-sizing: border-box;
+}
+
+.dp__input_icons {
+  padding: 5px !important;
+}
+
+.dp__input {
+  text-align: center;
 }
 
 .form-people-box {
@@ -484,7 +496,7 @@ footer {
 }
 
 /* Страница логина и регистрации */
-.login-form {
+.login-form, .add-trip-form {
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -495,20 +507,20 @@ footer {
   min-width: 400px;
 }
 
-.login-form-header {
+.login-form-header, .form-header {
   text-align: center;
   font-size: 2.5em;
   color: #054752;
 }
 
-.login-form-input {
+.login-form-input, .form-input {
   display: flex;
   box-sizing: border-box;
   box-shadow: none;
   padding: 8px 24px;
 }
 
-.login-form-input input {
+.login-form-input input, .form-input input {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -525,19 +537,19 @@ footer {
   outline: 0;
 }
 
-.login-form-remember {
+.login-form-remember, .agreement {
   display: flex;
   justify-content: space-between;
   padding: 8px 24px;
 }
 
-.login-form-btn-wrapper {
+.login-form-btn-wrapper, .form-btn-wrapper {
   display: flex;
   justify-content: center;
   padding: 8px 24px;
 }
 
-.login-form-btn {
+.login-form-btn, .form-btn {
   box-sizing: border-box;
   display: inline-flex;
   padding: 0px 24px;
@@ -558,7 +570,7 @@ footer {
   transition: max-width 500ms ease-in 0s, background-color 200ms ease-in 0s;
 }
 
-.login-form-btn:hover {
+.login-form-btn:hover, .form-btn:hover {
   background-color: #008fc1;
 }
 
@@ -570,6 +582,19 @@ footer {
 .login-form-register {
   text-align: center;
   padding: 2px 24px 8px 24px;
+}
+
+/* Добавление поездки */
+.form-row {
+  min-width: 600px;
+}
+
+.add-trip-form .dp__main {
+  width: 100%;
+}
+
+.form-input input {
+  text-align: center;
 }
 
 @media screen and (max-width: 960px) {
@@ -1023,10 +1048,19 @@ input[type="file"] {
   }
 }
 
-.div-select-city {
-  position: absolute;
-  background-color: #FFF;
-  color: burlywood;
-  font-size: larger;
-  width: auto;
+.form-input-select {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 0px;
+  border-radius: 16px;
+  background-color: #ededed;
+  color: #054752;
+  flex: 1 1 0%;
+  font-size: 16px;
+  line-height: 20px;
+  width: 100%;
+  caret-color: #00aff5;
+  padding: 16px;
+  outline: 0;
 }

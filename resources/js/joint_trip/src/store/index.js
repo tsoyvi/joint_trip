@@ -3,6 +3,7 @@ import auth from './auth';
 import userUploadFiles from './userUploadFiles';
 import errors from './blocks/errors';
 import cities from './blocks/cities';
+import trips from './trips';
 
 export default createStore({
   modules: {
@@ -10,5 +11,7 @@ export default createStore({
     userUploadFiles,
     errors,
     cities,
+    trips,
+
   },
 });

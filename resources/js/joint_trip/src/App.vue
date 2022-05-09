@@ -27,7 +27,9 @@ export default {
 
   // Обработка просроченных токенов
   created() {
+    // if (window.isLoggedin) {
     this.checkLogin();
+    // }
   },
   computed: {
   },

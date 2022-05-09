@@ -5,7 +5,8 @@
                 <div class="login-form-row">
                     <h1 class="login-form-header">Регистрация</h1>
                     <div class="login-form-input">
-                        <input type="text" placeholder="Имя" name="name" v-model="user.name">
+                        <input type="text" placeholder="Имя" name="name" v-model="user.name"
+                        autocomplete="off" @keyup="input();">
                     </div>
                     <div class="login-form-input">
                         <input type="email" placeholder="Эл. почта" name="login"
@@ -17,10 +18,10 @@
                     </div>
                     <label for="accept" class="login-form-remember">
                         <div>Регистрируясь, я принимаю <a target="_blank" href="#">условия</a></div>
-                        <input id="accept" type="checkbox" name="accept" checked="">
+                        <input id="accept" type="checkbox" name="accept" v-model="checkedAccept">
                     </label>
                     <div class="login-form-btn-wrapper">
-                      <button class="login-form-btn" @click="handleSubmit()">
+                      <button class="login-form-btn" @click="handleSubmit()" :disabled="buttonLock">
                         <div class="button-label">Зарегистрироватья!</div>
                       </button>
                     </div>
@@ -45,6 +46,9 @@ export default {
         email: '',
         password: '',
       },
+      checkedAccept: false,
+      count: null,
+      buttonLock: false,
       // sitekey: '6LfakIEfAAAAAI_bxI_b_2pAYplveVdcsyiVL4K2',
 
     };
@@ -61,29 +65,37 @@ export default {
     ...mapActions(['register']),
 
     async handleSubmit() {
-      if (this.user.password.length > 0 && this.user.email.length > 0
-      && this.user.name.length > 0) {
-        const result = await this.register(this.user);
+      if (this.checkedAccept) {
+        // Определяем количество символов в полях
+        const passCount = +this.user.password.length;
+        const emailCount = +this.user.email.length;
+        const nameCount = +this.user.name.length;
+        const checkSum = (nameCount) * (-1);
 
-        if (result) {
-          this.$router.push(window.laravelPath || '/login_user');
+        if (passCount > 3 && emailCount > 3 && nameCount > 0) {
+          // Блокируем кнопку чтобы не пользователь не нажал ее еще раз пока сервер обрабатывает запрос
+          this.buttonLock = true;
+
+          if (checkSum >= this.count) {
+            // отправляем запрос на сервер
+            const result = await this.register(this.user);
+
+            if (result) {
+              this.$router.push(window.laravelPath || '/login_user');
+            }
+          } else {
+            // если бот то через 2 сек переадресовываем
+            window.setTimeout(() => {
+              this.$router.push('/');
+            }, 2000);
+          }
         }
       }
     },
 
-    /*
-    register(recaptchaToken) {
-      this.$axios.post('https://yourserverurl.com/register', {
-        email: this.email,
-        password: this.password,
-        recaptchaToken,
-      });
+    input() {
+      this.count -= 1;
     },
-    /*
-    onCaptchaExpired() {
-      this.$refs.recaptcha.reset();
-    },
-    */
   },
   created() {
     /* if (typeof window.isLoggedin !== 'undefined' || window.isLoggedin === true) {
@@ -99,3 +111,6 @@ export default {
   },
 };
 </script>
+
+<style>
+</style>

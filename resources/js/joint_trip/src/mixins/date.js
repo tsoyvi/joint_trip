@@ -2,7 +2,7 @@ export default {
   methods: {
     formatDateToRus(date) {
       if (date !== null) {
-        return `${date.replace(/(\d+).(\d+).(\d+)/, '$3.$2.$1')} г.`;
+        return `${date.replace(/(\d+).(\d+).(\d+)/, '$3-$2-$1 г.')}`;
       }
       return '';
     },
@@ -12,7 +12,8 @@ export default {
     },
 
     getDateTime() {
-      return new Date().toLocaleDateString();
+      // return new Date().toLocaleDateString();
+      return new Date().toISOString();
     },
 
     formatToMysql(date) {

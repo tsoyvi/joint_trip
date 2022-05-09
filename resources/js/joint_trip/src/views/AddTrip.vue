@@ -86,7 +86,6 @@
             </form>
         </div>
     </main>
-    {{addTrip}}
 </template>
 
 <script>

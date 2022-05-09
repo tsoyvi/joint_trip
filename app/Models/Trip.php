@@ -22,4 +22,9 @@ class Trip extends Model
     protected $hidden = [
 
     ];
+
+    public function user_driver()
+    {
+        return $this->belongsTo(User::class, 'driver_id');
+    }
 }

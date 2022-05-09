@@ -3,11 +3,16 @@ import requests from './blocks/requests';
 export default ({
   state: {
     userTrips: [],
+    foundTrips: [],
   },
 
   getters: {
     userTrips(state) {
       return state.userTrips;
+    },
+
+    foundTrips(state) {
+      return state.foundTrips;
     },
 
   },
@@ -17,9 +22,24 @@ export default ({
       console.log('ADD_TRIP()');
       state.userTrips = formData;
     },
+
+    ADD_FOUND_TRIPS(state, data) {
+      state.foundTrips = data;
+    },
+
+    RESET_FOUND_RESULT(state) {
+      state.foundTrips = [];
+    },
+
   },
 
   actions: {
+    /**
+     * Добавления поездки пользователем как водитель
+     * @param
+     * @param
+     * @returns
+     */
     async addTripRequest({ commit }, formData) {
       // commit('UPLOAD_FILE');
 
@@ -35,6 +55,11 @@ export default ({
       return false;
     },
 
+    /**
+     * Запрос на список поездок созданных пользователем
+     * @param
+     * @returns
+     */
     async userTripsRequest({ commit }) {
       // commit('UPLOAD_FILE');
 
@@ -42,10 +67,31 @@ export default ({
       if (result.success === true) {
         console.log(result.data);
         commit('ADD_TRIP', result.data.trips);
-        // this.dispatch('checkLogin');
+
         return true;
       }
-      // commit('UPLOADED_FILE');
+
+      this.dispatch('addError', result.error);
+      return false;
+    },
+
+    /**
+     * Запрос на получение списка ездок
+     * @param
+     * @returns
+     */
+    async searchTripsRequest({ commit }, searchData) {
+      commit('RESET_FOUND_RESULT');
+
+      const result = await requests.postJson('api/search_trips', searchData);
+      // console.log(searchData);
+      if (result.success === true) {
+        // console.log(result.data);
+        commit('ADD_FOUND_TRIPS', result.data.trips);
+
+        return true;
+      }
+
       this.dispatch('addError', result.error);
       return false;
     },

@@ -49,7 +49,7 @@
                 </svg>
               </div>
 
-               <select v-model="searchData.countPass">
+               <select v-model="searchData.count_pass">
                     <option v-for="(item, index) of countPass"
                     :key=index
                     :value="item">{{ ('0'+item).slice(-2) }}
@@ -58,7 +58,7 @@
 
             </div>
             <div class="form-submit-box">
-              <button type="submit">
+              <button type="submit" @click="searchTripsRequest(searchData)">
                 <span class="">Поиск</span>
               </button>
             </div>
@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import Datepicker from '@vuepic/vue-datepicker';
 import Multiselect from '@vueform/multiselect';
 
@@ -86,7 +86,7 @@ export default {
         from: null,
         to: null,
         date: this.date,
-        countPass: 1,
+        count_pass: 1,
       },
 
     };
@@ -104,6 +104,7 @@ export default {
   },
 
   methods: {
+    ...mapActions(['searchTripsRequest']),
     // для дальнейшего исследования выпадающего списка
     test(query) {
       console.log(query);
@@ -111,7 +112,7 @@ export default {
 
     goSearch(e) {
       e.preventDefault();
-      console.log(this.searchData);
+      // console.log(this.searchData);
       this.$router.push('/results');
     },
 

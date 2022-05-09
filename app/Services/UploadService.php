@@ -45,7 +45,9 @@ class UploadService
             }
 
             // Добавляем ссылку на картинку в БД
-            $user->query()->update(['image_link' => $imageLink]);
+            // $user->query()->update(['image_link' => $imageLink])->where('id', $userId);
+            $user->image_link = $imageLink;
+            $user->save();
 
             $status = true;
         } catch (\Illuminate\Database\QueryException $ex) {

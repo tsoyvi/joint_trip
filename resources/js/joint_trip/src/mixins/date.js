@@ -7,6 +7,13 @@ export default {
       return '';
     },
 
+    formatDateTimeToRus(date) {
+      if (date !== null) {
+        return `${date.replace(/(\d+).(\d+).(\d+).(\d+).(\d+).(\d+)/, '$3-$2-$1 г. $4:$5')}`;
+      }
+      return '';
+    },
+
     getDate() {
       return new Date().toLocaleDateString().replace(/(\d+).(\d+).(\d+)/, '$3-$2-$1');
     },

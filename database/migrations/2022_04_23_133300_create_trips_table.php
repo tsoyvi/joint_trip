@@ -17,9 +17,9 @@ class CreateTripsTable extends Migration
             $table->id();
             $table->foreignId('driver_id')->constrained('users')->cascadeOnDelete();
             $table->string('from', 20)->comment('Адрес отправления');
-            $table->dateTime('date_depart')->comment('дата и время отправления');
+            $table->timestamp('date_depart')->comment('дата и время отправления');
             $table->string('to', 20)->comment('Адрес прибытия');
-            $table->dateTime('date_arrival')->nullable()->comment('Дата и время прибытия');
+            $table->timestamp('date_arrival')->nullable()->comment('Дата и время прибытия');
             $table->integer('count_pass')->comment('Количество мест');
             $table->integer('place_cost')->nullable()->comment('Стоимость одно места в копейках');
             

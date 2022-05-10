@@ -19,7 +19,7 @@
                 <div class="result-card-top">
                   <div class="result-card-route">
                     <div class="result-card-halt">
-                      <div style="font-size: 0.8em;">{{ formatDateToRus(foundTrip.date_depart) }}</div>
+                      <div style="font-size: 0.8em;">{{ formatDateTimeToRus(foundTrip.date_depart) }}</div>
                       <div>{{foundTrip.from}}</div>
                     </div>
                     <div class="result-card-halt">
@@ -27,7 +27,7 @@
                       <div class="result-card-halt-delimeter">|</div>
                     </div>
                     <div class="result-card-halt">
-                      <div style="font-size: 0.8em;">{{ formatDateToRus(foundTrip.date_arrival) }}</div>
+                      <div style="font-size: 0.8em;">{{ formatDateTimeToRus(foundTrip.date_arrival) }}</div>
                       <div>{{foundTrip.to}}</div>
                     </div>
                   </div>

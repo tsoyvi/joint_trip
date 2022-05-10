@@ -1,13 +1,28 @@
-<div v-if="uploadFileSatatus !='loading'" class="personal-car-info-source-img">
-    <img v-if="userCar.image_link" class="car-img" :src="'storage/' + userCar.image_link" alt="avatar">
-    <img v-else class="car-img" src="images/avatar-ico.png" alt="avatar">
-</div>
-<div v-else class="personal-car-info-source-img">
-    <i class="fa fa-2x fa-spin fa-refresh"></i>
-</div>
+count_pass: 4
+created_at: "2022-05-09T06:06:16.000000Z"
+date_arrival: "2022-09-04 19:00:00"
+date_depart: "2022-09-08 06:05:00"
+driver_id: 10
+from: "Брянск"
+id: 1
+place_cost: 70
+to: "Брянск"
+updated_at: "2022-05-09T06:06:16.000000Z"
 
-<div class="car-add-img">
-    <upload-file :buttonValue="'Загрузить фото'" :buttonClass="'personal-add-img-btn'" :url="urlUserPhoto"
-        :id="userCar.id">
-    </upload-file>
-</div>
+user_driver:
+about_me: null
+birth_day: "2000-01-01"
+city: "Москва"
+created_at: null
+email: "admin@test.ru"
+email_verified_at: null
+id: 10
+image_link: null
+login: "admin"
+messengers: "[\"viber\", \"WhatsApp\"]"
+name: "Админ"
+patronymic: "Аднинович"
+phone_number: "89123456789"
+role: "admin"
+surname: "Аднинов"
+updated_at: "2022-05-08T14:46:23.000000Z"

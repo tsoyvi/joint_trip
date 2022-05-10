@@ -36,7 +36,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         login: '',
         email: '',
         password: ''
-      } // sitekey: '6LfakIEfAAAAAI_bxI_b_2pAYplveVdcsyiVL4K2',
+      },
+      checkedAccept: false,
+      count: null,
+      buttonLock: false // sitekey: '6LfakIEfAAAAAI_bxI_b_2pAYplveVdcsyiVL4K2',
 
     };
   },
@@ -48,48 +51,65 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var result;
+        var passCount, emailCount, nameCount, checkSum, result;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!(_this.user.password.length > 0 && _this.user.email.length > 0 && _this.user.name.length > 0)) {
-                  _context.next = 5;
+                if (!_this.checkedAccept) {
+                  _context.next = 15;
                   break;
                 }
 
-                _context.next = 3;
+                // Определяем количество символов в полях
+                passCount = +_this.user.password.length;
+                emailCount = +_this.user.email.length;
+                nameCount = +_this.user.name.length;
+                checkSum = nameCount * -1;
+
+                if (!(passCount > 3 && emailCount > 3 && nameCount > 0)) {
+                  _context.next = 15;
+                  break;
+                }
+
+                // Блокируем кнопку чтобы не пользователь не нажал ее еще раз пока сервер обрабатывает запрос
+                _this.buttonLock = true;
+
+                if (!(checkSum >= _this.count)) {
+                  _context.next = 14;
+                  break;
+                }
+
+                _context.next = 10;
                 return _this.register(_this.user);
 
-              case 3:
+              case 10:
                 result = _context.sent;
 
                 if (result) {
                   _this.$router.push(window.laravelPath || '/login_user');
                 }
 
-              case 5:
+                _context.next = 15;
+                break;
+
+              case 14:
+                // если бот то через 2 сек переадресовываем
+                window.setTimeout(function () {
+                  _this.$router.push('/');
+                }, 2000);
+
+              case 15:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
       }))();
+    },
+    input: function input() {
+      this.count -= 1;
     }
-    /*
-    register(recaptchaToken) {
-      this.$axios.post('https://yourserverurl.com/register', {
-        email: this.email,
-        password: this.password,
-        recaptchaToken,
-      });
-    },
-    /*
-    onCaptchaExpired() {
-      this.$refs.recaptcha.reset();
-    },
-    */
-
   }),
   created: function created() {
     /* if (typeof window.isLoggedin !== 'undefined' || window.isLoggedin === true) {
@@ -147,33 +167,30 @@ var _hoisted_7 = {
 var _hoisted_8 = {
   "class": "login-form-input"
 };
-
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_9 = {
   "for": "accept",
   "class": "login-form-remember"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Регистрируясь, я принимаю "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+};
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Регистрируясь, я принимаю "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   target: "_blank",
   href: "#"
-}, "условия")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  id: "accept",
-  type: "checkbox",
-  name: "accept",
-  checked: ""
-})], -1
+}, "условия")], -1
 /* HOISTED */
 );
 
-var _hoisted_10 = {
+var _hoisted_11 = {
   "class": "login-form-btn-wrapper"
 };
+var _hoisted_12 = ["disabled"];
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "button-label"
 }, "Зарегистрироватья!", -1
 /* HOISTED */
 );
 
-var _hoisted_12 = [_hoisted_11];
+var _hoisted_14 = [_hoisted_13];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("main", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
@@ -181,14 +198,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     name: "name",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $data.user.name = $event;
+    }),
+    autocomplete: "off",
+    onKeyup: _cache[1] || (_cache[1] = function ($event) {
+      $options.input();
     })
-  }, null, 512
-  /* NEED_PATCH */
+  }, null, 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.user.name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "email",
     placeholder: "Эл. почта",
     name: "login",
-    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.user.email = $event;
     })
   }, null, 512
@@ -197,17 +218,29 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "password",
     placeholder: "Пароль",
     name: "password",
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $data.user.password = $event;
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.user.password]])]), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "login-form-btn",
-    onClick: _cache[3] || (_cache[3] = function ($event) {
-      return $options.handleSubmit();
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.user.password]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    id: "accept",
+    type: "checkbox",
+    name: "accept",
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+      return $data.checkedAccept = $event;
     })
-  }, _hoisted_12)])])])])]);
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $data.checkedAccept]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "login-form-btn",
+    onClick: _cache[5] || (_cache[5] = function ($event) {
+      return $options.handleSubmit();
+    }),
+    disabled: $data.buttonLock
+  }, _hoisted_14, 8
+  /* PROPS */
+  , _hoisted_12)])])])])]);
 }
 
 /***/ }),

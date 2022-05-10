@@ -2,7 +2,14 @@ export default {
   methods: {
     formatDateToRus(date) {
       if (date !== null) {
-        return `${date.replace(/(\d+).(\d+).(\d+)/, '$3.$2.$1')} г.`;
+        return `${date.replace(/(\d+).(\d+).(\d+)/, '$3-$2-$1 г.')}`;
+      }
+      return '';
+    },
+
+    formatDateTimeToRus(date) {
+      if (date !== null) {
+        return `${date.replace(/(\d+).(\d+).(\d+).(\d+).(\d+).(\d+)/, '$3-$2-$1 г. $4:$5')}`;
       }
       return '';
     },
@@ -12,7 +19,8 @@ export default {
     },
 
     getDateTime() {
-      return new Date().toLocaleDateString();
+      // return new Date().toLocaleDateString();
+      return new Date().toISOString();
     },
 
     formatToMysql(date) {

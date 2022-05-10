@@ -64,7 +64,7 @@ class TripController extends Controller
             'message' =>  $message,
         ];
 
-        sleep(1);
+        // sleep(1);
         return response()->json($response);
     }
 

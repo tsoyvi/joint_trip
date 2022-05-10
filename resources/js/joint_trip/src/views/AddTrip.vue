@@ -44,7 +44,7 @@
                     </div>
 
                     <div class="form-input">
-                        <Datepicker v-model="addTrip.dateArriva"
+                        <Datepicker v-model="addTrip.date_arrival"
                             format="dd/MM/yy H:m"
                             :minDate="addTrip.date_depart"
                             autoApply placeholder="Дата прибытия"
@@ -86,7 +86,6 @@
             </form>
         </div>
     </main>
-    {{addTrip}}
 </template>
 
 <script>
@@ -113,7 +112,7 @@ export default {
         from: null,
         to: null,
         date_depart: null, // дата-время отправления
-        date_arrival: this.getDateTime(), // дата-время прибытия
+        date_arrival: null, // дата-время прибытия
         count_pass: '',
         place_cost: null,
       },

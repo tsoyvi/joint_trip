@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\SearchTripsController;
 use App\Http\Controllers\API\TripController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\СitiesListController;
@@ -34,12 +35,16 @@ Route::get('check_login', [UserController::class, 'checkLogin']);
 //Route::put('update_user_data/{id}', [UserController::class, 'update']);// Обновление пользователя
 
 
- Route::apiResource('update_user_data', UserController::class); 
- Route::put('update_user_car/{id}', [UserCarController::class, '__invoke']);
+Route::apiResource('update_user_data', UserController::class);
+Route::put('update_user_car/{id}', [UserCarController::class, '__invoke']);
 
- Route::get('cities_list', СitiesListController::class); 
+Route::get('cities_list', СitiesListController::class);
 
- Route::post('upload_user_image', [UserUploadImageController::class, 'userImage']);
- Route::post('upload_user_car_image', [UserUploadImageController::class, 'userCarImage']);
+// Не забудьте создать символическую ссылку 
+// php artisan storage:link
+Route::post('upload_user_image', [UserUploadImageController::class, 'userImage']);
+Route::post('upload_user_car_image', [UserUploadImageController::class, 'userCarImage']);
 
- Route::apiResource('trip', TripController::class); 
+Route::apiResource('trip', TripController::class);
+
+Route::post('search_trips', [SearchTripsController::class, '__invoke']);

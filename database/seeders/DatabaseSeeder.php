@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             CarBodyType::class,
             User::class,
             UserCars::class,
+            Trips::class,
         ]);
     }
 }

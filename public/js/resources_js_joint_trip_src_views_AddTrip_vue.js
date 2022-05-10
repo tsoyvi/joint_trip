@@ -181,7 +181,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_Datepicker = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Datepicker");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("main", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     "class": "add-trip-form",
     method: "post",
     onSubmit: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
@@ -271,11 +271,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.addTrip.place_cost]])]), _hoisted_15])], 32
   /* HYDRATE_EVENTS */
-  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.addTrip), 1
-  /* TEXT */
-  )], 64
-  /* STABLE_FRAGMENT */
-  );
+  )])]);
 }
 
 /***/ }),
@@ -294,7 +290,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     formatDateToRus: function formatDateToRus(date) {
       if (date !== null) {
-        return "".concat(date.replace(/(\d+).(\d+).(\d+)/, '$3.$2.$1'), " \u0433.");
+        return "".concat(date.replace(/(\d+).(\d+).(\d+)/, '$3-$2-$1 г.'));
       }
 
       return '';
@@ -303,7 +299,8 @@ __webpack_require__.r(__webpack_exports__);
       return new Date().toLocaleDateString().replace(/(\d+).(\d+).(\d+)/, '$3-$2-$1');
     },
     getDateTime: function getDateTime() {
-      return new Date().toLocaleDateString();
+      // return new Date().toLocaleDateString();
+      return new Date().toISOString();
     },
     formatToMysql: function formatToMysql(date) {
       var d = new Date(date);

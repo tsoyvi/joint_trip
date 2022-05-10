@@ -234,7 +234,7 @@ class UserController extends Controller
         ];
 
         // Задержка подгруздки для демонстрации работы
-        sleep(2);
+        // sleep(2);
         return response()->json($response);
     }
 }

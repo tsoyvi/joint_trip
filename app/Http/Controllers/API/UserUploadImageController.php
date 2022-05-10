@@ -48,7 +48,7 @@ class UserUploadImageController extends Controller
             'success' => $success,
             'message' => $message,
         ];
-        sleep(2);
+        // sleep(2);
         return response()->json($response);
     }
 
@@ -89,7 +89,7 @@ class UserUploadImageController extends Controller
             'message' =>  $message,
         ];
 
-        sleep(2);
+        // sleep(2);
         return response()->json($response);
     }
 }

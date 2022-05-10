@@ -11,9 +11,8 @@
       </div>
     </section>
     <section class="results-section">
-      <div class="container">
+      <div v-if="foundTrips.length > 0" class="container">
         <ul class="result-list">
-
           <li v-for="(foundTrip, index) in foundTrips" :key="index">
             <div class="result-card">
               <a href="#">
@@ -45,16 +44,18 @@
                     </div>
                     <div class="driver-name">{{foundTrip.user_driver.surname}} {{foundTrip.user_driver.name}} {{foundTrip.user_driver.patronymic}} </div>
                   </div>
-                  <div class="driver-tickets">{{foundTrip.count_pass}} места</div>
+                  <div class="driver-tickets">{{ placeDeclensionCase(foundTrip.count_pass) }}</div>
                 </div>
               </a>
             </div>
           </li>
-
         </ul>
       </div>
+
+      <div v-else class="container">
+        Ничего не найдено
+      </div>
     </section>
-    <button @click="searchTrips()"> Загрузить тест</button>
   </main>
 </template>
 
@@ -62,13 +63,14 @@
 import { mapActions, mapGetters } from 'vuex';
 import SearchBar from '../components/search/SearchBar.vue';
 import DateMixin from '../mixins/date';
+import PlaceDeclensionCase from '../mixins/placeDeclension';
 
 export default {
   name: 'ResuLts',
   components: {
     SearchBar,
   },
-  mixins: [DateMixin],
+  mixins: [DateMixin, PlaceDeclensionCase],
   data() {
     return {
 
@@ -83,6 +85,7 @@ export default {
     searchTrips() {
       this.searchTripsRequest();
     },
+
   },
 
 };

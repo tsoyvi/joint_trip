@@ -32,7 +32,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   // Обработка просроченных токенов
   created: function created() {
-    this.checkLogin();
+    // if (window.isLoggedin) {
+    this.checkLogin(); // }
   },
   computed: {},
   methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)(['checkLogin']))
@@ -135,7 +136,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         from: null,
         to: null,
         date: this.date,
-        countPass: 1
+        count_pass: 1
       }
     };
   },
@@ -146,17 +147,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)(['citiesList'])),
-  methods: {
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapActions)(['searchTripsRequest'])), {}, {
     // для дальнейшего исследования выпадающего списка
     test: function test(query) {
       console.log(query);
     },
     goSearch: function goSearch(e) {
-      e.preventDefault();
-      console.log(this.searchData);
+      e.preventDefault(); // console.log(this.searchData);
+
       this.$router.push('/results');
     }
-  }
+  })
 });
 
 /***/ }),
@@ -546,17 +547,17 @@ var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_10 = ["value"];
-
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_11 = {
   "class": "form-submit-box"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  type: "submit"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+};
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": ""
-}, "Поиск")])], -1
+}, "Поиск", -1
 /* HOISTED */
 );
 
+var _hoisted_13 = [_hoisted_12];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_multiselect = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("multiselect");
 
@@ -565,7 +566,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", {
     action: "",
     method: "post",
-    onSubmit: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.goSearch && $options.goSearch.apply($options, arguments);
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_multiselect, {
@@ -608,7 +609,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , ["modelValue", "minDate"])])]), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-      return $data.searchData.countPass = $event;
+      return $data.searchData.count_pass = $event;
     })
   }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.countPass, function (item, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
@@ -621,7 +622,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   ))], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.searchData.countPass]])]), _hoisted_11], 32
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.searchData.count_pass]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "submit",
+    onClick: _cache[4] || (_cache[4] = function ($event) {
+      return _ctx.searchTripsRequest($data.searchData);
+    })
+  }, _hoisted_13)])], 32
   /* HYDRATE_EVENTS */
   );
 }
@@ -1474,20 +1480,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   state: {
-    userTrips: []
+    userTrips: [],
+    foundTrips: []
   },
   getters: {
     userTrips: function userTrips(state) {
       return state.userTrips;
+    },
+    foundTrips: function foundTrips(state) {
+      return state.foundTrips;
     }
   },
   mutations: {
     ADD_TRIP: function ADD_TRIP(state, formData) {
       console.log('ADD_TRIP()');
       state.userTrips = formData;
+    },
+    ADD_FOUND_TRIPS: function ADD_FOUND_TRIPS(state, data) {
+      state.foundTrips = data;
+    },
+    RESET_FOUND_RESULT: function RESET_FOUND_RESULT(state) {
+      state.foundTrips = [];
     }
   },
   actions: {
+    /**
+     * Добавления поездки пользователем как водитель
+     * @param
+     * @param
+     * @returns
+     */
     addTripRequest: function addTripRequest(_ref, formData) {
       var _this = this;
 
@@ -1528,6 +1550,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
+
+    /**
+     * Запрос на список поездок созданных пользователем
+     * @param
+     * @returns
+     */
     userTripsRequest: function userTripsRequest(_ref2) {
       var _this2 = this;
 
@@ -1550,12 +1578,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }
 
                 console.log(result.data);
-                commit('ADD_TRIP', result.data.trips); // this.dispatch('checkLogin');
-
+                commit('ADD_TRIP', result.data.trips);
                 return _context2.abrupt("return", true);
 
               case 8:
-                // commit('UPLOADED_FILE');
                 _this2.dispatch('addError', result.error);
 
                 return _context2.abrupt("return", false);
@@ -1566,6 +1592,51 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee2);
+      }))();
+    },
+
+    /**
+     * Запрос на получение списка ездок
+     * @param
+     * @returns
+     */
+    searchTripsRequest: function searchTripsRequest(_ref3, searchData) {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var commit, result;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                commit = _ref3.commit;
+                commit('RESET_FOUND_RESULT');
+                _context3.next = 4;
+                return _blocks_requests__WEBPACK_IMPORTED_MODULE_1__["default"].postJson('api/search_trips', searchData);
+
+              case 4:
+                result = _context3.sent;
+
+                if (!(result.success === true)) {
+                  _context3.next = 8;
+                  break;
+                }
+
+                // console.log(result.data);
+                commit('ADD_FOUND_TRIPS', result.data.trips);
+                return _context3.abrupt("return", true);
+
+              case 8:
+                _this3.dispatch('addError', result.error);
+
+                return _context3.abrupt("return", false);
+
+              case 10:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
       }))();
     }
   },

@@ -73,7 +73,9 @@ class UploadService
             }
 
             // Добавляем ссылку на картинку в БД
-            $userCar->query()->update(['image_link' => $imageLink]);
+            // $userCar->query()->update(['image_link' => $imageLink]);
+            $userCar->image_link = $imageLink;
+            $userCar->save();
 
             $status = true;
         } catch (\Illuminate\Database\QueryException $ex) {

@@ -153,10 +153,13 @@ body {
   }
   .search-form-delimeter {
     border: none;
-    background-color: rgb(237, 237, 237);
+    background-color: #999999;
     width: 1px;
-    height: 40px;
+    height: 40px!important;
     margin: 0px;
+  }
+  .multiselect {
+    border: 0!important;
   }
   .search-button-date-box {
     width: 15%;
@@ -252,6 +255,7 @@ body {
     margin-top: 50px;
   }
   .col-2 {
+    width: 100%;
     display: flex;
     align-items: flex-start;
     justify-content: center;

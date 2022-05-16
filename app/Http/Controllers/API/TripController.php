@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Trips\CreateRequest;
 use App\Models\Trip;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,19 +21,32 @@ class TripController extends Controller
         try {
             $user = Auth::user();
 
-            $trips = Trip::where('driver_id',  $user->id)
+            /* $trips = Trip::where('driver_id',  $user->id)
                 ->get();
+            */
+            // делаем запрос к БД
+            $trips = Trip::with(['user_passenger'])
+                ->where('driver_id',  $user->id)
+                ->get();
+
+            $passenger = User::with(['userTripPassenger'])
+                ->select('id')
+                ->where('id',  $user->id)
+                ->get();
+
             $success = true;
             $message = 'Список поездок пользователя';
         } catch (\Illuminate\Database\QueryException $ex) {
             $success = false;
             $message = $ex->getMessage();
             $trips = '';
+            $passenger = '';
         }
         return response()->json([
             "success" => $success,
             "message" => $message,
             "trips" => $trips,
+            "passenger" => $passenger,
         ]);
     }
 
@@ -50,11 +64,10 @@ class TripController extends Controller
             $validated = $request->validated();
             $user = Auth::user();
             $validated['driver_id'] = $user->id;
-            
+
             $trip =  Trip::create($validated);
             $success = true;
             $message = 'Запись о поездке добавлена';
-
         } catch (\Illuminate\Database\QueryException $ex) {
             $success = false;
             $message = $ex->getMessage();

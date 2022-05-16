@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ReservationSeatController;
 use App\Http\Controllers\API\SearchTripsController;
 use App\Http\Controllers\API\TripController;
 use App\Http\Controllers\API\UserController;
@@ -47,4 +48,5 @@ Route::post('upload_user_car_image', [UserUploadImageController::class, 'userCar
 
 Route::apiResource('trip', TripController::class);
 
-Route::post('search_trips', [SearchTripsController::class, '__invoke']);
+Route::post('search_trips', [SearchTripsController::class, '__invoke']); // поиск поездок
+Route::post('reservation_seat', [ReservationSeatController::class, '__invoke']); // бронирование поездки

@@ -11,11 +11,13 @@
       </div>
     </section>
     <section class="results-section">
-      <div v-if="foundTrips.length > 0" class="container">
+      <div v-if="foundTrips" class="container">
         <ul class="result-list">
           <li v-for="(foundTrip, index) in foundTrips" :key="index">
             <div class="result-card">
-              <a href="#">
+
+              <div  @click="viewDetails(foundTrip)" @keydown="bar" style="cursor:pointer;">
+
                 <div class="result-card-top">
                   <div class="result-card-route">
                     <div class="result-card-halt">
@@ -44,43 +46,25 @@
                     </div>
                     <div class="driver-name">{{foundTrip.user_driver.surname}} {{foundTrip.user_driver.name}} {{foundTrip.user_driver.patronymic}} </div>
                   </div>
-                  <div class="driver-tickets">{{ placeDeclensionCase(foundTrip.count_pass) }}</div>
+                  <!-- <div class="driver-tickets">{{ placeDeclensionCase(foundTrip.count_pass) }}</div> -->
+                  <div class="driver-tickets">{{ freePlaceCount(foundTrip) }} из {{ placeDeclensionCase(foundTrip.count_pass)}}</div>
                 </div>
-              </a>
+              </div>
             </div>
           </li>
         </ul>
+
+        <modal-window
+          ref="modalWindow"
+          :titleModalWindow="'Подробно о поездке'"
+        ></modal-window>
       </div>
 
       <div v-else class="container">
         Ничего не найдено
       </div>
 
-      <!-- Вертикально центрированное прокручиваемое модальное окно -->
-<!-- Кнопка-триггер модального окна -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Запустите демо модального окна
-</button>
-
-<!-- Модальное окно -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Заголовок модального окна</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-        <!-- <button type="button" class="btn btn-primary">Сохранить изменения</button> -->
-      </div>
-    </div>
-  </div>
-</div>
-
+<button @click="$refs.modalWindow.openWindow()">ТЕСТ</button>
     </section>
   </main>
 </template>
@@ -88,6 +72,8 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import SearchBar from '../components/search/SearchBar.vue';
+import ModalWindow from '../components/modalWindows/detailTripModalWindow.vue';
+
 import DateMixin from '../mixins/date';
 import PlaceDeclensionCase from '../mixins/placeDeclension';
 
@@ -95,10 +81,12 @@ export default {
   name: 'ResuLts',
   components: {
     SearchBar,
+    ModalWindow,
   },
   mixins: [DateMixin, PlaceDeclensionCase],
   data() {
     return {
+      show: false,
 
     };
   },
@@ -110,6 +98,21 @@ export default {
 
     searchTrips() {
       this.searchTripsRequest();
+    },
+
+    freePlaceCount(foundTrip) {
+      let countBlockPlace = 0;
+      if (foundTrip.user_passenger.length !== 0) { // проверяем есть ли пассажиры
+        foundTrip.user_passenger.forEach((el) => { // если есть то перебираем их и смотрим сколько
+          countBlockPlace += el.pivot.place_count; // они забронировали мест
+        });
+      }
+      return foundTrip.count_pass - countBlockPlace;
+    },
+
+    viewDetails(foundTrip) {
+      const freePlaceCount = this.freePlaceCount(foundTrip);
+      this.$refs.modalWindow.openWindow(foundTrip, freePlaceCount);
     },
 
   },

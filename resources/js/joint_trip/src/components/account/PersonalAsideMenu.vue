@@ -1,16 +1,16 @@
 <template>
 <div class="personal-main-menu">
-    <ul class="personal-main-menu-list">
+  <ul class="personal-main-menu-list">
 
-        <!-- Перебором personalAsideMenuList создаем пункты меню-->
-        <li v-for="(itemMenu, index) in personalAsideMenuList" :key="index"
-          class="personal-main-menu-link" v-bind:class="{ active: itemMenu.selected }">
-            <router-link :to="itemMenu.link" class="btm-go-main"
-              @click="selectItem(index)"
-            >{{itemMenu.name}}</router-link>
-        </li>
+      <!-- Перебором personalAsideMenuList создаем пункты меню-->
+      <li v-for="(itemMenu, index) in personalAsideMenuList" :key="index"
+        class="personal-main-menu-link" v-bind:class="{ active: itemMenu.selected }">
+          <router-link :to="itemMenu.link" class="btm-go-main"
+            @click="selectItem(index)"
+          >{{itemMenu.name}}</router-link>
+      </li>
 
-    </ul>
+  </ul>
 </div>
 </template>
 

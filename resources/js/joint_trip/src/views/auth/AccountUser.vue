@@ -2,13 +2,6 @@
   <main class="main-content">
     <section class="personal">
         <div class="container">
-            <div class="personal-header">
-                <h1 class="personal-header-text">Личный кабинет</h1>
-            </div>
-        </div>
-    </section>
-    <section class="personal">
-        <div class="container">
             <div class="personal-main">
 
             <!-- Подгружаем наше боковое меню -->

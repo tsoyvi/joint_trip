@@ -1,25 +1,30 @@
 /*Личный кабинет*/
 
-
-
+th {
+    border-color: #dee2e6!important;
+}
+footer {
+    margin-top: auto;
+}
+#app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 .personal {
+    margin-top: 20px;
     margin-bottom: 20px;
 }
-
 .personal-header {
     width:100%;
-    background-color: rgb(0, 175, 245);
 }
-
 .personal-header-text {
     font-style:normal;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 24px;
+    color: rgb(5, 71, 82);
     padding-left: 20px;
-    color: white;
 }
-
-
 .personal-main {
     width: 100%;
     display: -webkit-box;
@@ -38,20 +43,20 @@
 
 .active {
     background-color: rgb(237, 237, 237);
+    border-radius: 16px;
 }
-
 .personal-main-menu {
     width: 20%;
-    border: 1px rgb(0,175,245) solid;
+    height: 100%;
+    border-right: 2px rgb(237 237 237) solid;
     margin-right: 20px;
+    padding-right: 20px;
 }
-
-
 .personal-main-menu-link{
     margin-bottom: 0;
     padding-top: 20px;
     padding-bottom: 20px;
-    padding-left: 40px;
+    padding-left: 20px;
     font-size: 20px;
 }
 .btm-go-main:hover {
@@ -61,7 +66,6 @@
 /* Информация */
 
 .personal-main-info {
-    border: 1px rgb(0,175,245) solid;
     width: 80%;
     display: flex;
     flex-direction: column;
@@ -69,16 +73,14 @@
     align-items: flex-start;
     position: relative;
 }
-
 .personal-main-info-header {
     display: block;
     margin: 0 auto;
-    font-size: 40px;
+    font-size: 30px;
     margin-top: 10px;
     margin-bottom: 40px;
 
 }
-
 .personal-img {
     display: flex;
     margin: 0 auto;
@@ -87,9 +89,6 @@
     border-radius: 100px;
     border: 1px rgb(0,175,245) solid;
 }
-
-
-
 .personal-main-info-data {
     width:100%;
     display: flex;
@@ -104,22 +103,10 @@
 .personal-add-img-form {
     display: none;
 }
-
 .personal-add-img {
     display: flex;
     justify-content: center;
 }
-.personal-add-img-btn {
-    justify-content: center;
-    height: 40px;
-    width:50%;
-    margin-top: 20px;
-    border-radius: 20px;
-    background-color: rgb(0, 175, 245);
-    color: white;
-    border: 2px  rgb(0, 175, 245) solid;
-}
-
 .personal-add-img-form {
     margin-top: 10px;
 }
@@ -130,7 +117,6 @@
     margin-bottom: 8px;
 
 }
-
 .personal-add-img-btn-form {
     margin:0 auto;
     height:40px;
@@ -163,9 +149,6 @@
     font-style: normal;
     font-family: Arial;
 }
-
-
-
 .personal-main-info-individ{
     width:33.33%;
     padding-left: 30px;
@@ -173,6 +156,7 @@
 
 }
 .personal-main-info-individ-head {
+    width: 100%;
     color: rgb(151, 151, 151);
 }
 .personal-main-info-individ-name {
@@ -185,32 +169,29 @@
     padding-left: 30px;
     padding-right: 30px;
 }
-
 .personal-main-info-individ-name-form {
-    display: block;
-    height: calc(2rem + 2px);
-    width: 95%;
-    color: rgb(12, 12, 12);
-    font-family: inherit;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  margin:0;
-  padding-left: 10px;
-  border: 1px solid rgb(151, 151, 151);
-
+    appearance: none;
+    border: 0px;
+    border-radius: 16px;
+    background-color: rgb(237, 237, 237);
+    color: rgb(5, 71, 82);
+    flex: 1 1 0%;
+    font-size: 16px;
+    line-height: 20px;
+    width: 100%;
+    caret-color: rgb(0, 175, 245);
+    padding: 16px;
+    outline: 0;
 }
-
-
 .personal-main-info-about {
     width: 100%;
     margin-top: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-
-
 .personal-main-info-about-head {
     margin: 0 auto;
     color: rgb(151, 151, 151);
@@ -224,51 +205,55 @@
     display: flex;
     justify-content: center;
 }
-
 .personal-main-info-about-name-form {
-    font-size: 1rem;
-    overflow: auto;
-    resize: none;
-    width: 80%;
-    min-height: 100px;
-    border: 1px solid rgb(151, 151, 151);
+    appearance: none;
+    border: 0px;
+    border-radius: 16px;
+    background-color: rgb(237, 237, 237);
+    color: rgb(5, 71, 82);
+    flex: 1 1 0%;
+    font-size: 16px;
+    line-height: 20px;
+    width: 100%;
+    caret-color: rgb(0, 175, 245);
+    padding: 16px;
+    outline: 0;
 }
 .personal-main-info-about-name-form::placeholder {
-    color: rgb(151, 151, 151);
+    color: rgb(5, 71, 82);
     font-family: inherit;
-  font-size: 1rem;
-  font-weight: 400;
-  padding: 0.5rem;
+    font-size: 16px;
+    line-height: 20px;
 }
-
-
 .personal-main-info-about-name{
     border-bottom: 1px rgb(221, 221, 221) solid;
     font-size: 20px;
     padding-bottom: 5px;
 }
-
 .personal-main-info-change {
     margin: 0 auto;
     display: flex;
 }
-
 .personal-main-info-change-btn {
-    border-radius: 20px;
+    box-sizing: border-box;
+    padding: 15px 24px;
+    margin: 30px auto;
+    border: 1px solid transparent;
+    border-radius: 48px;
+    font-size: 16px;
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    align-items: center;
+    transition: max-width 500ms ease-in 0s, background-color 200ms ease-in 0s;
     background-color: rgb(0, 175, 245);
-    border: none;
-    color:white;
-    line-height: 40px;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    color: rgb(255, 255, 255);
 }
-.personal-main-info-change-btn:hover, .personal-add-img-btn:hover, .personal-add-img-form-file:hover, .personal-add-img-btn-form:hover {
-    transform: scale(1.05);
+.personal-main-info-change-btn:hover, .personal-add-img-form-file:hover, .personal-add-img-btn-form:hover {
+    background-color: rgb(0, 143, 193);
+    color: #ffffff!important;
 }
-
-
 input[type="file"]{
     display: none;
 }
@@ -280,7 +265,6 @@ input[type="file"]{
     width: 100%;
 
 }
-
 .personal-car-info-name {
     width: 50%;
     padding-left: 50px;
@@ -294,11 +278,13 @@ input[type="file"]{
 .personal-car-info-source {
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     margin-bottom: 40px;
 }
 .personal-car-info-source-img {
     display: flex;
+    width: 100%;
 }
 .car-img {
     width: 400px;
@@ -307,11 +293,9 @@ input[type="file"]{
     border: 1px rgb(0,175,245) solid;
 }
 .personal-car-info-source-load {
-    width: 40%;
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    padding-top: 125px;
 }
 .car-add-img-form {
     width: 100%;
@@ -333,34 +317,14 @@ input[type="file"]{
 .personal-drive-empty {
     margin: 0 auto;
 }
-
 .personal-drive-empty-text {
     color: darkgrey;
     margin-bottom: 40px;
-    text-transform: uppercase;
 }
 .personal-drive-archive {
     width: 90%;
     margin: 0 auto;
 }
-.personal-drive-archive table {
-    width: 100%;
-    margin-bottom: 40px;
-    border-collapse: collapse;
-    border: 1px solid rgb(0, 175, 245);
-}
-
-.personal-drive-archive-header {
-    font-size: 20px;
-    background-color: rgb(221, 221, 221);
-    border-bottom: 3px solid rgb(0, 175, 245);
-}
-.personal-drive-archive-header th, .personal-drive-archive-text td {
-    text-align: center;
-    padding: 10px 15px;
-    border: 1px solid rgb(0, 175, 245);
-}
-
 .isset-drive {
     display: none;
 }

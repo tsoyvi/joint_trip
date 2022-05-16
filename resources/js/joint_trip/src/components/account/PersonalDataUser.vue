@@ -5,8 +5,6 @@
         </div>
     </div>
 
-    <h1 class="personal-main-info-header"
-        v-bind:class="{ pouring: authStatus==='loading' }">Личные данные</h1>
     <div class="personal-main-info-data">
         <div class="personal-main-info-img">
 
@@ -39,70 +37,52 @@
         </div>
         <div class="personal-main-info-individ">
             <label class="personal-main-info-individ-head" for="surname">Фамилия:
-                <p class="personal-main-info-individ-name">
-                <input type="text" id="surname" class="personal-main-info-individ-name-form"
-                    v-model="user.surname">
-                </p>
+            <input type="text" id="surname" class="personal-main-info-individ-name-form"
+                v-model="user.surname">
             </label>
             <label class="personal-main-info-individ-head" for="name">Имя:
-                 <p class="personal-main-info-individ-name">
-                <input type="text" id="name" class="personal-main-info-individ-name-form"
-                    v-model="user.name">
-                </p>
+            <input type="text" id="name" class="personal-main-info-individ-name-form"
+                v-model="user.name">
             </label>
 
             <label class="personal-main-info-individ-head" for="patronymic">Отчество:
-               <p class="personal-main-info-individ-name">
-                <input type="text" id="patronymic" class="personal-main-info-individ-name-form"
-                    v-model="user.patronymic">
-                </p>
+            <input type="text" id="patronymic" class="personal-main-info-individ-name-form"
+                v-model="user.patronymic">
             </label>
 
             <label class="personal-main-info-individ-head" for="birth_day">Возраст:
-              <p class="personal-main-info-individ-name">
-                <input type="text" id="birth_day" class="personal-main-info-individ-name-form"
-                    v-model="user.birth_day">
-              </p>
+            <input type="text" id="birth_day" class="personal-main-info-individ-name-form"
+                v-model="user.birth_day">
             </label>
         </div>
         <div class="personal-main-info-contact">
             <label class="personal-main-info-individ-head" for="city">Город
-             <p class="personal-main-info-individ-name">
-               <input type="text" id="city" class="personal-main-info-individ-name-form"
-                    v-model="user.city">
-            </p>
+            <input type="text" id="city" class="personal-main-info-individ-name-form"
+                v-model="user.city">
             </label>
 
             <label class="personal-main-info-individ-head" for="phone_number">Телефон
-                <p class="personal-main-info-individ-name">
-                <input type="text" id="phone_number" class="personal-main-info-individ-name-form"
-                    v-model="user.phone_number">
-                </p>
+            <input type="text" id="phone_number" class="personal-main-info-individ-name-form"
+                v-model="user.phone_number">
                 </label>
 
             <label class="personal-main-info-individ-head" for="email">E-mail
-                <p class="personal-main-info-individ-name">
-                <input type="text" id="email" class="personal-main-info-individ-name-form"
-                    v-model="user.email">
-                </p>
+            <input type="text" id="email" class="personal-main-info-individ-name-form"
+                v-model="user.email">
             </label>
             <label class="personal-main-info-individ-head" for="messengers">Мессенджеры
-               <p class="personal-main-info-individ-name">
-                <input type="text" id="messengers" class="personal-main-info-individ-name-form"
-                    v-model="user.messengers">
-                </p>
+            <input type="text" id="messengers" class="personal-main-info-individ-name-form"
+                v-model="user.messengers">
             </label>
         </div>
     </div>
     <div class="personal-main-info-about">
         <label class="personal-main-info-about-head" for="about">
             <p class="personal-main-info-about-head-name">О себе:</p>
-            <p class="personal-main-info-about-head-text">
-                <textarea class="personal-main-info-about-name-form" id="about"
-                    v-model="user.about_me"
-                placeholder="Расскажи о себе">
-                </textarea>
-            </p>
+            <textarea class="personal-main-info-about-name-form" id="about"
+                v-model="user.about_me"
+            placeholder="Расскажи о себе">
+            </textarea>
         </label>
 
     </div>

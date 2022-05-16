@@ -1,68 +1,49 @@
 <template>
-    <div v-if="authStatus==='loading'" class="blur">
-        <div class="blur-loaded">
-            <i class="fa fa-2x fa-spin fa-refresh"></i>
-        </div>
+<div v-if="authStatus==='loading'" class="blur">
+    <div class="blur-loaded">
+        <i class="fa fa-2x fa-spin fa-refresh"></i>
     </div>
+</div>
 
-  <h1 class="personal-main-info-header"
-    v-bind:class="{ pouring: authStatus==='loading' }">Мой автомобиль</h1>
 <div class="personal-car-info-data">
     <div class="personal-car-info-name">
-        <label class="personal-main-info-individ-head" for="brand">Марка:
-              <p class="personal-main-info-individ-name">
-                <input type="text" id="brand" class="personal-main-info-individ-name-form"
-                    v-model="userCar.brand">
-              </p>
-        </label>
-        <label class="personal-main-info-individ-head" for="model">Модель:
-              <p class="personal-main-info-individ-name">
-                <input type="text" id="model" class="personal-main-info-individ-name-form"
-                    v-model="userCar.model">
-              </p>
-        </label>
+      <label class="personal-main-info-individ-head" for="brand">Марка:
+        <input type="text" id="brand" class="personal-main-info-individ-name-form"
+            v-model="userCar.brand">
+      </label>
+      <label class="personal-main-info-individ-head" for="model">Модель:
+        <input type="text" id="model" class="personal-main-info-individ-name-form"
+            v-model="userCar.model">
+      </label>
 
-        <label class="personal-main-info-individ-head" for="body_type">Кузов:
-            <p class="personal-main-info-individ-name">
-              <input type="text" id="body_type" class="personal-main-info-individ-name-form"
-                v-model="userCar.body_type">
-            </p>
-        </label>
+      <label class="personal-main-info-individ-head" for="body_type">Кузов:
+        <input type="text" id="body_type" class="personal-main-info-individ-name-form"
+          v-model="userCar.body_type">
+      </label>
 
-        <label class="personal-main-info-individ-head" for="capacity">Количество посадочных мест:
-            <p class="personal-main-info-individ-name">
-              <input type="text" id="capacity" class="personal-main-info-individ-name-form"
-                v-model="userCar.capacity">
-            </p>
-        </label>
+      <label class="personal-main-info-individ-head" for="capacity">Количество посадочных мест:
+        <input type="text" id="capacity" class="personal-main-info-individ-name-form"
+          v-model="userCar.capacity">
+      </label>
     </div>
     <div class="personal-car-info-statis">
-        <label class="personal-main-info-individ-head" for="engine_capacity">Объем двигателя:
-            <p class="personal-main-info-individ-name">
-              <input type="text" id="engine_capacity" class="personal-main-info-individ-name-form"
-                v-model="userCar.engine_capacity">
-            </p>
-        </label>
+      <label class="personal-main-info-individ-head" for="engine_capacity">Объем двигателя:
+        <input type="text" id="engine_capacity" class="personal-main-info-individ-name-form"
+          v-model="userCar.engine_capacity">
+      </label>
 
-        <label class="personal-main-info-individ-head" for="issue_year">Год выпуска:
-            <p class="personal-main-info-individ-name">
-              <input type="text" id="issue_year" class="personal-main-info-individ-name-form"
-                v-model="userCar.issue_year">
-            </p>
-        </label>
-        <label class="personal-main-info-individ-head" for="color">Цвет:
-            <p class="personal-main-info-individ-name">
-              <input type="text" id="color" class="personal-main-info-individ-name-form"
-                v-model="userCar.color">
-            </p>
-        </label>
-        <label class="personal-main-info-individ-head" for="state_number">Гос.номер:
-            <p class="personal-main-info-individ-name">
-              <input type="text" id="state_number" class="personal-main-info-individ-name-form"
-                v-model="userCar.state_number">
-            </p>
-        </label>
-
+      <label class="personal-main-info-individ-head" for="issue_year">Год выпуска:
+        <input type="text" id="issue_year" class="personal-main-info-individ-name-form"
+          v-model="userCar.issue_year">
+      </label>
+      <label class="personal-main-info-individ-head" for="color">Цвет:
+        <input type="text" id="color" class="personal-main-info-individ-name-form"
+          v-model="userCar.color">
+      </label>
+      <label class="personal-main-info-individ-head" for="state_number">Гос.номер:
+        <input type="text" id="state_number" class="personal-main-info-individ-name-form"
+          v-model="userCar.state_number">
+      </label>
     </div>
 </div>
             <button class="personal-main-info-change personal-main-info-change-btn"
@@ -72,7 +53,6 @@
 
 <div class="personal-car-info-source">
     <div class="personal-car-info-source-img">
-
         <div v-if="uploadFileSatatus !='loading'" class="personal-car-info-source-img">
         <img v-if="userCar.image_link" class="car-img" :src="'storage/' +  userCar.image_link"
             alt="avatar">
@@ -87,7 +67,7 @@
         <div class="car-add-img">
           <upload-file
               :buttonValue="'Загрузить фото'"
-              :buttonClass="'personal-add-img-btn'"
+              :buttonClass="'personal-main-info-change-btn'"
               :url="urlUserPhoto"
               :id="userCar.id">
           </upload-file>

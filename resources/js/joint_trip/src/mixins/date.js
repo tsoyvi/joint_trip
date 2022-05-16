@@ -8,7 +8,7 @@ export default {
     },
 
     formatDateTimeToRus(date) {
-      if (date !== null) {
+      if (date !== null && date !== undefined) {
         return `${date.replace(/(\d+).(\d+).(\d+).(\d+).(\d+).(\d+)/, '$3-$2-$1 г. $4:$5')}`;
       }
       return '';

@@ -27,4 +27,13 @@ class Trip extends Model
     {
         return $this->belongsTo(User::class, 'driver_id');
     }
+    public function user_car()
+    {
+        return $this->belongsTo(UserCar::class, 'driver_id', 'user_id');
+    }
+    public function user_passenger()
+    {
+        return $this->belongsToMany(User::class)->withPivot(["place_count"]);
+    }
+
 }

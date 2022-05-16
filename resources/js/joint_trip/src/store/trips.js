@@ -3,6 +3,7 @@ import requests from './blocks/requests';
 export default ({
   state: {
     userTrips: [],
+    userTripsPassenger: [],
     foundTrips: [],
   },
 
@@ -11,6 +12,9 @@ export default ({
       return state.userTrips;
     },
 
+    userTripsPassenger(state) {
+      return state.userTripsPassenger;
+    },
     foundTrips(state) {
       return state.foundTrips;
     },
@@ -19,8 +23,11 @@ export default ({
 
   mutations: {
     ADD_TRIP(state, formData) {
-      console.log('ADD_TRIP()');
+      // console.log('ADD_TRIP()');
       state.userTrips = formData;
+    },
+    ADD_TRIP_PASSENGER(state, formData) {
+      state.userTripsPassenger = formData;
     },
 
     ADD_FOUND_TRIPS(state, data) {
@@ -29,6 +36,9 @@ export default ({
 
     RESET_FOUND_RESULT(state) {
       state.foundTrips = [];
+    },
+
+    RESERVATION_SEAT() {
     },
 
   },
@@ -65,8 +75,9 @@ export default ({
 
       const result = await requests.getJson('api/trip');
       if (result.success === true) {
-        console.log(result.data);
+        console.log(result.data.passenger[0].user_trip_passenger);
         commit('ADD_TRIP', result.data.trips);
+        commit('ADD_TRIP_PASSENGER', result.data.passenger[0].user_trip_passenger);
 
         return true;
       }
@@ -88,6 +99,22 @@ export default ({
       if (result.success === true) {
         // console.log(result.data);
         commit('ADD_FOUND_TRIPS', result.data.trips);
+
+        return true;
+      }
+
+      this.dispatch('addError', result.error);
+      return false;
+    },
+
+    async reservationSeatRequest({ commit }, reservationData) {
+      commit('RESET_FOUND_RESULT');
+
+      const result = await requests.postJson('api/reservation_seat', reservationData);
+      // console.log(searchData);
+      if (result.success === true) {
+        console.log(result.data);
+        commit('RESERVATION_SEAT', result.data.trips);
 
         return true;
       }

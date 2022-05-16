@@ -37,7 +37,7 @@ class SearchTripsController extends Controller
             }
 
             // делаем запрос к БД
-            $trips = Trip::with('user_driver')
+            $trips = Trip::with(['user_driver', 'user_car', 'user_passenger'])
                 ->where($arrWhere)
                 ->get();
 

@@ -18,7 +18,7 @@ class CreateUserCarsTable extends Migration
             $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
             $table->string('brand', 20)->nullable()->comment('Марка Авто');
             $table->string('model', 20)->nullable()->comment('Модель авто');
-            $table->string('body_type', 20)->nullable()->comment('Тип кузова авто');
+            $table->string('body_type', 35)->nullable()->comment('Тип кузова авто');
             $table->string('issue_year', 4)->nullable()->comment('Год выпуска'); // Правда не знаю для чего, так для красоты ))
             $table->string('color', 20)->nullable()->comment('Цвет авто'); 
             $table->string('engine_capacity', 20)->nullable()->comment('Объем двигателя'); // Правда не знаю для чего, так для красоты ))

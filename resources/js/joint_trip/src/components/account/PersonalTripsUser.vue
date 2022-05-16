@@ -1,5 +1,5 @@
 <template>
-    <h1 class="personal-main-info-header">Текущие поездки</h1>
+    <h1 class="personal-main-info-header">Текущие поездки как Водитель</h1>
     <!-- isset-drive -->
     <div v-if="userTrips.length !=0" class="personal-drive-archive" >
         <table>
@@ -9,8 +9,8 @@
                 <th>Откуда</th>
                 <th>Куда</th>
                 <th>Стоимость</th>
-                <th>Водитель</th>
-                <th>Автомобиль</th>
+                <th>Кол-во мест</th>
+                <th>Список пассажиров - мест</th>
             </tr>
             <tr v-for="(trip, index) in userTrips" :key="index" class="personal-drive-archive-text">
                 <td>{{index + 1 }}</td>
@@ -18,13 +18,47 @@
                 <td>{{trip.from}}</td>
                 <td>{{trip.to}}</td>
                 <td>{{trip.place_cost}}</td>
-                <td>---</td>
-                <td>---</td>
+                <td>{{trip.count_pass}}</td>
+                <td>
+                  <div v-for="(passenger, index) in trip.user_passenger" :key="index">
+                  <div>{{passenger.surname }} {{passenger.name }} {{passenger.patronymic }} - {{ passenger.pivot.place_count }} </div>
+                  </div>
+
+                </td>
             </tr>
         </table>
     </div>
     <div v-else class="personal-drive-empty">
         <h2 class="personal-drive-empty-text" id="drive-empty">Поездки не найдены</h2>
+    </div>
+    <h1 class="personal-main-info-header">Текущие поездки как Пассажир</h1>
+
+        <div v-if="userTripsPassenger.length !=0" class="personal-drive-archive" >
+        <table>
+            <tr class="personal-drive-archive-header">
+                <th>№</th>
+                <th>Дата поездки</th>
+                <th>Откуда</th>
+                <th>Куда</th>
+                <th>Стоимость</th>
+                <th>Забронировано мест</th>
+                <th></th>
+            </tr>
+            <tr v-for="(trip, index) in userTripsPassenger" :key="index" class="personal-drive-archive-text">
+                <td>{{index + 1 }}</td>
+                <td>{{trip.date_depart}} - <br> {{trip.date_arrival}}</td>
+                <td>{{trip.from}}</td>
+                <td>{{trip.to}}</td>
+                <td>{{trip.place_cost}}</td>
+                <td>{{trip.pivot.place_count}}</td>
+                <td>
+                  <div v-for="(passenger, index) in trip.user_passenger" :key="index">
+                  <div>{{passenger.surname }} {{passenger.name }} {{passenger.patronymic }} - {{ passenger.pivot.place_count }} </div>
+                  </div>
+
+                </td>
+            </tr>
+        </table>
     </div>
 
     <h1 class="personal-main-info-header">Архив</h1>
@@ -64,14 +98,14 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['userTrips']),
+    ...mapGetters(['userTrips', 'userTripsPassenger']),
   },
   methods: {
     ...mapActions(['userTripsRequest']),
 
-    getTrips() {
+    /* getTrips() {
       this.userTripsRequest();
-    },
+    }, */
 
   },
   mounted() {

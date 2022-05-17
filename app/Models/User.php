@@ -56,6 +56,10 @@ class User extends Authenticatable
     */
     public function userTripPassenger()
     {
-        return $this->belongsToMany(Trip::class)->withPivot(["place_count"]);
+        return $this->belongsToMany(Trip::class)->with(['user_driver'])
+        ->withPivot(["place_count"]);
     }
+
+
+    
 }

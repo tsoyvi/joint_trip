@@ -1,67 +1,127 @@
 <template>
+
+    <div v-if="userTrips.length !=0" style="width: 100%">
+
     <h1 class="personal-main-info-header">Текущие поездки как Водитель</h1>
     <!-- isset-drive -->
-    <div v-if="userTrips.length !=0">
-        <table class="table table-striped">
+
+        <table class="table table-striped align-middle" v-for="(trip, index) in userTrips" :key="index">
           <thead>
-            <tr>
+            <tr align="center">
                 <th>№</th>
                 <th>Дата поездки</th>
                 <th>Откуда</th>
                 <th>Куда</th>
                 <th>Стоимость</th>
                 <th>Кол-во мест</th>
-                <th>Список пассажиров - мест</th>
+                <th>Забронировано мест</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(trip, index) in userTrips" :key="index">
-                <td>{{index + 1 }}</td>
-                <td>{{trip.date_depart}} - <br> {{trip.date_arrival}}</td>
-                <td>{{trip.from}}</td>
-                <td>{{trip.to}}</td>
+            <tr align="center">
+                <td rowspan="2">{{index + 1 }} <br>
+                  <div class="dropdown">
+                    <button class="btn btn-link button-non-outline" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa fa-bars" aria-hidden="true"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-tsoyvi" aria-labelledby="dropdownMenuButton1">
+                      <li><a class="dropdown-item" href="#">Завершить</a></li>
+                      <li><a class="dropdown-item" href="#">Отменить</a></li>
+                    </ul>
+                  </div>
+                </td>
+
+                <td>
+                    {{ formatDateTimeToRus(trip.date_depart) }} <br>
+                   | <br>{{ formatDateTimeToRus(trip.date_arrival) }}
+                </td>
+                <td> {{trip.from}}
+                </td>
+                <td>
+                  {{trip.to}}
+                </td>
                 <td>{{trip.place_cost}}</td>
                 <td>{{trip.count_pass}}</td>
                 <td>
-                  <div v-for="(passenger, index) in trip.user_passenger" :key="index">
-                  <div>{{passenger.surname }} {{passenger.name }} {{passenger.patronymic }} - {{ passenger.pivot.place_count }} </div>
-                  </div>
-
+                    {{countPassengers(trip.user_passenger)}}
                 </td>
+            </tr>
+            <tr class="table-success" align="center">
+              <td colspan="6">
+                <div v-for="(passenger, index) in trip.user_passenger" :key="index">
+                  <div>{{passenger.surname }} {{passenger.name }} {{passenger.patronymic }}
+                        - {{ placeDeclensionCase(passenger.pivot.place_count) }}
+                  </div>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
+
     </div>
+    <!--
     <div v-else class="personal-drive-empty">
         <h3 class="personal-drive-empty-text" id="drive-empty">Поездки не найдены</h3>
     </div>
-    <h1 class="personal-main-info-header">Текущие поездки как Пассажир</h1>
+    -->
+          <!-- personal-drive-archive -->
+        <div v-if="userTripsPassenger.length !=0" class="" style="width: 100%">
+          <hr>
+        <h1 class="personal-main-info-header">Текущие поездки как Пассажир</h1>
 
-        <div v-if="userTripsPassenger.length !=0" class="personal-drive-archive" >
-        <table>
-            <tr class="personal-drive-archive-header">
-                <th>№</th>
-                <th>Дата поездки</th>
-                <th>Откуда</th>
-                <th>Куда</th>
-                <th>Стоимость</th>
-                <th>Забронировано мест</th>
-                <th></th>
-            </tr>
-            <tr v-for="(trip, index) in userTripsPassenger" :key="index" class="personal-drive-archive-text">
-                <td>{{index + 1 }}</td>
-                <td>{{trip.date_depart}} - <br> {{trip.date_arrival}}</td>
+        <table class="table table-striped align-middle" v-for="(trip, index) in userTripsPassenger" :key="index">
+            <thead>
+              <tr class="personal-drive-archive-header" align="center">
+                  <th>№</th>
+                  <th>Дата поездки</th>
+                  <th>Откуда</th>
+                  <th>Куда</th>
+                  <th>Стоимость</th>
+                  <th>Забронировано мест</th>
+                  <th></th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr align="center">
+                <td rowspan="2">
+                  {{index + 1 }}<br>
+                  <div class="dropdown">
+                    <button class="btn btn-link button-non-outline" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa fa-bars" aria-hidden="true"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-tsoyvi" aria-labelledby="dropdownMenuButton1">
+                      <li><a class="dropdown-item" href="#">Завершить</a></li>
+                      <li><a class="dropdown-item" href="#">Отменить</a></li>
+                    </ul>
+                  </div>
+                </td>
+                <td>
+                  {{ formatDateTimeToRus(trip.date_depart) }}
+                  <br>|<br>
+                  {{ formatDateTimeToRus(trip.date_arrival) }}
+                </td>
+
                 <td>{{trip.from}}</td>
                 <td>{{trip.to}}</td>
                 <td>{{trip.place_cost}}</td>
                 <td>{{trip.pivot.place_count}}</td>
                 <td>
-                  <div v-for="(passenger, index) in trip.user_passenger" :key="index">
+                 <!-- <div v-for="(passenger, index) in trip.user_passenger" :key="index">
                   <div>{{passenger.surname }} {{passenger.name }} {{passenger.patronymic }} - {{ passenger.pivot.place_count }} </div>
-                  </div>
-
+                  </div> -->
                 </td>
             </tr>
+
+            <tr class="table-success" align="center">
+              <td colspan="6">
+
+                  <div>Водитель {{trip.user_driver.surname }} {{trip.user_driver.name }} {{trip.user_driver.patronymic }}
+
+                </div>
+              </td>
+            </tr>
+
+           </tbody>
         </table>
     </div>
 
@@ -97,9 +157,12 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import DateMixin from '../../mixins/date';
+import PlaceDeclensionCase from '../../mixins/placeDeclension';
 
 export default {
   name: 'TripsUser',
+  mixins: [DateMixin, PlaceDeclensionCase],
   data() {
     return {
 
@@ -111,9 +174,14 @@ export default {
   methods: {
     ...mapActions(['userTripsRequest']),
 
-    /* getTrips() {
-      this.userTripsRequest();
-    }, */
+    countPassengers(passengers) {
+      // Здесь подсчитываем общее количество мест
+      let countPassengers = 0;
+      passengers.forEach((passenger) => {
+        countPassengers += passenger.pivot.place_count;
+      });
+      return countPassengers;
+    },
 
   },
   mounted() {

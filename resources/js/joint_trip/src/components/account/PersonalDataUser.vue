@@ -29,7 +29,7 @@
             <div class="personal-add-img">
                 <upload-file
                 :buttonValue="'Загрузить фото'"
-                :buttonClass="'personal-add-img-btn'"
+                :buttonClass="'personal-main-info-change personal-main-info-change-btn'"
                 :url="urlUserPhoto"
                 :id="user.id"
                 ></upload-file>

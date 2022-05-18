@@ -470,7 +470,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    href: "#",
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.logoutFunction();
     })
@@ -1417,6 +1418,55 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       }, _callee3, null, [[0, 10]]);
     }))();
+  },
+  deleteJson: function deleteJson(url, pData) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+      var _yield$axios$delete, data;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.prev = 0;
+              _context4.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"](url, pData);
+
+            case 3:
+              _yield$axios$delete = _context4.sent;
+              data = _yield$axios$delete.data;
+
+              if (!(data.success === true)) {
+                _context4.next = 7;
+                break;
+              }
+
+              return _context4.abrupt("return", {
+                success: true,
+                data: data
+              });
+
+            case 7:
+              return _context4.abrupt("return", {
+                success: false,
+                error: data.message
+              });
+
+            case 10:
+              _context4.prev = 10;
+              _context4.t0 = _context4["catch"](0);
+              console.log(_context4.t0);
+              return _context4.abrupt("return", {
+                success: false,
+                error: _context4.t0
+              });
+
+            case 14:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4, null, [[0, 10]]);
+    }))();
   }
 });
 
@@ -1481,11 +1531,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   state: {
     userTrips: [],
+    userTripsPassenger: [],
     foundTrips: []
   },
   getters: {
     userTrips: function userTrips(state) {
       return state.userTrips;
+    },
+    userTripsPassenger: function userTripsPassenger(state) {
+      return state.userTripsPassenger;
     },
     foundTrips: function foundTrips(state) {
       return state.foundTrips;
@@ -1493,15 +1547,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mutations: {
     ADD_TRIP: function ADD_TRIP(state, formData) {
-      console.log('ADD_TRIP()');
+      // console.log('ADD_TRIP()');
       state.userTrips = formData;
+    },
+    DELETE_TRIP: function DELETE_TRIP(state, formData) {
+      console.log('ADD_TRIP()');
+      state.userTrips = [];
+      console.log(formData);
+    },
+    ADD_TRIP_PASSENGER: function ADD_TRIP_PASSENGER(state, formData) {
+      state.userTripsPassenger = formData;
     },
     ADD_FOUND_TRIPS: function ADD_FOUND_TRIPS(state, data) {
       state.foundTrips = data;
     },
     RESET_FOUND_RESULT: function RESET_FOUND_RESULT(state) {
       state.foundTrips = [];
-    }
+    },
+    RESERVATION_SEAT: function RESERVATION_SEAT() {}
   },
   actions: {
     /**
@@ -1573,20 +1636,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 result = _context2.sent;
 
                 if (!(result.success === true)) {
-                  _context2.next = 8;
+                  _context2.next = 9;
                   break;
                 }
 
-                console.log(result.data);
+                console.log(result.data.passenger[0].user_trip_passenger);
                 commit('ADD_TRIP', result.data.trips);
+                commit('ADD_TRIP_PASSENGER', result.data.passenger[0].user_trip_passenger);
                 return _context2.abrupt("return", true);
 
-              case 8:
+              case 9:
                 _this2.dispatch('addError', result.error);
 
                 return _context2.abrupt("return", false);
 
-              case 10:
+              case 11:
               case "end":
                 return _context2.stop();
             }
@@ -1637,6 +1701,123 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee3);
+      }))();
+    },
+    reservationSeatRequest: function reservationSeatRequest(_ref4, reservationData) {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var commit, result;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                commit = _ref4.commit;
+                commit('RESET_FOUND_RESULT');
+                _context4.next = 4;
+                return _blocks_requests__WEBPACK_IMPORTED_MODULE_1__["default"].postJson('api/reservation_seat', reservationData);
+
+              case 4:
+                result = _context4.sent;
+
+                if (!(result.success === true)) {
+                  _context4.next = 9;
+                  break;
+                }
+
+                console.log(result.data);
+                commit('RESERVATION_SEAT', result.data.trips);
+                return _context4.abrupt("return", true);
+
+              case 9:
+                _this4.dispatch('addError', result.error);
+
+                return _context4.abrupt("return", false);
+
+              case 11:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
+    },
+    // Оптимизировать код!
+    cancelTripDriverRequest: function cancelTripDriverRequest(_ref5, trip) {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        var commit, result;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                commit = _ref5.commit;
+                _context5.next = 3;
+                return _blocks_requests__WEBPACK_IMPORTED_MODULE_1__["default"].deleteJson("/api/trip/".concat(trip.id));
+
+              case 3:
+                result = _context5.sent;
+
+                if (!(result.success === true)) {
+                  _context5.next = 8;
+                  break;
+                }
+
+                commit('DELETE_TRIP', result);
+                console.log(result.data);
+                return _context5.abrupt("return", true);
+
+              case 8:
+                _this5.dispatch('addError', result.error);
+
+                return _context5.abrupt("return", false);
+
+              case 10:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
+      }))();
+    },
+    // Оптимизировать код!
+    cancelTripPassengerRequest: function cancelTripPassengerRequest(_ref6, trip) {
+      var _this6 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+        var commit, result;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                commit = _ref6.commit;
+                _context6.next = 3;
+                return _blocks_requests__WEBPACK_IMPORTED_MODULE_1__["default"].deleteJson("/api/reservation_seat/".concat(trip.id));
+
+              case 3:
+                result = _context6.sent;
+
+                if (!(result.success === true)) {
+                  _context6.next = 8;
+                  break;
+                }
+
+                commit('DELETE_TRIP', result);
+                console.log(result.data);
+                return _context6.abrupt("return", true);
+
+              case 8:
+                _this6.dispatch('addError', result.error);
+
+                return _context6.abrupt("return", false);
+
+              case 10:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6);
       }))();
     }
   },

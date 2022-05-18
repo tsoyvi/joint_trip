@@ -64,7 +64,7 @@
         Ничего не найдено
       </div>
 
-<button @click="$refs.modalWindow.openWindow()">ТЕСТ</button>
+<!-- <button @click="$refs.modalWindow.openWindow()">ТЕСТ</button> -->
     </section>
   </main>
 </template>

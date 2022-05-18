@@ -50,7 +50,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         to: null,
         date_depart: null,
         // дата-время отправления
-        date_arrival: this.getDateTime(),
+        date_arrival: null,
         // дата-время прибытия
         count_pass: '',
         place_cost: null
@@ -228,9 +228,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["modelValue", "options", "onSearchChange"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Datepicker, {
-    modelValue: $data.addTrip.dateArriva,
+    modelValue: $data.addTrip.date_arrival,
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-      return $data.addTrip.dateArriva = $event;
+      return $data.addTrip.date_arrival = $event;
     }),
     format: "dd/MM/yy H:m",
     minDate: $data.addTrip.date_depart,
@@ -291,6 +291,13 @@ __webpack_require__.r(__webpack_exports__);
     formatDateToRus: function formatDateToRus(date) {
       if (date !== null) {
         return "".concat(date.replace(/(\d+).(\d+).(\d+)/, '$3-$2-$1 г.'));
+      }
+
+      return '';
+    },
+    formatDateTimeToRus: function formatDateTimeToRus(date) {
+      if (date !== null && date !== undefined) {
+        return "".concat(date.replace(/(\d+).(\d+).(\d+).(\d+).(\d+).(\d+)/, '$3-$2-$1 г. $4:$5'));
       }
 
       return '';

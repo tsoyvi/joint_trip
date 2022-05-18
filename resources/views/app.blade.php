@@ -6,12 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <title>ПоПути!</title>
-  <link rel="stylesheet" href="/css/style.css">
+ 
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  
   <!-- bootstrap -->
-  <!--<link type="text/css" rel="stylesheet" href="/css/bootstrap-5.0.2/css/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" href="/css/bootstrap-5.0.2/css/bootstrap.min.css">
     <script src="/css/bootstrap-5.0.2/js/bootstrap.bundle.min.js"></script>
-    -->
+    
+  <link rel="stylesheet" href="/css/style.css">   
 
 </head>
 

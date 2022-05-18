@@ -536,18 +536,12 @@ header {
   -webkit-transition: -webkit-box-shadow 200ms ease-in 0s;
   transition: -webkit-box-shadow 200ms ease-in 0s;
   transition: box-shadow 200ms ease-in 0s;
-<<<<<<< HEAD
   transition: box-shadow 200ms ease-in 0s, -webkit-box-shadow 200ms ease-in 0s;
   background-color: white;
   -webkit-box-flex: 1;
       -ms-flex: 1 1 0%;
           flex: 1 1 0%;
-  padding: 20px;
-=======
-  background-color: rgb(255, 255, 255);
-  flex: 1 1 0%;
   padding: 20px 40px;
->>>>>>> origin/master
 }
 
 .result-card:hover {
@@ -631,13 +625,9 @@ header {
 }
 
 .driver-tickets {
-<<<<<<< HEAD
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: end;
-=======
-  align-items: center;
->>>>>>> origin/master
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 /* Футер */
@@ -1170,15 +1160,11 @@ footer {
   color: #ffffff !important;
 }
 
-<<<<<<< HEAD
-input[type="file"] {
-=======
 .personal-main-info-change-btn label {
   cursor: pointer;
 }
 
-input[type=file] {
->>>>>>> origin/master
+input[type="file"] {
   display: none;
 }
 

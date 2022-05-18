@@ -3,17 +3,17 @@ body {
   margin: 0;
   padding: 0;
   min-width: 800px;
-  color: #054752;
+  color: rgb(5, 71, 82);
 }
 
 a {
-  color: #00aff5;
+  color: rgb(0, 175, 245);
   transition: max-width 500ms ease-in 0s, color 200ms ease-in 0s;
   text-decoration: none;
 }
 
 a:hover {
-  color: #008fc1;
+  color: rgb(0, 143, 193);
 }
 
 ul {
@@ -56,9 +56,9 @@ header {
   width: 100%;
   height: 80px;
   position: fixed;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   top: 0px;
-  border-bottom: 2px solid #dddddd;
+  border-bottom: 2px solid rgb(221, 221, 221);
   z-index: 999;
 }
 
@@ -135,7 +135,7 @@ header {
   place-content: center;
   width: 100%;
   box-sizing: border-box;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1pt 4pt, rgba(0, 0, 0, 0.08) 0px 2pt 8pt;
   padding: 8px 0px 8px 8px;
   border-radius: 16px;
@@ -152,7 +152,7 @@ header {
 
 .main-form-box form input {
   font-size: 18px;
-  color: #708c91;
+  color: rgb(112, 140, 145);
   line-height: 20px;
   background: transparent;
   border: 0px !important;
@@ -222,7 +222,7 @@ header {
   padding-left: 5px;
   outline: 0;
   font-size: inherit;
-  color: #708c91;
+  color: rgb(112, 140, 145);
   align-items: center;
   justify-content: center;
 }
@@ -230,7 +230,7 @@ header {
 .search-button-date {
   display: flex;
   cursor: pointer;
-  color: #708c91;
+  color: rgb(112, 140, 145);
   box-sizing: border-box;
   white-space: nowrap;
   overflow: hidden;
@@ -250,7 +250,7 @@ header {
 .form-submit-box button {
   height: 56px;
   border-radius: 0px 16px 16px 0px;
-  background-color: #00aff5;
+  background-color: rgb(0, 175, 245);
   transition: max-width 500ms ease-in 0s, background-color 200ms ease-in 0s;
   padding: 0px;
   justify-content: center;
@@ -271,7 +271,7 @@ header {
 }
 
 .form-submit-box button:hover {
-  background-color: #008fc1;
+  background-color: rgb(0, 143, 193);
 }
 
 .daterangepicker {
@@ -347,7 +347,7 @@ header {
 }
 
 .col-4 a:hover {
-  color: #008fc1;
+  color: rgb(0, 143, 193);
 }
 
 .col-4-item {
@@ -368,12 +368,12 @@ header {
   cursor: pointer;
   align-items: center;
   transition: max-width 500ms ease-in 0s, background-color 200ms ease-in 0s;
-  background-color: #00aff5;
-  color: white;
+  background-color: rgb(0, 175, 245);
+  color: rgb(255, 255, 255);
 }
 
 .main-btn:hover {
-  background-color: #008fc1;
+  background-color: rgb(0, 143, 193);
   color: #ffffff !important;
 }
 
@@ -382,7 +382,7 @@ header {
   width: 100%;
   background-image: none;
   min-height: auto;
-  background-color: #ededed;
+  background-color: rgb(237, 237, 237);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -414,7 +414,7 @@ header {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1pt 4pt, rgba(0, 0, 0, 0.08) 0px 2pt 8pt;
   list-style-type: none;
   transition: box-shadow 200ms ease-in 0s;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   flex: 1 1 0%;
   padding: 20px 40px;
 }
@@ -424,7 +424,7 @@ header {
 }
 
 .result-card a, .result-card a:visited, .result-card a:hover {
-  color: #054752;
+  color: rgb(5, 71, 82);
 }
 
 .result-card-top {
@@ -492,13 +492,13 @@ footer {
   width: 100%;
   margin-top: 24px;
   padding-top: 24px;
-  background-color: #ededed;
+  background-color: rgb(237, 237, 237);
 }
 
 .copyright {
   width: 100%;
   padding: 16px 0px;
-  background-color: #dddddd;
+  background-color: rgb(221, 221, 221);
 }
 
 /* Страница логина и регистрации */
@@ -516,7 +516,7 @@ footer {
 .login-form-header, .form-header {
   text-align: center;
   font-size: 2.5em;
-  color: #054752;
+  color: rgb(5, 71, 82);
 }
 
 .login-form-input, .form-input {
@@ -532,13 +532,13 @@ footer {
           appearance: none;
   border: 0px;
   border-radius: 16px;
-  background-color: #ededed;
-  color: #054752;
+  background-color: rgb(237, 237, 237);
+  color: rgb(5, 71, 82);
   flex: 1 1 0%;
   font-size: 16px;
   line-height: 20px;
   width: 100%;
-  caret-color: #00aff5;
+  caret-color: rgb(0, 175, 245);
   padding: 16px;
   outline: 0;
 }
@@ -561,10 +561,10 @@ footer {
   padding: 0px 24px;
   border: 1px solid transparent;
   border-radius: 48px;
-  background-color: #00aff5;
+  background-color: rgb(0, 175, 245);
   padding-left: 40px;
   padding-right: 40px;
-  color: white;
+  color: rgb(255, 255, 255);
   font-size: 16px;
   text-align: center;
   text-decoration: none;
@@ -577,7 +577,7 @@ footer {
 }
 
 .login-form-btn:hover, .form-btn:hover {
-  background-color: #008fc1;
+  background-color: rgb(0, 143, 193);
 }
 
 .login-form-forgot {
@@ -608,7 +608,6 @@ footer {
     display: none;
   }
 }
-
 /*Личный кабинет*/
 th {
   border-color: #dee2e6 !important;
@@ -637,7 +636,7 @@ footer {
   font-style: normal;
   font-weight: bold;
   font-size: 24px;
-  color: #054752;
+  color: rgb(5, 71, 82);
   padding-left: 20px;
 }
 
@@ -650,14 +649,14 @@ footer {
 
 /* Меню*/
 .active {
-  background-color: #ededed;
+  background-color: rgb(237, 237, 237);
   border-radius: 16px;
 }
 
 .personal-main-menu {
   width: 20%;
   height: 100%;
-  border-right: 2px #ededed solid;
+  border-right: 2px rgb(237, 237, 237) solid;
   margin-right: 20px;
   padding-right: 20px;
 }
@@ -698,7 +697,7 @@ footer {
   max-width: 200px;
   max-height: 200px;
   border-radius: 100px;
-  border: 1px #00aff5 solid;
+  border: 1px rgb(0, 175, 245) solid;
 }
 
 .personal-main-info-data {
@@ -738,9 +737,9 @@ footer {
   height: 40px;
   width: 60%;
   border-radius: 20px;
-  background-color: #00aff5;
+  background-color: rgb(0, 175, 245);
   color: white;
-  border: 2px #00aff5 solid;
+  border: 2px rgb(0, 175, 245) solid;
   text-align: center;
   vertical-align: middle;
   font-size: 12px;
@@ -757,9 +756,9 @@ footer {
   height: 36px;
   width: 60%;
   border-radius: 20px;
-  background-color: #00aff5;
+  background-color: rgb(0, 175, 245);
   color: white;
-  border: 2px #00aff5 solid;
+  border: 2px rgb(0, 175, 245) solid;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -776,11 +775,11 @@ footer {
 
 .personal-main-info-individ-head {
   width: 100%;
-  color: #979797;
+  color: rgb(151, 151, 151);
 }
 
 .personal-main-info-individ-name {
-  border-bottom: 1px #dddddd solid;
+  border-bottom: 1px rgb(221, 221, 221) solid;
   font-size: 20px;
   padding-bottom: 5px;
 }
@@ -797,13 +796,13 @@ footer {
           appearance: none;
   border: 0px;
   border-radius: 16px;
-  background-color: #ededed;
-  color: #054752;
+  background-color: rgb(237, 237, 237);
+  color: rgb(5, 71, 82);
   flex: 1 1 0%;
   font-size: 16px;
   line-height: 20px;
   width: 100%;
-  caret-color: #00aff5;
+  caret-color: rgb(0, 175, 245);
   padding: 16px;
   outline: 0;
 }
@@ -820,7 +819,7 @@ footer {
 
 .personal-main-info-about-head {
   margin: 0 auto;
-  color: #979797;
+  color: rgb(151, 151, 151);
   width: 100%;
 }
 
@@ -840,33 +839,40 @@ footer {
           appearance: none;
   border: 0px;
   border-radius: 16px;
-  background-color: #ededed;
-  color: #054752;
+  background-color: rgb(237, 237, 237);
+  color: rgb(5, 71, 82);
   flex: 1 1 0%;
   font-size: 16px;
   line-height: 20px;
   width: 100%;
-  caret-color: #00aff5;
+  caret-color: rgb(0, 175, 245);
   padding: 16px;
   outline: 0;
 }
 
 .personal-main-info-about-name-form::-moz-placeholder {
-  color: #054752;
+  color: rgb(5, 71, 82);
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.personal-main-info-about-name-form:-ms-input-placeholder {
+  color: rgb(5, 71, 82);
   font-family: inherit;
   font-size: 16px;
   line-height: 20px;
 }
 
 .personal-main-info-about-name-form::placeholder {
-  color: #054752;
+  color: rgb(5, 71, 82);
   font-family: inherit;
   font-size: 16px;
   line-height: 20px;
 }
 
 .personal-main-info-about-name {
-  border-bottom: 1px #dddddd solid;
+  border-bottom: 1px rgb(221, 221, 221) solid;
   font-size: 20px;
   padding-bottom: 5px;
 }
@@ -889,12 +895,12 @@ footer {
   cursor: pointer;
   align-items: center;
   transition: max-width 500ms ease-in 0s, background-color 200ms ease-in 0s;
-  background-color: #00aff5;
-  color: white;
+  background-color: rgb(0, 175, 245);
+  color: rgb(255, 255, 255);
 }
 
 .personal-main-info-change-btn:hover, .personal-add-img-form-file:hover, .personal-add-img-btn-form:hover {
-  background-color: #008fc1;
+  background-color: rgb(0, 143, 193);
   color: #ffffff !important;
 }
 
@@ -902,7 +908,7 @@ footer {
   cursor: pointer;
 }
 
-input[type="file"] {
+input[type=file] {
   display: none;
 }
 
@@ -941,7 +947,7 @@ input[type="file"] {
   width: 400px;
   height: 400px;
   margin: 0 auto;
-  border: 1px #00aff5 solid;
+  border: 1px rgb(0, 175, 245) solid;
 }
 
 .personal-car-info-source-load {
@@ -1017,7 +1023,7 @@ input[type="file"] {
 }
 
 .pouring:before {
-  content: '';
+  content: "";
   position: absolute;
   filter: blur(5px);
   width: 100%;
@@ -1054,39 +1060,24 @@ input[type="file"] {
     background-position: 100% 0;
   }
 }
-
 @media (max-width: 690px) {
   .pouring {
     font-size: 10px;
   }
 }
-
 .form-input-select {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
   border: 0px;
   border-radius: 16px;
-  background-color: #ededed;
-  color: #054752;
+  background-color: rgb(237, 237, 237);
+  color: rgb(5, 71, 82);
   flex: 1 1 0%;
   font-size: 16px;
   line-height: 20px;
   width: 100%;
-  caret-color: #00aff5;
+  caret-color: rgb(0, 175, 245);
   padding: 16px;
   outline: 0;
-}
-
-.button-non-outline:hover {
-  color: green;
-}
-
-.button-non-outline:focus {
-  box-shadow: 0 0 0 0px;
-}
-
-.dropdown-menu-tsoyvi {
-  padding: 0;
-  min-width: 1rem;
-}
+}/*# sourceMappingURL=style.css.map */

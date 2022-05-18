@@ -30,7 +30,7 @@
                 <span v-else-if="authStatus===true">
                 <span>
                   <router-link to="/account_user">{{user.name}}</router-link>
-                  <button  @click="logoutFunction()">Выход</button>
+                  <a href="#" @click="logoutFunction()">Выход</a>
                 </span>
 
                 </span>

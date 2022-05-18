@@ -523,7 +523,7 @@ header {
 
 .result-list {
   width: 100%;
-  max-width: 600px;
+  max-width: 650px;
   margin: auto;
 }
 
@@ -536,12 +536,18 @@ header {
   -webkit-transition: -webkit-box-shadow 200ms ease-in 0s;
   transition: -webkit-box-shadow 200ms ease-in 0s;
   transition: box-shadow 200ms ease-in 0s;
+<<<<<<< HEAD
   transition: box-shadow 200ms ease-in 0s, -webkit-box-shadow 200ms ease-in 0s;
   background-color: white;
   -webkit-box-flex: 1;
       -ms-flex: 1 1 0%;
           flex: 1 1 0%;
   padding: 20px;
+=======
+  background-color: rgb(255, 255, 255);
+  flex: 1 1 0%;
+  padding: 20px 40px;
+>>>>>>> origin/master
 }
 
 .result-card:hover {
@@ -561,6 +567,7 @@ header {
       -ms-flex-pack: justify;
           justify-content: space-between;
   font-size: 20px;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
@@ -582,7 +589,7 @@ header {
 
 .result-card-halt div {
   margin-right: 15px;
-  width: 50px;
+  min-width: 140px;
 }
 
 .result-card-halt-delimeter {
@@ -624,9 +631,13 @@ header {
 }
 
 .driver-tickets {
+<<<<<<< HEAD
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: end;
+=======
+  align-items: center;
+>>>>>>> origin/master
 }
 
 /* Футер */
@@ -1159,7 +1170,15 @@ footer {
   color: #ffffff !important;
 }
 
+<<<<<<< HEAD
 input[type="file"] {
+=======
+.personal-main-info-change-btn label {
+  cursor: pointer;
+}
+
+input[type=file] {
+>>>>>>> origin/master
   display: none;
 }
 

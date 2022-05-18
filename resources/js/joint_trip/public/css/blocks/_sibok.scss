@@ -362,7 +362,7 @@ body {
   
   .result-list {
     width: 100%;
-    max-width: 600px;
+    max-width: 650px;
     margin: auto;
   }
   
@@ -374,7 +374,7 @@ body {
     transition: box-shadow 200ms ease-in 0s;
     background-color: rgb(255, 255, 255);
     flex: 1 1 0%;
-    padding: 20px;
+    padding: 20px 40px;
 }
 
 .result-card:hover {
@@ -389,6 +389,7 @@ body {
     display: flex;
     justify-content: space-between;
     font-size: 20px;
+    margin-top: 20px;
     margin-bottom: 20px;
   }
   
@@ -403,7 +404,7 @@ body {
   
   .result-card-halt div {
     margin-right: 15px;
-    width: 50px;
+    min-width: 140px;
   }
   
   .result-card-halt-delimeter {
@@ -436,7 +437,7 @@ body {
   }
   
   .driver-tickets {
-    align-items: end;
+    align-items: center;
   }
   
   /* Футер */

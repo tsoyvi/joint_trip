@@ -254,6 +254,9 @@ footer {
     background-color: rgb(0, 143, 193);
     color: #ffffff!important;
 }
+.personal-main-info-change-btn label {
+    cursor: pointer;
+}
 input[type="file"]{
     display: none;
 }

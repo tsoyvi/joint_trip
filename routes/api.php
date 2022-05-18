@@ -50,3 +50,4 @@ Route::apiResource('trip', TripController::class);
 
 Route::post('search_trips', [SearchTripsController::class, '__invoke']); // поиск поездок
 Route::post('reservation_seat', [ReservationSeatController::class, '__invoke']); // бронирование поездки
+Route::delete('reservation_seat/{id}', [ReservationSeatController::class, 'destroy']); // Удаление бронирования поездки

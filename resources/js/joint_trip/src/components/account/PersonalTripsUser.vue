@@ -26,7 +26,7 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-tsoyvi" aria-labelledby="dropdownMenuButton1">
                       <li><a class="dropdown-item" href="#">Завершить</a></li>
-                      <li><a class="dropdown-item" href="#">Отменить</a></li>
+                      <li><button class="dropdown-item" @click="cancelTripDriver(trip)">Отменить</button></li>
                     </ul>
                   </div>
                 </td>
@@ -91,7 +91,7 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-tsoyvi" aria-labelledby="dropdownMenuButton1">
                       <li><a class="dropdown-item" href="#">Завершить</a></li>
-                      <li><a class="dropdown-item" href="#">Отменить</a></li>
+                      <li><button class="dropdown-item" @click="cancelTripPassenger(trip)">Отменить</button></li>
                     </ul>
                   </div>
                 </td>
@@ -172,15 +172,38 @@ export default {
     ...mapGetters(['userTrips', 'userTripsPassenger']),
   },
   methods: {
-    ...mapActions(['userTripsRequest']),
+    ...mapActions(['userTripsRequest', 'cancelTripDriverRequest', 'cancelTripPassengerRequest']),
 
     countPassengers(passengers) {
       // Здесь подсчитываем общее количество мест
       let countPassengers = 0;
-      passengers.forEach((passenger) => {
-        countPassengers += passenger.pivot.place_count;
-      });
+      if (passengers) {
+        passengers.forEach((passenger) => {
+          countPassengers += passenger.pivot.place_count;
+        });
+      }
+
       return countPassengers;
+    },
+
+    async cancelTripDriver(trip) {
+      if (window.confirm('Удалить поездку?')) {
+        console.log(trip);
+        const result = await this.cancelTripDriverRequest(trip);
+        if (result) {
+          this.userTripsRequest();
+        }
+      }
+    },
+
+    async cancelTripPassenger(trip) {
+      if (window.confirm('Удалить поездку?')) {
+        console.log(trip);
+        const result = await this.cancelTripPassengerRequest(trip);
+        if (result) {
+          this.userTripsRequest();
+        }
+      }
     },
 
   },

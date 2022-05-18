@@ -44,4 +44,28 @@ class ReservationSeatController extends Controller
             "reservation" => $result,
         ]);
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        try {
+            $result = DB::table('trip_user')->where('trip_id', '=', $id)->delete();
+
+            $success = true;
+            $message = 'Поездка удалена';
+        } catch (\Illuminate\Database\QueryException $ex) {
+            $success = false;
+            $message = $ex->getMessage();
+        }
+        // response
+        return response()->json([
+            "success" => $success,
+            "message" => $id,
+        ]);
+    }
 }

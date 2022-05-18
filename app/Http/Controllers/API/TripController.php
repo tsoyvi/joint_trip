@@ -110,8 +110,20 @@ class TripController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Trip $trip)
     {
-        //
+        try {
+            $trip->delete();
+            $success = true;
+            $message = 'Поездка удалена';
+        } catch (\Illuminate\Database\QueryException $ex) {
+            $success = false;
+            $message = $ex->getMessage();
+        }
+        // response
+        return response()->json([
+            "success" => $success,
+            "message" => $message,
+        ]);
     }
 }

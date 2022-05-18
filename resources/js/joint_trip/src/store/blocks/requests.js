@@ -58,4 +58,18 @@ export default {
     }
   },
 
+  async deleteJson(url, pData) {
+    try {
+      const { data } = await axios.delete(url, pData);
+
+      if (data.success === true) {
+        return { success: true, data };
+      }
+      return { success: false, error: data.message };
+    } catch (error) {
+      console.log(error);
+      return { success: false, error };
+    }
+  },
+
 };

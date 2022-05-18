@@ -26,6 +26,13 @@ export default ({
       // console.log('ADD_TRIP()');
       state.userTrips = formData;
     },
+
+    DELETE_TRIP(state, formData) {
+      console.log('ADD_TRIP()');
+      state.userTrips = [];
+      console.log(formData);
+    },
+
     ADD_TRIP_PASSENGER(state, formData) {
       state.userTripsPassenger = formData;
     },
@@ -115,6 +122,36 @@ export default ({
       if (result.success === true) {
         console.log(result.data);
         commit('RESERVATION_SEAT', result.data.trips);
+
+        return true;
+      }
+
+      this.dispatch('addError', result.error);
+      return false;
+    },
+
+    // Оптимизировать код!
+    async cancelTripDriverRequest({ commit }, trip) {
+      const result = await requests.deleteJson(`/api/trip/${trip.id}`);
+
+      if (result.success === true) {
+        commit('DELETE_TRIP', result);
+        console.log(result.data);
+
+        return true;
+      }
+
+      this.dispatch('addError', result.error);
+      return false;
+    },
+
+    // Оптимизировать код!
+    async cancelTripPassengerRequest({ commit }, trip) {
+      const result = await requests.deleteJson(`/api/reservation_seat/${trip.id}`);
+
+      if (result.success === true) {
+        commit('DELETE_TRIP', result);
+        console.log(result.data);
 
         return true;
       }

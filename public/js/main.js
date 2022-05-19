@@ -887,7 +887,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       state.user = {};
       window.isLoggedin = false;
     },
-    UPDATE_USER_DATA: function UPDATE_USER_DATA() {}
+    UPDATE_USER_DATA: function UPDATE_USER_DATA() {},
+    UPDATE_USER_CAR: function UPDATE_USER_CAR(state, userCar) {
+      state.userCar = userCar;
+    }
   },
   actions: {
     // Здесь мы делаем запрос на сервер для проверки авторизации пользователя
@@ -910,23 +913,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 result = _context.sent;
 
                 if (!(result.success === true)) {
-                  _context.next = 9;
+                  _context.next = 10;
                   break;
                 }
 
-                // console.log(result.data);
+                console.log(result.data);
                 commit('AUTH_SUCCESS', result.data.user);
                 commit('USER_CAR', result.data.car);
                 return _context.abrupt("return", true);
 
-              case 9:
+              case 10:
                 commit('AUTH_ERROR');
 
                 _this.dispatch('addError', result.error);
 
                 return _context.abrupt("return", false);
 
-              case 12:
+              case 13:
               case "end":
                 return _context.stop();
             }
@@ -1124,29 +1127,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 commit = _ref10.commit;
                 _context6.prev = 1;
-                console.log(userCar);
-                _context6.next = 5;
+                _context6.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default().put("api/update_user_car/".concat(userCar.id), userCar);
 
-              case 5:
+              case 4:
                 _yield$axios$put2 = _context6.sent;
                 data = _yield$axios$put2.data;
 
                 if (!(data.success === true)) {
-                  _context6.next = 10;
+                  _context6.next = 9;
                   break;
                 }
 
-                commit('UPDATE_USER_DATA'); // alert(data.message);
+                // console.log(data.userCar);
+                commit('UPDATE_USER_CAR', data.userCar); // alert(data.message);
 
                 return _context6.abrupt("return", true);
 
-              case 10:
+              case 9:
                 alert(data.message);
                 return _context6.abrupt("return", false);
 
-              case 14:
-                _context6.prev = 14;
+              case 13:
+                _context6.prev = 13;
                 _context6.t0 = _context6["catch"](1);
                 alert(Object.entries(_context6.t0.response.data.errors).map(function (_ref11) {
                   var _ref12 = _slicedToArray(_ref11, 2),
@@ -1157,12 +1160,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }).join(', '));
                 return _context6.abrupt("return", false);
 
-              case 18:
+              case 17:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, null, [[1, 14]]);
+        }, _callee6, null, [[1, 13]]);
       }))();
     }
   },

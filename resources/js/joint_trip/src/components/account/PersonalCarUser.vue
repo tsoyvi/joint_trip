@@ -51,7 +51,7 @@
                  Редактировать профиль
             </button>
 
-<div class="personal-car-info-source" v-if="Object.keys(userCar).length !== 0">
+<div class="personal-car-info-source" v-if="userCar.created_at">
     <div class="personal-car-info-source-img">
         <div v-if="uploadFileSatatus !='loading'" class="personal-car-info-source-img">
         <img v-if="userCar.image_link" class="car-img" :src="'storage/' +  userCar.image_link"

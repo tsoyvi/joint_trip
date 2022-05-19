@@ -62,6 +62,10 @@ export default ({
     UPDATE_USER_DATA() {
     },
 
+    UPDATE_USER_CAR(state, userCar) {
+      state.userCar = userCar;
+    },
+
   },
 
   actions: {
@@ -72,7 +76,7 @@ export default ({
       const result = await requests.getJson('api/check_login');
 
       if (result.success === true) {
-        // console.log(result.data);
+        console.log(result.data);
         commit('AUTH_SUCCESS', result.data.user);
         commit('USER_CAR', result.data.car);
         return true;
@@ -150,11 +154,10 @@ export default ({
 
     async updateUserCarRequest({ commit }, userCar) {
       try {
-        console.log(userCar);
-
         const { data } = await axios.put(`api/update_user_car/${userCar.id}`, userCar);
         if (data.success === true) {
-          commit('UPDATE_USER_DATA');
+          // console.log(data.userCar);
+          commit('UPDATE_USER_CAR', data.userCar);
           // alert(data.message);
           return true;
         }

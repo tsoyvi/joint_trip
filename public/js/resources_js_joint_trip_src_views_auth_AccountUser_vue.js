@@ -112,9 +112,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       urlUserPhoto: '/api/upload_user_car_image'
     };
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)(['userCar', 'authStatus', 'uploadFileSatatus'])),
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)(['user', 'userCar', 'authStatus', 'uploadFileSatatus'])),
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)(['updateUserCarRequest'])), {}, {
-    updateUserCar: function updateUserCar(userCar) {
+    updateUserCar: function updateUserCar() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -123,18 +123,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log(userCar);
-                _context.next = 3;
-                return _this.updateUserCarRequest(userCar);
+                console.log(_this.userCar);
+                _this.userCar.user_id = _this.user.id;
+                _context.next = 4;
+                return _this.updateUserCarRequest(_this.userCar);
 
-              case 3:
+              case 4:
                 result = _context.sent;
 
                 if (result) {
                   alert('Профиль обновлен');
                 }
 
-              case 5:
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -599,6 +600,7 @@ var _hoisted_21 = {
 var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Гос.номер: ");
 
 var _hoisted_23 = {
+  key: 1,
   "class": "personal-car-info-source"
 };
 var _hoisted_24 = {
@@ -711,9 +713,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.userCar.state_number]])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "personal-main-info-change personal-main-info-change-btn",
     onClick: _cache[8] || (_cache[8] = function ($event) {
-      return $options.updateUserCar(_ctx.userCar);
+      return $options.updateUserCar();
     })
-  }, " Редактировать профиль "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [_ctx.uploadFileSatatus != 'loading' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_25, [_ctx.userCar.image_link ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
+  }, " Редактировать профиль "), Object.keys(_ctx.userCar).length !== 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [_ctx.uploadFileSatatus != 'loading' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_25, [_ctx.userCar.image_link ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
     key: 0,
     "class": "car-img",
     src: 'storage/' + _ctx.userCar.image_link,
@@ -727,7 +729,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: _ctx.userCar.id
   }, null, 8
   /* PROPS */
-  , ["url", "id"])])])])], 64
+  , ["url", "id"])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 64
   /* STABLE_FRAGMENT */
   );
 }

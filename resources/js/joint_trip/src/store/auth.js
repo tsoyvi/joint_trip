@@ -40,7 +40,7 @@ export default ({
     },
 
     USER_CAR(state, car) {
-      state.userCar = car;
+      state.userCar = car || {};
       state.status = true;
       window.isLoggedin = true;
     },
@@ -72,6 +72,7 @@ export default ({
       const result = await requests.getJson('api/check_login');
 
       if (result.success === true) {
+        // console.log(result.data);
         commit('AUTH_SUCCESS', result.data.user);
         commit('USER_CAR', result.data.car);
         return true;
@@ -154,7 +155,7 @@ export default ({
         const { data } = await axios.put(`api/update_user_car/${userCar.id}`, userCar);
         if (data.success === true) {
           commit('UPDATE_USER_DATA');
-          alert(data.message);
+          // alert(data.message);
           return true;
         }
         alert(data.message);

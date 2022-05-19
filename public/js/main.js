@@ -873,7 +873,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       window.isLoggedin = true;
     },
     USER_CAR: function USER_CAR(state, car) {
-      state.userCar = car;
+      state.userCar = car || {};
       state.status = true;
       window.isLoggedin = true;
     },
@@ -914,6 +914,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   break;
                 }
 
+                // console.log(result.data);
                 commit('AUTH_SUCCESS', result.data.user);
                 commit('USER_CAR', result.data.car);
                 return _context.abrupt("return", true);
@@ -1132,20 +1133,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 data = _yield$axios$put2.data;
 
                 if (!(data.success === true)) {
-                  _context6.next = 11;
+                  _context6.next = 10;
                   break;
                 }
 
-                commit('UPDATE_USER_DATA');
-                alert(data.message);
+                commit('UPDATE_USER_DATA'); // alert(data.message);
+
                 return _context6.abrupt("return", true);
 
-              case 11:
+              case 10:
                 alert(data.message);
                 return _context6.abrupt("return", false);
 
-              case 15:
-                _context6.prev = 15;
+              case 14:
+                _context6.prev = 14;
                 _context6.t0 = _context6["catch"](1);
                 alert(Object.entries(_context6.t0.response.data.errors).map(function (_ref11) {
                   var _ref12 = _slicedToArray(_ref11, 2),
@@ -1156,12 +1157,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }).join(', '));
                 return _context6.abrupt("return", false);
 
-              case 19:
+              case 18:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, null, [[1, 15]]);
+        }, _callee6, null, [[1, 14]]);
       }))();
     }
   },

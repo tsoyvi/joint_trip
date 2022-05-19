@@ -47,11 +47,11 @@
     </div>
 </div>
             <button class="personal-main-info-change personal-main-info-change-btn"
-                @click="updateUserCar(userCar)">
+                @click="updateUserCar()">
                  Редактировать профиль
             </button>
 
-<div class="personal-car-info-source">
+<div class="personal-car-info-source" v-if="Object.keys(userCar).length !== 0">
     <div class="personal-car-info-source-img">
         <div v-if="uploadFileSatatus !='loading'" class="personal-car-info-source-img">
         <img v-if="userCar.image_link" class="car-img" :src="'storage/' +  userCar.image_link"
@@ -74,6 +74,7 @@
         </div>
     </div>
 </div>
+
 </template>
 
 <script>
@@ -92,14 +93,15 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['userCar', 'authStatus', 'uploadFileSatatus']),
+    ...mapGetters(['user', 'userCar', 'authStatus', 'uploadFileSatatus']),
   },
   methods: {
     ...mapActions(['updateUserCarRequest']),
 
-    async updateUserCar(userCar) {
-      console.log(userCar);
-      const result = await this.updateUserCarRequest(userCar);
+    async updateUserCar() {
+      console.log(this.userCar);
+      this.userCar.user_id = this.user.id;
+      const result = await this.updateUserCarRequest(this.userCar);
       if (result) {
         alert('Профиль обновлен');
       }

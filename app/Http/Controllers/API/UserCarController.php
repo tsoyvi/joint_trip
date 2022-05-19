@@ -19,17 +19,19 @@ class UserCarController extends Controller
     {
         try {
 
-            $update = DB::table('user_cars')->where('id', $request['id'])->update([
-                'brand' => $request['brand'],
-                'model' => $request['model'],
-                'capacity' => $request['capacity'],
-                'color' => $request['color'],
-                'body_type' => $request['body_type'],
-                'engine_capacity' => $request['engine_capacity'],
-                'issue_year' => $request['issue_year'],
-                'state_number' => $request['state_number'],
-            ]);
-
+            $userCar = UserCar::updateOrCreate(
+                ['user_id' => $request['user_id']], // по чему ищем
+                [
+                    'brand' => $request['brand'], // что обновляем / вставляем
+                    'model' => $request['model'],
+                    'capacity' => $request['capacity'],
+                    'color' => $request['color'],
+                    'body_type' => $request['body_type'],
+                    'engine_capacity' => $request['engine_capacity'],
+                    'issue_year' => $request['issue_year'],
+                    'state_number' => $request['state_number'],
+                ]
+            );
 
             $success = true;
             $message = 'Запись обновлена';

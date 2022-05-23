@@ -13,7 +13,7 @@
       </div>
     </section>
     <section class="about">
-      <div class="container">
+      <div class="container row">
         <div class="col-3">
           <div class="col-3-item">
             <img src="/images/importo-ico.png" alt="" />
@@ -46,7 +46,7 @@
       </div>
     </section>
     <section class="about">
-      <div class="container">
+      <div class="container row">
         <div class="col-2">
           <div class="col-2-item">
             <img src="/images/driver-passenger.jpg" alt="" />

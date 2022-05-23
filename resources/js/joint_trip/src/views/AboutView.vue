@@ -1,73 +1,10 @@
 <template>
-  <div class="about">
-
-    <h1>This is an about page</h1>
-  </div>
-  <div class="about">
-
-    <h1>This is an about page</h1>
-  </div>
-    <div class="about">
-
-    <h1>This is an about page</h1>
-  </div>
-    <div class="about">
-
-    <h1>This is an about page</h1>
-  </div>
-    <div class="about">
-
-    <h1>This is an about page</h1>
-  </div>
-    <div class="about">
-
-    <h1>This is an about page</h1>
-  </div>
-
-<div>
-<Multiselect
-  v-model="value"
-  :close-on-select="true"
-  :searchable="true"
-  :create-option="true"
-  :options="citiesList"
-  @search-change="test"
-/>
-{{ value }}<br>
-{{citiesList}}
-
-</div>
-
+  <main class="main-content">
+    <div class="container">
+      <h1 class="page-header">О нашем проекте</h1>
+      <p>
+        ПоПути! — новый российский национальный стартап-проект - тревел-сообщество, призванный помочь его участникам совершать совместные путешествия по России. Наше решение позволяет нам объединять людей, которые ищут попутку или попутчиков, и таким образом помогают заполнять пустые места в транспорте. ПоПути! делает поездки экономнее, удобнее и экологичнее. Наш проект позволит нашим участникам не только снизить расходы на проезд, но и снизит выбросы углекислого газа по всей России, благодаря более полному заполнению транспортных средств и снижения их количества.
+      </p>
+    </div>
+  </main>
 </template>
-
-<script>
-import { mapGetters } from 'vuex';
-import Multiselect from '@vueform/multiselect';
-
-export default {
-  name: 'RegisterUser',
-  components: {
-    // https://github.com/vueform/multiselect
-    Multiselect,
-  },
-  data() {
-    return {
-      value: null,
-      options: this.citiesList,
-
-    };
-  },
-  computed: {
-    ...mapGetters(['citiesList']),
-  },
-
-  methods: {
-    test(query) {
-      console.log(query);
-    },
-
-  },
-
-};
-</script>
-<style src="@vueform/multiselect/themes/default.css"></style>

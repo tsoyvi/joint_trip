@@ -49,7 +49,12 @@
             <tr class="table-success" align="center">
               <td colspan="6">
                 <div v-for="(passenger, index) in trip.user_passenger" :key="index">
-                  <div>{{passenger.surname }} {{passenger.name }} {{passenger.patronymic }}
+                  <div>
+                    <button class="btn btn-link button-non-outline" title="Написать сообщение"
+                      @click="viewMessengerModalWindow(passenger)">
+                      <i class="fa fa-comments" aria-hidden="true"></i>
+                    </button>
+                    {{passenger.surname }} {{passenger.name }} {{passenger.patronymic }}
                         - {{ placeDeclensionCase(passenger.pivot.place_count) }}
                   </div>
                 </div>
@@ -114,10 +119,13 @@
 
             <tr class="table-success" align="center">
               <td colspan="6">
-
-                  <div>Водитель {{trip.user_driver.surname }} {{trip.user_driver.name }} {{trip.user_driver.patronymic }}
-
-                </div>
+                  <div>
+                    <button class="btn btn-link button-non-outline" title="Написать сообщение"
+                      @click="viewMessengerModalWindow(trip.user_driver)">
+                      <i class="fa fa-comments" aria-hidden="true"></i>
+                    </button>
+                    Водитель {{trip.user_driver.surname }} {{trip.user_driver.name }} {{trip.user_driver.patronymic }}
+                  </div>
               </td>
             </tr>
 
@@ -153,15 +161,31 @@
     <div class="personal-drive-empty isset-drive">
         <h2 class="personal-drive-empty-text" id="drive-empty">Поездки не найдены</h2>
     </div>
+
+    <MessengerModalWindow
+      ref="messengerModalWindow"
+      :titleModalWindow="'Мессенджер'"
+    />
+
+<!-- Кнопка-триггер модального окна -->
+<button type="button" data-bs-toggle="modal" data-bs-target="#messengerModalWindow"
+   id="openMessengerModalWindow"> tesyts
+</button>
+
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import MessengerModalWindow from '../messenger/messengerModalWindow.vue';
 import DateMixin from '../../mixins/date';
 import PlaceDeclensionCase from '../../mixins/placeDeclension';
 
 export default {
   name: 'TripsUser',
+  components: {
+    MessengerModalWindow,
+  },
+
   mixins: [DateMixin, PlaceDeclensionCase],
   data() {
     return {
@@ -184,6 +208,11 @@ export default {
       }
 
       return countPassengers;
+    },
+
+    viewMessengerModalWindow(user) {
+      // const freePlaceCount = this.freePlaceCount(foundTrip);
+      this.$refs.messengerModalWindow.openWindow(user);
     },
 
     async cancelTripDriver(trip) {

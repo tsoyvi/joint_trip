@@ -21,9 +21,6 @@ class TripController extends Controller
         try {
             $user = Auth::user();
 
-            /* $trips = Trip::where('driver_id',  $user->id)
-                ->get();
-            */
             // делаем запрос к БД
             $trips = Trip::with(['user_passenger'])
                 ->where('driver_id',  $user->id)

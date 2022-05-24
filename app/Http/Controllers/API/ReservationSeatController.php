@@ -29,6 +29,7 @@ class ReservationSeatController extends Controller
                 'place_count' => $input['seat_reservation'],
             ];
 
+            // ПЕРЕДЕЛАТЬ НА eloquent
             $result = DB::table('trip_user')->insert($data);
 
             $success = true;

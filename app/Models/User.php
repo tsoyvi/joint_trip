@@ -60,6 +60,9 @@ class User extends Authenticatable
         ->withPivot(["place_count"]);
     }
 
-
+    public function message()
+    {
+        return $this->belongsToMany(Message::class, 'message_user', 'from_user_id', 'message_id');
+    }
     
 }

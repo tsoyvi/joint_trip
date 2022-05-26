@@ -76,7 +76,7 @@ export default ({
       const result = await requests.getJson('api/check_login');
 
       if (result.success === true) {
-        console.log(result.data);
+        // console.log(result.data);
         commit('AUTH_SUCCESS', result.data.user);
         commit('USER_CAR', result.data.car);
         return true;

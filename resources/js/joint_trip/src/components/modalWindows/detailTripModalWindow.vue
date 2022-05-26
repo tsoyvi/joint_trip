@@ -78,7 +78,7 @@ import PlaceDeclensionCase from '../../mixins/placeDeclension';
 
 export default {
   name: 'modalWindow',
-  props: ['showWindow', 'titleModalWindow'],
+  props: ['titleModalWindow'],
   mixins: [DateMixin, PlaceDeclensionCase],
   components: {
   },

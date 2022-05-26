@@ -4,6 +4,7 @@ import userUploadFiles from './userUploadFiles';
 import errors from './blocks/errors';
 import cities from './blocks/cities';
 import trips from './trips';
+import messenger from './messenger';
 
 export default createStore({
   modules: {
@@ -12,6 +13,7 @@ export default createStore({
     errors,
     cities,
     trips,
+    messenger,
 
   },
 });

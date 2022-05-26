@@ -21,8 +21,10 @@ export default ({
   },
 
   mutations: {
-    ADD_MESSAGE(state, data) {
-      state.userDialogs = data;
+    ADD_MESSAGE(state, message) {
+      const mess = message;
+      mess.user = [{ id: message.from_user_id }];
+      state.userMessages.push(mess);
     },
 
     ADD_USER_CHAT(state, chats) {
@@ -54,14 +56,10 @@ export default ({
       return false;
     },
 
-    async userMessagesRequest({ commit }, userId) {
-      console.log(userId);
-      commit('RESET_USER_LIST_MESSAGES');
+    async UpdateUserMessagesRequest({ commit }, userId) {
       const result = await requests.getJson(`api/chats/${userId}`);
       if (result.success === true) {
-        console.log(result.data);
         commit('SET_LIST_MESSAGES', result.data.userMessages);
-
         return true;
       }
 
@@ -75,13 +73,11 @@ export default ({
      * @returns
      */
     async sendMessageRequest({ commit }, message) {
-      console.log(message);
-
       const result = await requests.postJson('api/chats', message);
       // console.log(searchData);
       if (result.success === true) {
-        console.log(result.data);
-        commit('ADD_MESSAGE', result.data.message);
+        // console.log(result.data.userMessage);
+        commit('ADD_MESSAGE', result.data.userMessage);
         this.dispatch('userChatsRequest');
         return true;
       }

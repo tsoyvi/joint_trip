@@ -82,7 +82,7 @@ export default ({
 
       const result = await requests.getJson('api/trip');
       if (result.success === true) {
-        console.log(result.data.passenger[0].user_trip_passenger);
+        // console.log(result.data.passenger[0].user_trip_passenger);
         commit('ADD_TRIP', result.data.trips);
         commit('ADD_TRIP_PASSENGER', result.data.passenger[0].user_trip_passenger);
 

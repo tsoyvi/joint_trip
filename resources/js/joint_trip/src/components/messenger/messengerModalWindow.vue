@@ -23,24 +23,28 @@
                               <img v-else class="driver-img" src="images/avatar-ico.png" style="width: 25px; height: 25px;" alt="avatar">
                             </div>
                             <div style="display:block;">
-                              {{user.image_link}} {{user.name}} {{user.surname}} {{user.patronymic}}
+                              {{user.name}} {{user.surname}} {{user.patronymic}}
                             </div>
                         </div>
                       </button>
                     </div>
                   </td>
                   <td>
-                    <div style="height:500px; border: grey solid 1px; padding:5px; overflow-y: scroll;">
+                    <div style="height:500px; border: grey solid 1px; padding:5px; overflow-y: scroll;" id="div-messages">
                       <div v-for="(message, index) in userMessages" :key="index">
                         <div v-bind:class="classObject(message.user[0].id)">
                           <!-- class="right-div">
                           classObject
                           -->
                         <div>
-                            {{formatDateTimeToRus(message.created_at)}}
+                            {{formatFromMysql(message.created_at)}}
                           </div>
-                          <div>
-                            {{message.user[0].name}} {{message.user[0].surname}}  {{message.user[0].patronymic}}
+
+                          <div v-if="user.id !== message.user[0].id">
+                            {{message.user[0].name}} {{message.user[0].surname}} {{message.user[0].patronymic}}
+                          </div>
+                          <div v-else>
+                            Вы
                           </div>
 
                           <div style="font-size: 1.2em; background: rgba(103, 71, 248, 0.1);">
@@ -65,14 +69,12 @@
             </div>
         </div>
     </div>
-<button @click="userMessageRequest()">Запрос сообщений</button>
 </div>
 
 <!-- Кнопка-триггер модального окна -->
 <button type="button" data-bs-toggle="modal" data-bs-target="#messengerModalWindow"
   style="display: none;" id="openMessengerModalWindow">
 </button>
-
 </template>
 
 <script>
@@ -88,7 +90,8 @@ export default {
     return {
       messageText: '',
       toUserId: null,
-
+      timerEnable: false,
+      chatUserId: null,
     };
   },
 
@@ -98,37 +101,81 @@ export default {
   },
 
   methods: {
-    ...mapActions(['sendMessageRequest', 'userChatsRequest', 'userMessagesRequest']),
+    ...mapActions(['sendMessageRequest', 'userChatsRequest', 'UpdateUserMessagesRequest']),
 
     openWindow(user) {
-      console.log(user.id);
+      // console.log(user.id);
       this.toUserId = user.id;
       const openButtonModal = document.getElementById('openMessengerModalWindow');
       openButtonModal.click();
       this.userChatsRequest();
       this.selectChat(user.id);
+
+      this.timerEnable = true;
+      this.countDownTimer();
     },
 
     async sendMessage() {
-      const result = await this.sendMessageRequest({ messageText: this.messageText, toUserId: this.toUserId });
-      if (result) {
-        this.messageText = '';
-        this.selectChat(this.toUserId);
+      if (this.messageText.length > 0) {
+        const result = await this.sendMessageRequest({ messageText: this.messageText, toUserId: this.toUserId });
+        if (result) {
+          this.messageText = '';
+          this.scrollMessages();
+        }
       }
     },
 
     selectChat(userId) {
-      this.userMessagesRequest(userId);
+      this.toUserId = userId;
+      this.chatUserId = userId;
+      this.UpdateMessages();
     },
 
     classObject(userId) {
-      console.log(userId);
+      // console.log(userId);
       if (userId === this.user.id) {
         return { 'right-div': 'right-div' };
       }
       return { 'left-div': 'left-div' };
     },
 
+    countDownTimer() {
+      if (this.timerEnable) {
+        setTimeout(() => {
+          // console.log('timer');
+
+          this.UpdateMessages();
+
+          this.countDownTimer();
+        }, 4000);
+      }
+    },
+
+    listenerCloseModalWindow() {
+      // Вешаем слушатель на событие
+      const myModalEl = document.getElementById('messengerModalWindow');
+      myModalEl.addEventListener('hidden.bs.modal', () => {
+        // console.log('выключаем таймер');
+        this.timerEnable = false;
+      });
+    },
+
+    async UpdateMessages() {
+      const result = await this.UpdateUserMessagesRequest(this.chatUserId);
+      if (result) {
+        this.scrollMessages();
+      }
+    },
+
+    scrollMessages() {
+      const block = document.getElementById('div-messages');
+      block.scrollTop = block.scrollHeight;
+    },
+
+  },
+
+  mounted() {
+    this.listenerCloseModalWindow();
   },
 
 };

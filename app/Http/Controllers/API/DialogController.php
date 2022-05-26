@@ -109,7 +109,7 @@ class DialogController extends Controller
         return response()->json([
             "success" => $success,
             "message" => $message,
-            "UserMessage" => $result,
+            "userMessage" => $result,
         ]);
     }
 
@@ -140,6 +140,7 @@ class DialogController extends Controller
                         ['from_user_id', $user->id],
                     ]
                 )
+                ->orderBy('id')
                 ->get();
 
             $success = true;

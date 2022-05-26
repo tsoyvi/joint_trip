@@ -167,11 +167,6 @@
       :titleModalWindow="'Мессенджер'"
     />
 
-<!-- Кнопка-триггер модального окна -->
-<button type="button" data-bs-toggle="modal" data-bs-target="#messengerModalWindow"
-   id="openMessengerModalWindow"> tesyts
-</button>
-
 </template>
 
 <script>

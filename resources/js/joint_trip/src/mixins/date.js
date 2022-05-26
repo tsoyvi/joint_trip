@@ -23,11 +23,13 @@ export default {
       return new Date().toISOString();
     },
 
-    formatToMysql(date) {
-      let d = new Date(date);
-      d = d.toISOString().slice(0, 19).replace('T', ' ');
-      console.log(d);
-      return d;
+    formatFromMysql(date) {
+      if (date !== null && date !== undefined) {
+        let dateOut = new Date(date);
+        dateOut = dateOut.toISOString().slice(0, 19).replace('T', ' ');
+        return this.formatDateTimeToRus(dateOut);
+      }
+      return '';
     },
 
   },

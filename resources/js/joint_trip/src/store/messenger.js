@@ -76,7 +76,7 @@ export default ({
       const result = await requests.postJson('api/chats', message);
       // console.log(searchData);
       if (result.success === true) {
-        // console.log(result.data.userMessage);
+        console.log(result.data);
         commit('ADD_MESSAGE', result.data.userMessage);
         this.dispatch('userChatsRequest');
         return true;

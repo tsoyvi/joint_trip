@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Message;
 use App\Models\User;
 use App\Models\UserMessage;
+use App\Services\NoticeService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+
 
 class DialogController extends Controller
 {
@@ -95,8 +95,11 @@ class DialogController extends Controller
                 'to_user_id' => $input['toUserId'],
                 'messages' => $input['messageText'],
             ];
-            // $result = DB::table('user_messages')->insert($data);
+
             $result = UserMessage::create($data);
+
+            $noticeService = app(NoticeService::class);
+            $status = $noticeService->addNotice('Новое сообщение', $input['toUserId'] );
 
             $success = true;
             $message = 'Сообщение добавлено';
@@ -110,6 +113,7 @@ class DialogController extends Controller
             "success" => $success,
             "message" => $message,
             "userMessage" => $result,
+            "status" => $status,
         ]);
     }
 

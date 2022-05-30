@@ -32,5 +32,12 @@ export default {
       return '';
     },
 
+    formatToMysql(date) {
+      let d = new Date(date);
+      d = d.toISOString().slice(0, 19).replace('T', ' ');
+      console.log(d);
+      return d;
+    },
+
   },
 };

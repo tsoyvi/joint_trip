@@ -5,7 +5,7 @@
     <h1 class="personal-main-info-header">Текущие поездки как Водитель</h1>
     <!-- isset-drive -->
 
-        <table class="table table-striped align-middle" v-for="(trip, index) in userTrips" :key="index">
+        <table class="table table-striped align-middle">
           <thead>
             <tr align="center">
                 <th>№</th>
@@ -17,7 +17,7 @@
                 <th>Забронировано мест</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody v-for="(trip, index) in userTrips" :key="index">
             <tr align="center">
                 <td rowspan="2">{{index + 1 }} <br>
                   <div class="dropdown">
@@ -32,19 +32,15 @@
                 </td>
 
                 <td>
-                    {{ formatDateTimeToRus(trip.date_depart) }} <br>
-                   | <br>{{ formatDateTimeToRus(trip.date_arrival) }}
+                  {{ formatDateTimeToRus(trip.date_depart) }}
+                  <br> | <br>
+                  {{ formatDateTimeToRus(trip.date_arrival) }}
                 </td>
-                <td> {{trip.from}}
-                </td>
-                <td>
-                  {{trip.to}}
-                </td>
+                <td>{{trip.from}}</td>
+                <td>{{trip.to}}</td>
                 <td>{{trip.place_cost}}</td>
                 <td>{{trip.count_pass}}</td>
-                <td>
-                    {{countPassengers(trip.user_passenger)}}
-                </td>
+                <td>{{countPassengers(trip.user_passenger)}}</td>
             </tr>
             <tr class="table-success" align="center">
               <td colspan="6">
@@ -74,7 +70,7 @@
           <hr>
         <h1 class="personal-main-info-header">Текущие поездки как Пассажир</h1>
 
-        <table class="table table-striped align-middle" v-for="(trip, index) in userTripsPassenger" :key="index">
+        <table class="table table-striped align-middle">
             <thead>
               <tr class="personal-drive-archive-header" align="center">
                   <th>№</th>
@@ -86,7 +82,7 @@
                   <th></th>
               </tr>
             </thead>
-            <tbody>
+            <tbody v-for="(trip, index) in userTripsPassenger" :key="index">
             <tr align="center">
                 <td rowspan="2">
                   {{index + 1 }}<br>

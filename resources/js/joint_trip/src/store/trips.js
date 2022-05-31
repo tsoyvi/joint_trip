@@ -3,8 +3,12 @@ import requests from './blocks/requests';
 export default ({
   state: {
     userTrips: [],
+    userTripsАrchive: [],
+
     userTripsPassenger: [],
     foundTrips: [],
+    userTripsPassengerАrchive: [],
+
   },
 
   getters: {
@@ -12,9 +16,18 @@ export default ({
       return state.userTrips;
     },
 
+    userTripsАrchive(state) {
+      return state.userTripsАrchive;
+    },
+
     userTripsPassenger(state) {
       return state.userTripsPassenger;
     },
+
+    userTripsPassengerАrchive(state) {
+      return state.userTripsPassengerАrchive;
+    },
+
     foundTrips(state) {
       return state.foundTrips;
     },
@@ -23,8 +36,19 @@ export default ({
 
   mutations: {
     ADD_TRIP(state, formData) {
-      // console.log('ADD_TRIP()');
-      state.userTrips = formData;
+      state.userTrips = [];
+      state.userTripsАrchive = [];
+
+      formData.forEach((element) => {
+        console.log(element.completed);
+        if (element.completed) {
+          state.userTripsАrchive.push(element);
+        } else {
+          state.userTrips.push(element);
+        }
+      });
+
+      // state.userTrips = formData;
     },
 
     DELETE_TRIP(state, formData) {
@@ -34,7 +58,19 @@ export default ({
     },
 
     ADD_TRIP_PASSENGER(state, formData) {
-      state.userTripsPassenger = formData;
+      state.userTripsPassenger = [];
+      state.userTripsPassengerАrchive = [];
+
+      formData.forEach((element) => {
+        console.log(element.pivot.completed);
+        if (element.pivot.completed) {
+          state.userTripsPassengerАrchive.push(element);
+        } else {
+          state.userTripsPassenger.push(element);
+        }
+      });
+
+      // state.userTripsPassenger = formData;
     },
 
     ADD_FOUND_TRIPS(state, data) {
@@ -46,6 +82,10 @@ export default ({
     },
 
     RESERVATION_SEAT() {
+    },
+
+    END_TRIP() {
+
     },
 
   },
@@ -153,6 +193,38 @@ export default ({
         commit('DELETE_TRIP', result);
         console.log(result.data);
 
+        return true;
+      }
+
+      this.dispatch('addError', result.error);
+      return false;
+    },
+
+    // Оптимизировать код!
+    async endTripPassenger({ commit }, trip) {
+      const result = await requests.putJson(`api/trip/${trip.id}`, trip);
+
+      if (result.success === true) {
+        commit('END_TRIP', result);
+        console.log(result.data);
+        this.dispatch('userTripsRequest');
+        return true;
+      }
+
+      this.dispatch('addError', result.error);
+      return false;
+    },
+
+    // Оптимизировать код!
+    async endTripDriverRequest({ commit }, trip) {
+      const tripReq = trip;
+      tripReq.driver = true;
+      const result = await requests.putJson(`api/trip/${trip.id}`, tripReq);
+
+      if (result.success === true) {
+        commit('END_TRIP', result);
+        console.log(result.data);
+        // this.dispatch('userTripsRequest');
         return true;
       }
 

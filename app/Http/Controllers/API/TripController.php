@@ -8,6 +8,7 @@ use App\Models\Trip;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TripController extends Controller
 {
@@ -98,7 +99,34 @@ class TripController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+
+            if (isset($request->input()['driver'])) {
+              
+                $update = DB::table('trips')->where('id', $id)->update([
+                    'completed' => 1,
+                ]);
+
+            } else {
+
+                $userId = $request->input()['pivot']['user_id'];
+                $id = $request->input()['pivot']['id'];
+                $update = DB::table('trip_user')->where([['id', $id], ['user_id', $userId] ])->update([
+                    'completed' => 1,
+                ]);
+            }
+
+            $success = true;
+            $message = 'Поездка завершена';
+        } catch (\Illuminate\Database\QueryException $ex) {
+            $success = false;
+            $message = $ex->getMessage();
+        }
+        // response
+        return response()->json([
+            "success" => $success,
+            "message" =>  $message,
+        ]);
     }
 
     /**

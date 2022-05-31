@@ -48,10 +48,56 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                        @click="endTripPassenger()">Завершить</button>
-
+                        @click="endTripPassenger(trip)">Завершить</button>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+import { mapActions } from 'vuex';
+import StarRating from 'vue-star-rating';
+import DateMixin from '../../mixins/date';
+import PlaceDeclensionCase from '../../mixins/placeDeclension';
+
+export default {
+  name: 'endTripModalWindow',
+  props: ['titleModalWindow'],
+  mixins: [DateMixin, PlaceDeclensionCase],
+  components: {
+    StarRating,
+  },
+  data() {
+    return {
+      trip: null,
+      rating: 0,
+      // freePlaceCount: null,
+    };
+  },
+
+  methods: {
+    ...mapActions(['endTripPassenger']),
+
+    initializingVar() {
+      this.trip = null;
+    },
+
+    openWindow(trip) {
+      this.initializingVar();
+
+      const openButtonModal = document.getElementById('openButtonEndTripModalWindow');
+      openButtonModal.click();
+      console.log(trip);
+      this.trip = trip;
+      /// this.freePlaceCount = freePlaceCount;
+    },
+
+  },
+
+};
+</script>
+
+<style>
+
+</style>

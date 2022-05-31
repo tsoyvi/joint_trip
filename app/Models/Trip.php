@@ -33,7 +33,7 @@ class Trip extends Model
     }
     public function user_passenger()
     {
-        return $this->belongsToMany(User::class)->withPivot(["place_count"]);
+        return $this->belongsToMany(User::class)->withPivot(['place_count', 'completed']);
     }
 
 }

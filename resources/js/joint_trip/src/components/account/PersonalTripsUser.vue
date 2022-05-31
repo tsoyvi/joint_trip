@@ -91,7 +91,7 @@
                       <i class="fa fa-bars" aria-hidden="true"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-tsoyvi" aria-labelledby="dropdownMenuButton1">
-                      <li><a class="dropdown-item" href="#">Завершить</a></li>
+                      <li><button class="dropdown-item" @click="viewEndTripModalWindow(trip)">Завершить</button></li>
                       <li><button class="dropdown-item" @click="cancelTripPassenger(trip)">Отменить</button></li>
                     </ul>
                   </div>
@@ -163,11 +163,17 @@
       :titleModalWindow="'Мессенджер'"
     />
 
+    <EndTripModalWindow
+    ref="endTripModalWindow"
+    />
+
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import MessengerModalWindow from '../messenger/messengerModalWindow.vue';
+import EndTripModalWindow from '../modalWindows/endTripModalWindow.vue';
+
 import DateMixin from '../../mixins/date';
 import PlaceDeclensionCase from '../../mixins/placeDeclension';
 
@@ -175,6 +181,7 @@ export default {
   name: 'TripsUser',
   components: {
     MessengerModalWindow,
+    EndTripModalWindow,
   },
 
   mixins: [DateMixin, PlaceDeclensionCase],
@@ -204,6 +211,10 @@ export default {
     viewMessengerModalWindow(user) {
       // const freePlaceCount = this.freePlaceCount(foundTrip);
       this.$refs.messengerModalWindow.openWindow(user);
+    },
+
+    viewEndTripModalWindow(trip) {
+      this.$refs.endTripModalWindow.openWindow(trip);
     },
 
     async cancelTripDriver(trip) {
